@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram, Mail, Phone, ArrowUp } from "lucide-react";
+import { Mail, Phone, ArrowUp, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import logo from "@/assets/logo.jpg";
 
 const footerLinks = {
   services: [
@@ -22,17 +24,13 @@ const footerLinks = {
   ],
 };
 
-const socialLinks = [
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-];
-
 export const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const whatsappNumber = "27604334341";
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
     <footer className="bg-card border-t border-border relative">
@@ -43,29 +41,27 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <a href="#home" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">K</span>
-              </div>
-              <span className="text-xl font-bold text-foreground">
-                Kiing<span className="text-gradient">Codes</span>
-              </span>
-            </a>
+            <Link to="/" className="flex items-center gap-2 mb-4">
+              <img 
+                src={logo} 
+                alt="KiingCodes Logo" 
+                className="h-16 w-auto object-contain"
+              />
+            </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
               Premium web development and entrepreneurship studio. Building digital
               experiences that drive growth.
             </p>
             <div className="flex gap-3">
-              {socialLinks.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"
+              >
+                <MessageCircle className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
@@ -142,6 +138,17 @@ export const Footer = () => {
                   +27 60 433 4341
                 </a>
               </li>
+              <li>
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  WhatsApp Us
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -152,12 +159,12 @@ export const Footer = () => {
             © {new Date().getFullYear()} KiingCodes. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+            </Link>
+            <Link to="/terms-of-service" className="text-sm text-muted-foreground hover:text-primary transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

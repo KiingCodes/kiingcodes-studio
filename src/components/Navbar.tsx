@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.jpg";
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -15,6 +17,8 @@ const navLinks = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +27,14 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (href: string) => {
+    if (!isHomePage) {
+      // Navigate to home page with hash
+      window.location.href = "/" + href;
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
     <motion.nav
@@ -37,33 +49,47 @@ export const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo Placeholder */}
-          <a href="#home" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">K</span>
-            </div>
-            <span className="text-xl font-bold text-foreground">
-              Kiing<span className="text-gradient">Codes</span>
-            </span>
-          </a>
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <img 
+              src={logo} 
+              alt="KiingCodes Logo" 
+              className="h-12 md:h-14 w-auto object-contain"
+            />
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
-              >
-                {link.label}
-              </a>
+              isHomePage ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <a
+                  key={link.href}
+                  href={"/" + link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button variant="hero" size="lg" asChild>
-              <a href="#contact">Book a Call</a>
+              {isHomePage ? (
+                <a href="#contact">Book a Call</a>
+              ) : (
+                <a href="/#contact">Book a Call</a>
+              )}
             </Button>
           </div>
 
@@ -87,16 +113,20 @@ export const Navbar = () => {
             {navLinks.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={isHomePage ? link.href : "/" + link.href}
                 className="block py-3 px-4 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors duration-200"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => handleNavClick(link.href)}
               >
                 {link.label}
               </a>
             ))}
             <div className="px-4 pt-4">
               <Button variant="hero" className="w-full" asChild>
-                <a href="#contact">Book a Call</a>
+                {isHomePage ? (
+                  <a href="#contact">Book a Call</a>
+                ) : (
+                  <a href="/#contact">Book a Call</a>
+                )}
               </Button>
             </div>
           </motion.div>
