@@ -11,6 +11,12 @@ import {
   Palette,
   Database,
   Cloud,
+   Megaphone,
+  PenTool,
+  Image,
+  Video,
+  FileText,
+  Briefcase,
 } from "lucide-react";
 
 const services = [
@@ -56,6 +62,80 @@ const services = [
       "Turn your business vision into reality with our entrepreneurship expertise. From ideation to execution, we're your digital partner.",
     features: ["Business Strategy", "Digital Transformation", "Process Automation", "Analytics"],
   },
+
+  {
+  icon: Megaphone,
+  title: "Digital & Social Media Marketing",
+  description:
+    "Data-driven digital marketing strategies designed to grow reach, engagement, and revenue. We turn attention into measurable business outcomes.",
+  features: [
+    "Social Media Campaigns",
+    "Paid Ads (Meta & Google)",
+    "Analytics & Reporting",
+    "Brand Growth Strategy",
+  ],
+},
+{
+  icon: PenTool,
+  title: "Advanced Copywriting & Storytelling",
+  description:
+    "High-impact messaging that connects, converts, and builds brand loyalty. We craft narratives that move audiences to action.",
+  features: [
+    "Brand Voice Development",
+    "Website & App Copy",
+    "Ad & Sales Copy",
+    "Storytelling Frameworks",
+  ],
+},
+{
+  icon: Image,
+  title: "Graphic Design",
+  description:
+    "Visually compelling designs that elevate your brand identity across digital and print platforms. Built for clarity, consistency, and impact.",
+  features: [
+    "Brand Identity",
+    "Marketing Collateral",
+    "UI Assets",
+    "Social Media Creatives",
+  ],
+},
+{
+  icon: Video,
+  title: "Content Creation",
+  description:
+    "Scroll-stopping content engineered for modern platforms. We create content that educates, entertains, and converts.",
+  features: [
+    "Short-Form Video",
+    "Content Strategy",
+    "Photography & Visuals",
+    "Platform Optimization",
+  ],
+},
+{
+  icon: FileText,
+  title: "Software Documentation",
+  description:
+    "Clear, structured documentation that improves onboarding, reduces support costs, and scales with your product.",
+  features: [
+    "Technical Documentation",
+    "API Docs",
+    "User Guides",
+    "Knowledge Bases",
+  ],
+},
+{
+  icon: Briefcase,
+  title: "Project Management",
+  description:
+    "End-to-end project oversight ensuring timelines, budgets, and deliverables stay aligned. Execution without chaos.",
+  features: [
+    "Agile & Scrum",
+    "Roadmapping",
+    "Stakeholder Management",
+    "Delivery Tracking",
+  ],
+},
+
 ];
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {

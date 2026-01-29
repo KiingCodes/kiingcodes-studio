@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, ArrowUp, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 
 const footerLinks = {
   services: [
@@ -45,7 +45,7 @@ export const Footer = () => {
               <img 
                 src={logo} 
                 alt="KiingCodes Logo" 
-                className="h-16 w-auto object-contain"
+                className="h-24 w-auto object-contain"
               />
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">

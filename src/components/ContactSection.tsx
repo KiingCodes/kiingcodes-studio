@@ -194,7 +194,7 @@ export const ContactSection = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder="John Doe"
+                    placeholder="Kiing Ncube"
                     required
                     className="bg-secondary/50 border-border focus:border-primary"
                   />
@@ -208,7 +208,7 @@ export const ContactSection = () => {
                     type="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="john@example.com"
+                    placeholder="kiing@example.com"
                     required
                     className="bg-secondary/50 border-border focus:border-primary"
                   />

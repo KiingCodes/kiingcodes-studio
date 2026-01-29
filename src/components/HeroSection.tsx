@@ -88,10 +88,10 @@ export const HeroSection = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
           >
             {[
-              { value: "50+", label: "Projects Completed" },
-              { value: "99%", label: "Client Satisfaction" },
+              { value: "15+", label: "Projects Completed" },
+              { value: "85%", label: "Client Satisfaction" },
               { value: "24/7", label: "Support Available" },
-              { value: "5+", label: "Years Experience" },
+              { value: "3+", label: "Years Experience" },
             ].map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">

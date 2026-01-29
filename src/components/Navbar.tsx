@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.jpg";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -54,7 +54,7 @@ export const Navbar = () => {
             <img 
               src={logo} 
               alt="KiingCodes Logo" 
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-24 md:h-24 w-auto object-contain"
             />
           </Link>
 
