@@ -65,7 +65,7 @@ export const AboutSection = () => {
             About Us
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            Why Choose <span className="text-gradient">KiingCodes</span>?
+            Why Choose <span className="text-gradient">Jewel IQ</span>?
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
             We're more than just developers – we're your digital partners. With a passion for
@@ -86,9 +86,9 @@ export const AboutSection = () => {
             </h3>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                At KiingCodes, we understand that in today's digital age, having a strong online
+                At Jewel IQ, we understand that in today's digital age, having a strong online
                 presence is crucial for business success. That's why we combine our expertise in
-                full-stack development with entrepreneurial insights to deliver solutions that
+                full-stack development with intelligent systems to deliver solutions that
                 not only look great but drive real business results.
               </p>
               <p>

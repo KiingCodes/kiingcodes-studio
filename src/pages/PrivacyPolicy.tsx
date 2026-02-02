@@ -24,7 +24,7 @@ const PrivacyPolicy = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">1. Introduction</h2>
                 <p>
-                  KiingCodes ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                  Jewel IQ ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
                 </p>
               </section>
 
@@ -81,7 +81,7 @@ const PrivacyPolicy = () => {
                   If you have questions about this Privacy Policy, please contact us at:
                 </p>
                 <p className="mt-2">
-                  <strong>Email:</strong> kiingcodes@outlook.com<br />
+                  <strong>Email:</strong> info@jeweliq.com<br />
                   <strong>Phone:</strong> +27 60 433 4341
                 </p>
               </section>

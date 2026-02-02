@@ -24,13 +24,13 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">1. Agreement to Terms</h2>
                 <p>
-                  By accessing or using KiingCodes' services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
+                  By accessing or using Jewel IQ's services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">2. Services</h2>
-                <p className="mb-4">KiingCodes provides web development and digital services including but not limited to:</p>
+                <p className="mb-4">Jewel IQ provides web development and digital services including but not limited to:</p>
                 <ul className="list-disc pl-6 space-y-2">
                   <li>Website design and development</li>
                   <li>Mobile application development</li>
@@ -64,7 +64,7 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">5. Intellectual Property</h2>
                 <p>
-                  Upon full payment, clients receive full ownership of the custom work created specifically for their project. KiingCodes retains the right to showcase completed projects in our portfolio unless otherwise agreed in writing.
+                  Upon full payment, clients receive full ownership of the custom work created specifically for their project. Jewel IQ retains the right to showcase completed projects in our portfolio unless otherwise agreed in writing.
                 </p>
               </section>
 
@@ -82,7 +82,7 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-2xl font-semibold text-foreground mb-4">7. Limitation of Liability</h2>
                 <p>
-                  KiingCodes shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services. Our total liability shall not exceed the amount paid for the specific service in question.
+                  Jewel IQ shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services. Our total liability shall not exceed the amount paid for the specific service in question.
                 </p>
               </section>
 
@@ -108,7 +108,7 @@ const TermsOfService = () => {
                   For questions about these Terms of Service, please contact us:
                 </p>
                 <p className="mt-2">
-                  <strong>Email:</strong> kiingcodes@outlook.com<br />
+                  <strong>Email:</strong> info@jeweliq.com<br />
                   <strong>Phone:</strong> +27 60 433 4341
                 </p>
               </section>

@@ -57,8 +57,8 @@ export const ContactSection = () => {
     {
       icon: Mail,
       label: "Email Us",
-      value: "kiingcodes@outlook.com",
-      href: "mailto:kiingcodes@outlook.com",
+      value: "info@jeweliq.com",
+      href: "mailto:info@jeweliq.com",
     },
     {
       icon: Phone,
@@ -313,7 +313,7 @@ export const ContactSection = () => {
               </Button>
 
               <p className="text-xs text-muted-foreground text-center mt-4">
-                By submitting, you agree to receive communications from KiingCodes.
+                By submitting, you agree to receive communications from Jewel IQ.
               </p>
             </form>
           </motion.div>

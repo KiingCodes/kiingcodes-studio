@@ -8,7 +8,7 @@ const testimonials = [
     name: "Sarah M.",
     role: "CEO, StartupHub",
     content:
-      "KiingCodes transformed our vision into a stunning web application. Their expertise in both development and business strategy was invaluable. Highly recommend!",
+      "Jewel IQ transformed our vision into a stunning web application. Their expertise in both development and business strategy was invaluable. Highly recommend!",
     rating: 5,
   },
   {
@@ -22,7 +22,7 @@ const testimonials = [
     name: "Lisa K.",
     role: "Marketing Director",
     content:
-      "Working with KiingCodes was a game-changer for our online presence. They understood our needs perfectly and delivered a website that truly represents our brand.",
+      "Working with Jewel IQ was a game-changer for our online presence. They understood our needs perfectly and delivered a website that truly represents our brand.",
     rating: 5,
   },
 ];
@@ -53,7 +53,7 @@ export const TestimonialsSection = () => {
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Don't just take our word for it. Here's what our clients have to say about
-            working with KiingCodes.
+            working with Jewel IQ.
           </p>
         </motion.div>
 
