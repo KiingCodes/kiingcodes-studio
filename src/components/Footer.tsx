@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, ArrowUp, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/jeweliq-logo.png";
 import fusegigsLogo from "@/assets/fusegigs-logo.png";
 const footerLinks = {
   services: [
@@ -41,15 +41,16 @@ export const Footer = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex flex-col items-start mb-2">
               <img 
                 src={logo} 
-                alt="KiingCodes Logo" 
-                className="h-24 w-auto object-contain"
+                alt="Jewel IQ Logo" 
+                className="h-16 w-auto object-contain"
               />
+              <span className="text-xs text-muted-foreground tracking-wide -mt-1">Intelligent systems built with precision.</span>
             </Link>
             <p className="text-muted-foreground text-sm mb-6 max-w-xs">
-              Premium web development and entrepreneurship studio. Building digital
+              Premium web development and intelligent systems studio. Building digital
               experiences that drive growth.
             </p>
             <div className="flex items-center gap-4">
@@ -135,11 +136,11 @@ export const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:kiingcodes@outlook.com"
+                  href="mailto:info@jeweliq.com"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
                 >
                   <Mail className="w-4 h-4" />
-                  kiingcodes@outlook.com
+                  info@jeweliq.com
                 </a>
               </li>
               <li>
@@ -169,7 +170,7 @@ export const Footer = () => {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-border gap-4">
           <p className="text-sm text-muted-foreground text-center md:text-left">
-            © {new Date().getFullYear()} KiingCodes. All rights reserved.
+            © {new Date().getFullYear()} Jewel IQ. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/privacy-policy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
