@@ -44,7 +44,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
           >
-            We Build{" "}
+            JewelIQ Builds{" "}
             <span className="text-gradient">Digital Experiences</span>
             <br />
             That Drive Growth
@@ -57,9 +57,9 @@ export const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
           >
-            From stunning websites to scalable applications, we transform your vision 
-            into powerful digital solutions. Expert full-stack development meets 
-            entrepreneurial strategy.
+            JewelIQ transforms your vision into powerful digital solutions — from stunning 
+            websites to scalable applications. Expert full-stack web development and 
+            intelligent systems, proudly based in South Africa.
           </motion.p>
 
           {/* CTA Buttons */}
