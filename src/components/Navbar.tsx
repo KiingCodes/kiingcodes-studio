@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/jeweliq-logo.png";
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -50,12 +50,13 @@ export const Navbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex flex-col items-start">
             <img 
               src={logo} 
-              alt="KiingCodes Logo" 
-              className="h-24 md:h-24 w-auto object-contain"
+              alt="Jewel IQ Logo" 
+              className="h-14 md:h-16 w-auto object-contain"
             />
+            <span className="text-[10px] md:text-xs text-muted-foreground tracking-wide -mt-1">Intelligent systems built with precision.</span>
           </Link>
 
           {/* Desktop Navigation */}
