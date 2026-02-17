@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, ArrowUp, MessageCircle } from "lucide-react";
+import { Mail, Phone, ArrowUp, MessageCircle, Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useRef, useState } from "react";
 import logo from "@/assets/jeweliq-logo.png";
-import fusegigsLogo from "@/assets/fusegigs-logo.png";
+import footerBg from "@/assets/wallpaper-footer.jpg";
+
 const footerLinks = {
   services: [
     { label: "Website Development", href: "#services" },
@@ -28,16 +30,81 @@ export const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const toggleVideo = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const whatsappNumber = "27604334341";
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
-    <footer className="bg-card border-t border-border relative">
-      {/* Top Gradient Line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+    <footer className="relative overflow-hidden">
+      {/* Background Wallpaper */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.92), rgba(10, 15, 30, 0.96)), url(${footerBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
 
-      <div className="container mx-auto px-4 md:px-6 py-16">
+      {/* Top Gradient Line */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-10" />
+
+      {/* Showreel Video Section */}
+      <div className="relative z-10 border-b border-border">
+        <div className="container mx-auto px-4 md:px-6 py-12">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-6"
+            >
+              <span className="text-primary font-medium text-sm uppercase tracking-wider">Showreel</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-2">See What We Build</h3>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="relative rounded-2xl overflow-hidden border border-border glow-effect cursor-pointer group"
+              onClick={toggleVideo}
+            >
+              <video
+                ref={videoRef}
+                className="w-full aspect-video object-cover"
+                loop
+                muted
+                playsInline
+                preload="metadata"
+              >
+                <source src="/videos/showreel.mp4" type="video/mp4" />
+              </video>
+              {!isPlaying && (
+                <div className="absolute inset-0 bg-background/40 flex items-center justify-center group-hover:bg-background/30 transition-colors">
+                  <div className="w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/40 group-hover:scale-110 transition-transform">
+                    <Play className="w-8 h-8 text-primary-foreground ml-1" />
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 py-16 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
@@ -62,19 +129,6 @@ export const Footer = () => {
                 className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
-              </a>
-              <a
-                href="https://fusegigs-app.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Fuse Gigs"
-                className="hover:opacity-80 transition-opacity"
-              >
-                <img 
-                  src={fusegigsLogo} 
-                  alt="Fuse Gigs" 
-                  className="h-12 w-12 object-contain"
-                />
               </a>
             </div>
           </div>

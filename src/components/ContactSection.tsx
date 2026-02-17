@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Mail, Phone, MapPin, Send, CheckCircle, Clock, Calendar } from "lucide-react";
+import { Mail, Phone, Send, CheckCircle, Clock, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import contactBg from "@/assets/wallpaper-tech.jpg";
 
 export const ContactSection = () => {
   const headerRef = useRef(null);
@@ -33,24 +35,45 @@ export const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { data, error } = await supabase.functions.invoke("send-booking", {
+        body: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || undefined,
+          company: formData.company.trim() || undefined,
+          projectType: formData.projectType,
+          budget: formData.budget || undefined,
+          message: formData.message.trim(),
+        },
+      });
 
-    toast({
-      title: "Message Sent! ✉️",
-      description: "Thank you for reaching out. We'll get back to you within 24 hours.",
-    });
+      if (error) throw error;
 
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      company: "",
-      projectType: "",
-      budget: "",
-      message: "",
-    });
-    setIsSubmitting(false);
+      toast({
+        title: "Booking Sent! ✉️",
+        description: "Thank you for reaching out. We'll get back to you within 24 hours.",
+      });
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        projectType: "",
+        budget: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("Booking error:", err);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly via WhatsApp.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -75,7 +98,15 @@ export const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-background relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-24 md:py-32 relative overflow-hidden"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.9), rgba(10, 15, 30, 0.95)), url(${contactBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
@@ -196,6 +227,7 @@ export const ContactSection = () => {
                     onChange={handleChange}
                     placeholder="Kiing Ncube"
                     required
+                    maxLength={100}
                     className="bg-secondary/50 border-border focus:border-primary"
                   />
                 </div>
@@ -210,6 +242,7 @@ export const ContactSection = () => {
                     onChange={handleChange}
                     placeholder="kiing@example.com"
                     required
+                    maxLength={255}
                     className="bg-secondary/50 border-border focus:border-primary"
                   />
                 </div>
@@ -288,6 +321,7 @@ export const ContactSection = () => {
                   placeholder="Tell us about your project, goals, and timeline..."
                   required
                   rows={5}
+                  maxLength={5000}
                   className="bg-secondary/50 border-border focus:border-primary resize-none"
                 />
               </div>
