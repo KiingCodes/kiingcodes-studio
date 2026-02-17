@@ -3,6 +3,7 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ctaBg from "@/assets/wallpaper-cta.jpg";
 
 export const CTASection = () => {
   const ref = useRef(null);
@@ -10,8 +11,15 @@ export const CTASection = () => {
 
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 animated-gradient-bg" />
+      {/* Wallpaper Background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.85), rgba(10, 15, 30, 0.9)), url(${ctaBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
       <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
       {/* Floating Orbs */}
