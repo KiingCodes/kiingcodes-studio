@@ -72,8 +72,8 @@ export const Footer = () => {
               viewport={{ once: true }}
               className="text-center mb-6"
             >
-              <span className="text-primary font-medium text-sm uppercase tracking-wider">Showreel</span>
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-2">See What We Build</h3>
+              <span className="text-primary font-medium text-sm uppercase tracking-wider"></span>
+              <h3 className="text-2xl md:text-3xl font-bold text-foreground mt-2"></h3>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
@@ -194,7 +194,7 @@ export const Footer = () => {
                   className="text-sm text-muted-foreground hover:text-primary transition-colors flex items-center gap-2"
                 >
                   <Mail className="w-4 h-4" />
-                  info@jeweliq.com
+                  jeweliq.tech@outlook.com
                 </a>
               </li>
               <li>
@@ -204,6 +204,7 @@ export const Footer = () => {
                 >
                   <Phone className="w-4 h-4" />
                   +27 60 433 4341
+                  +27 63 567 9395
                 </a>
               </li>
               <li>
