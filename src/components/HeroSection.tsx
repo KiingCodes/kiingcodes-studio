@@ -88,7 +88,7 @@ export const HeroSection = () => {
             className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
           >
             {[
-              { value: "15+", label: "Projects Completed" },
+              { value: "29+", label: "Projects Completed" },
               { value: "85%", label: "Client Satisfaction" },
               { value: "24/7", label: "Support Available" },
               { value: "3+", label: "Years Experience" },
