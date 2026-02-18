@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
-import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const floatingVariants = {
   animate: {
@@ -41,14 +41,9 @@ export const HeroSection = () => {
       <div className="floating-orb w-80 h-80 bg-accent bottom-20 -right-40" style={{ animationDelay: "2s" }} />
       <div className="floating-orb w-64 h-64 bg-primary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: "4s" }} />
 
-      {/* Floating Diamond Logo */}
-      <motion.div
-        variants={floatingVariants}
-        animate="animate"
-        className="absolute top-28 right-8 md:right-16 lg:right-24 opacity-20 md:opacity-30 pointer-events-none"
-      >
-        <img src={diamondLogo} alt="" className="w-24 md:w-36 lg:w-48 h-auto drop-shadow-[0_0_30px_hsl(var(--primary)/0.6)]" />
-      </motion.div>
+      {/* Floating Diamonds */}
+      <FloatingDiamond className="top-28 right-8 md:right-16 lg:right-24 opacity-15 md:opacity-25" size="w-24 md:w-36 lg:w-48" />
+      <FloatingDiamond className="bottom-32 left-8 md:left-16 opacity-10" size="w-16 md:w-24" delay={3} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20">
         <motion.div

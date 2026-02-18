@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Mail, Phone, Send, CheckCircle, Clock, Calendar } from "lucide-react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -112,6 +113,8 @@ export const ContactSection = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
         <div className="floating-orb w-80 h-80 bg-primary -top-40 -right-40" />
         <div className="floating-orb w-80 h-80 bg-accent -bottom-40 -left-40" style={{ animationDelay: "3s" }} />
+        <FloatingDiamond className="top-20 left-8 opacity-10" size="w-20" delay={2} />
+        <FloatingDiamond className="bottom-32 right-10 opacity-10" size="w-14" delay={4.5} duration={8} />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import specialOffer from "@/assets/special-offer.png";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 export const SpecialOfferBanner = () => {
   const ref = useRef(null);
@@ -12,6 +13,8 @@ export const SpecialOfferBanner = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10" />
       <div className="floating-orb w-64 h-64 bg-accent top-0 -right-32 opacity-20" />
+      <FloatingDiamond className="top-4 left-6 opacity-10" size="w-14" delay={1} />
+      <FloatingDiamond className="bottom-4 right-8 opacity-10" size="w-12" delay={3} duration={8} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div

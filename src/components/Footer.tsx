@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import logo from "@/assets/jeweliq-logo.png";
 import footerBg from "@/assets/wallpaper-footer.jpg";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const footerLinks = {
   services: [
@@ -61,6 +62,8 @@ export const Footer = () => {
 
       {/* Top Gradient Line */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent z-10" />
+      <FloatingDiamond className="top-20 right-10 opacity-10 z-10" size="w-16" delay={2} />
+      <FloatingDiamond className="bottom-32 left-8 opacity-10 z-10" size="w-12" delay={5} duration={10} />
 
       {/* Showreel Video Section */}
       <div className="relative z-10 border-b border-border">
