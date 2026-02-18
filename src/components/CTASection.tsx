@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/wallpaper-cta.jpg";
 
@@ -25,6 +26,8 @@ export const CTASection = () => {
       {/* Floating Orbs */}
       <div className="floating-orb w-96 h-96 bg-primary top-0 -left-48 opacity-30" />
       <div className="floating-orb w-80 h-80 bg-accent bottom-0 -right-40 opacity-30" style={{ animationDelay: "2s" }} />
+      <FloatingDiamond className="top-16 right-12 opacity-15" size="w-24" delay={0.5} />
+      <FloatingDiamond className="bottom-20 left-10 opacity-10" size="w-16" delay={3} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div

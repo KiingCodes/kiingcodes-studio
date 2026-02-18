@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Check, Star, Zap, Crown, Rocket } from "lucide-react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
 
 const pricingPlans = [
@@ -156,9 +157,11 @@ export const PricingSection = () => {
   const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section id="pricing" className="py-24 md:py-32 bg-secondary/30 relative">
+    <section id="pricing" className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+      <FloatingDiamond className="top-20 right-12 opacity-10" size="w-20" delay={1.5} />
+      <FloatingDiamond className="bottom-20 left-8 opacity-10" size="w-14" delay={4} duration={10} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}

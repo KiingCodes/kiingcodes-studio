@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const technologies = {
   frontend: [
@@ -72,6 +73,8 @@ export const TechStackSection = () => {
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse-glow" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: "1.5s" }} />
       </div>
+      <FloatingDiamond className="top-12 right-10 opacity-10" size="w-18 md:w-22" delay={1} />
+      <FloatingDiamond className="bottom-16 left-6 opacity-10" size="w-14" delay={3.5} duration={8} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}

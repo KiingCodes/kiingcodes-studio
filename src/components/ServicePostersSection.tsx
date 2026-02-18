@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { ZoomIn } from "lucide-react";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import servicesWebAi from "@/assets/services-web-ai.png";
@@ -45,6 +46,8 @@ export const ServicePostersSection = () => {
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
         <div className="floating-orb w-96 h-96 bg-primary top-20 -left-48 opacity-10" />
         <div className="floating-orb w-80 h-80 bg-accent bottom-20 -right-40 opacity-10" />
+        <FloatingDiamond className="top-12 left-8 opacity-10" size="w-16" delay={2} />
+        <FloatingDiamond className="bottom-16 right-10 opacity-10" size="w-20" delay={5} duration={8} />
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div

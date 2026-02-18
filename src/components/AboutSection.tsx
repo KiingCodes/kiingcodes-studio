@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Target, Shield, Clock, HeartHandshake, Award, Lightbulb } from "lucide-react";
 
 const values = [
@@ -51,6 +52,8 @@ export const AboutSection = () => {
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+      <FloatingDiamond className="top-16 left-10 opacity-10" size="w-20" delay={2} />
+      <FloatingDiamond className="bottom-24 right-8 opacity-10" size="w-16" delay={5} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         {/* Section Header */}

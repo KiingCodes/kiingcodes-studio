@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 import {
   Code2, Smartphone, Globe, Lightbulb, TrendingUp, Users, Palette, Database, Cloud,
   Megaphone, PenTool, Image, Video, FileText, Briefcase,
@@ -86,7 +87,9 @@ export const ServicesSection = () => {
   const isHeaderInView = useInView(headerRef, { once: true });
 
   return (
-    <section id="services" className="py-24 md:py-32 bg-background relative">
+    <section id="services" className="py-24 md:py-32 bg-background relative overflow-hidden">
+      <FloatingDiamond className="top-16 right-8 opacity-10" size="w-20" delay={1} />
+      <FloatingDiamond className="bottom-24 left-6 opacity-10" size="w-16" delay={4} duration={9} />
       <div className="container mx-auto px-4 md:px-6">
         {/* Section Header */}
         <motion.div
