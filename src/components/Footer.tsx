@@ -8,22 +8,22 @@ import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const footerLinks = {
   services: [
-    { label: "Website Development", href: "#services" },
-    { label: "Mobile Apps", href: "#services" },
-    { label: "UI/UX Design", href: "#services" },
-    { label: "Consulting", href: "#services" },
+    { label: "Website Development", href: "/services" },
+    { label: "Mobile Apps", href: "/services" },
+    { label: "UI/UX Design", href: "/services" },
+    { label: "Consulting", href: "/services" },
   ],
   company: [
-    { label: "About Us", href: "#about" },
-    { label: "Our Work", href: "#" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "Contact", href: "#contact" },
+    { label: "About Us", href: "/about" },
+    { label: "Our Work", href: "/services" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "Contact", href: "/contact" },
   ],
   resources: [
     { label: "Blog", href: "#" },
     { label: "Case Studies", href: "#" },
     { label: "FAQ", href: "#" },
-    { label: "Support", href: "#contact" },
+    { label: "Support", href: "/contact" },
   ],
 };
 
@@ -142,12 +142,12 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -159,12 +159,12 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-sm text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -176,12 +176,21 @@ export const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.resources.map((link, index) => (
                 <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </a>
+                  {link.href.startsWith("/") ? (
+                    <Link
+                      to={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

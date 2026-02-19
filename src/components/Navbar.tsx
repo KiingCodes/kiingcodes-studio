@@ -6,19 +6,17 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/jeweliq-logo.png";
 
 const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#services", label: "Services" },
-  { href: "#pricing", label: "Pricing" },
-  { href: "#about", label: "About" },
-  { href: "#tech", label: "Tech Stack" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const isHomePage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,14 +25,6 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleNavClick = (href: string) => {
-    if (!isHomePage) {
-      // Navigate to home page with hash
-      window.location.href = "/" + href;
-    }
-    setIsMobileMenuOpen(false);
-  };
 
   return (
     <motion.nav
@@ -62,35 +52,24 @@ export const Navbar = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              isHomePage ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <a
-                  key={link.href}
-                  href={"/" + link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-muted-foreground hover:text-foreground transition-colors duration-200 text-sm font-medium"
-                >
-                  {link.label}
-                </a>
-              )
+              <Link
+                key={link.href}
+                to={link.href}
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  location.pathname === link.href
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button variant="hero" size="lg" asChild>
-              {isHomePage ? (
-                <a href="#contact">Book a Call</a>
-              ) : (
-                <a href="/#contact">Book a Call</a>
-              )}
+              <Link to="/contact">Book a Call</Link>
             </Button>
           </div>
 
@@ -112,22 +91,22 @@ export const Navbar = () => {
             className="md:hidden bg-card border-b border-border py-4"
           >
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
-                href={isHomePage ? link.href : "/" + link.href}
-                className="block py-3 px-4 text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors duration-200"
-                onClick={() => handleNavClick(link.href)}
+                to={link.href}
+                className={`block py-3 px-4 transition-colors duration-200 ${
+                  location.pathname === link.href
+                    ? "text-primary bg-primary/5"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <div className="px-4 pt-4">
               <Button variant="hero" className="w-full" asChild>
-                {isHomePage ? (
-                  <a href="#contact">Book a Call</a>
-                ) : (
-                  <a href="/#contact">Book a Call</a>
-                )}
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Book a Call</Link>
               </Button>
             </div>
           </motion.div>
