@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
 import ctaBg from "@/assets/wallpaper-cta.jpg";
@@ -59,13 +60,13 @@ export const CTASection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="hero" size="xl" asChild>
-              <a href="#contact" className="group">
+              <Link to="/contact" className="group">
                 Start Your Project
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Link>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <a href="#pricing">View Pricing</a>
+              <Link to="/pricing">View Pricing</Link>
             </Button>
           </div>
 

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
@@ -90,24 +91,24 @@ export const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Button variant="hero" size="xl" asChild>
-              <motion.a
-                href="#contact"
+              <motion.div
                 className="group"
                 whileHover={{ scale: 1.05, boxShadow: "0 0 30px hsl(var(--primary) / 0.5)" }}
                 whileTap={{ scale: 0.97 }}
               >
-                Start Your Project
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
+                <Link to="/contact">
+                  Start Your Project
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform inline ml-2" />
+                </Link>
+              </motion.div>
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
-              <motion.a
-                href="#services"
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
               >
-                Explore Services
-              </motion.a>
+                <Link to="/services">Explore Services</Link>
+              </motion.div>
             </Button>
           </motion.div>
 

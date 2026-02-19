@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Check, Star, Zap, Crown, Rocket } from "lucide-react";
+import { Link } from "react-router-dom";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
 
@@ -146,7 +147,7 @@ const PricingCard = ({ plan, index }: { plan: typeof pricingPlans[0]; index: num
         className="w-full"
         asChild
       >
-        <a href="#contact">Get Started</a>
+        <Link to="/contact">Get Started</Link>
       </Button>
     </motion.div>
   );
