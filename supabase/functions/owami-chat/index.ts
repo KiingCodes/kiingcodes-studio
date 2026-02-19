@@ -68,6 +68,12 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
+    // Filter out client-side greeting and any error messages from conversation
+    const cleanMessages = messages.filter((m: { role: string; content: string }) => {
+      if (m.content === "AI service error") return false;
+      return true;
+    });
+
     const response = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
       {
@@ -77,10 +83,10 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "google/gemini-3-flash-preview",
+          model: "openai/gpt-5-mini",
           messages: [
             { role: "system", content: SYSTEM_PROMPT },
-            ...messages,
+            ...cleanMessages,
           ],
           stream: true,
         }),
