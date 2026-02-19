@@ -4,7 +4,7 @@ import { MessageCircle, X, Send, User, Bot, Sparkles, ChevronRight } from "lucid
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ReactMarkdown from "react-markdown";
-import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
+import owamiIcon from "@/assets/owami-bot-icon.png";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -145,7 +145,7 @@ export function OwamaChatbot() {
               animate={{ rotate: [0, 10, -10, 0] }}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
             >
-              <img src={diamondLogo} alt="Owami" className="w-8 h-8 object-contain" />
+              <img src={owamiIcon} alt="Owami" className="w-8 h-8 object-contain" />
             </motion.div>
             {/* Pulse ring */}
             <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
@@ -168,7 +168,7 @@ export function OwamaChatbot() {
             <div className="relative px-5 py-4 bg-gradient-to-r from-primary/20 to-accent/20 border-b border-border/30 flex items-center gap-3">
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <img src={diamondLogo} alt="Owami" className="w-6 h-6 object-contain" />
+                  <img src={owamiIcon} alt="Owami" className="w-6 h-6 object-contain" />
                 </div>
                 <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-background" style={{ background: "hsl(142, 71%, 45%)" }} />
               </div>
