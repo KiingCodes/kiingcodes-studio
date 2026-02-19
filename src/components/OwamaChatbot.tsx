@@ -13,7 +13,6 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/owami-chat`;
 const SUGGESTIONS = [
   { label: "Services", icon: Sparkles, message: "What services does JewelIQ offer?" },
   { label: "Pricing", icon: ChevronRight, message: "Can you tell me about JewelIQ's pricing?" },
-  { label: "Portfolio", icon: ChevronRight, message: "Show me JewelIQ's portfolio highlights" },
   { label: "Book Consultation", icon: ChevronRight, message: "I'd like to book a free consultation" },
 ];
 
