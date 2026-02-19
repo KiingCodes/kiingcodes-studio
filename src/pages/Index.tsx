@@ -10,6 +10,7 @@ import { TechStackSection } from "@/components/TechStackSection";
 import { CTASection } from "@/components/CTASection";
 import { ContactSection } from "@/components/ContactSection";
 import { Footer } from "@/components/Footer";
+import { OwamaChatbot } from "@/components/OwamaChatbot";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
       <CTASection />
       <ContactSection />
       <Footer />
+      <OwamaChatbot />
     </div>
   );
 };
