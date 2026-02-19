@@ -1,1 +1,7 @@
 project_id = "wiyzgzhkcmgyfxdyrnhr"
+
+[functions.send-booking]
+verify_jwt = false
+
+[functions.owami-chat]
+verify_jwt = false
