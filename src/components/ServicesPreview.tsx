@@ -1,22 +1,25 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Globe, Smartphone, Palette, Megaphone, Database, Lightbulb } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { Button } from "@/components/ui/button";
+import { useServices } from "@/hooks/use-dynamic-content";
+import {
+  Globe, Smartphone, Database, Palette, Lightbulb, TrendingUp,
+  Megaphone, PenTool, Image, Video, FileText, Briefcase, Cloud, Code2, Users,
+} from "lucide-react";
 
-const previewServices = [
-  { icon: Globe, title: "Website Development", description: "Custom, responsive websites built with modern technologies that convert visitors into customers." },
-  { icon: Smartphone, title: "Mobile App Development", description: "Cross-platform mobile apps that deliver native-like experiences users love." },
-  { icon: Database, title: "Full-Stack Solutions", description: "End-to-end development with robust backends and scalable cloud infrastructure." },
-  { icon: Palette, title: "UI/UX Design", description: "Beautiful, intuitive interfaces designed with your users in mind." },
-  { icon: Megaphone, title: "Digital Marketing", description: "Data-driven strategies designed to grow reach, engagement, and revenue." },
-  { icon: Lightbulb, title: "Startup Consulting", description: "Strategic guidance to validate ideas, build MVPs, and scale your products." },
-];
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Globe, Smartphone, Database, Palette, Lightbulb, TrendingUp,
+  Megaphone, PenTool, Image, Video, FileText, Briefcase, Cloud, Code2, Users, Sparkles,
+};
 
 export const ServicesPreview = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+  const { data: services } = useServices();
+  const previewServices = services?.slice(0, 6) ?? [];
 
   return (
     <section className="py-24 md:py-32 bg-background relative overflow-hidden">
@@ -44,29 +47,32 @@ export const ServicesPreview = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {previewServices.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-all duration-300"
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative z-10">
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.2 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6"
-                >
-                  <service.icon className="w-7 h-7 text-primary" />
-                </motion.div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </div>
-            </motion.div>
-          ))}
+          {previewServices.map((service, index) => {
+            const IconComponent = iconMap[service.icon] || Sparkles;
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group relative bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-all duration-300"
+              >
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative z-10">
+                  <motion.div
+                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.2 }}
+                    transition={{ duration: 0.5 }}
+                    className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-6"
+                  >
+                    <IconComponent className="w-7 h-7 text-primary" />
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div
