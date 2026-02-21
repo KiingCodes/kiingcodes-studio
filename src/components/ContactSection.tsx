@@ -81,8 +81,8 @@ export const ContactSection = () => {
     {
       icon: Mail,
       label: "Email Us",
-      value: "info@jeweliq.com",
-      href: "mailto:info@jeweliq.com",
+      value: "jeweliq.tech.@outlook.com",
+      href: "mailto:jeweliq.tech.@outlook.com",
     },
     {
       icon: Phone,
@@ -93,7 +93,7 @@ export const ContactSection = () => {
     {
       icon: Clock,
       label: "Working Hours",
-      value: "Mon - Fri: 9AM - 6PM",
+      value: "Mon - Fri: 9AM - 24hrs",
       href: null,
     },
   ];
@@ -305,6 +305,7 @@ export const ContactSection = () => {
                     className="w-full h-10 px-3 rounded-lg bg-secondary/50 border border-border text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
                     <option value="">Select a range</option>
+                    <option value="500-1000">R500 - R1,000</option>
                     <option value="2500-5000">R2,500 - R5,000</option>
                     <option value="5000-10000">R5,000 - R10,000</option>
                     <option value="10000-20000">R10,000 - R20,000</option>
