@@ -30,7 +30,8 @@ const VISITOR_PROMPT = `You are Owami, JewelIQ's friendly, professional, and con
 - Collect lead info (name, email, phone, company) naturally
 - Keep responses concise (2-4 sentences typical)
 - When users ask about pricing, give ranges and suggest consultation
-- Format responses with markdown when helpful`;
+- Format responses with markdown when helpful
+- You have memory of all previous conversations in the thread`;
 
 const ADMIN_PROMPT = `You are Owami in ADMIN MODE for JewelIQ. You're speaking with the site administrator.
 
@@ -45,6 +46,7 @@ You can manage all website content using the provided tools:
 When the admin asks to change content, use the appropriate tool. Always confirm what you've done.
 Be proactive in suggesting improvements. Keep responses professional but friendly.
 Format responses with markdown. Use emojis sparingly ✨.
+You have memory of all previous conversations in the thread.
 
 IMPORTANT: When creating blog posts, always generate a slug from the title (lowercase, hyphens, no special chars).
 When updating items, you need the item's ID. If unsure, use list tools first to find the right item.`;
@@ -193,7 +195,8 @@ const ADMIN_TOOLS = [
   },
 ];
 
-async function executeTool(name: string, args: Record<string, unknown>, adminSupabase: ReturnType<typeof createClient>, adminUserId: string) {
+// Use any-typed client to avoid TS issues with dynamic tool args
+async function executeTool(name: string, args: Record<string, any>, adminSupabase: any, adminUserId: string) {
   try {
     switch (name) {
       case "list_items": {
@@ -208,7 +211,7 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return { data };
       }
       case "upsert_service": {
-        const { id, ...rest } = args as Record<string, unknown>;
+        const { id, ...rest } = args;
         if (id) {
           const { data, error } = await adminSupabase.from("services").update(rest).eq("id", id).select().single();
           return error ? { error: error.message } : { data, action: "updated" };
@@ -217,7 +220,7 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return error ? { error: error.message } : { data, action: "created" };
       }
       case "upsert_pricing": {
-        const { id, features, ...rest } = args as Record<string, unknown>;
+        const { id, features, ...rest } = args;
         const row = { ...rest, features: features ? JSON.stringify(features) : undefined };
         if (id) {
           const { data, error } = await adminSupabase.from("pricing_plans").update(row).eq("id", id).select().single();
@@ -227,11 +230,11 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return error ? { error: error.message } : { data, action: "created" };
       }
       case "upsert_blog_post": {
-        const { id, ...rest } = args as Record<string, unknown>;
+        const { id, ...rest } = args;
         const row = {
           ...rest,
           author_id: adminUserId,
-          slug: (rest.slug as string) || (rest.title as string || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+          slug: rest.slug || (rest.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
           published_at: rest.is_published && !rest.published_at ? new Date().toISOString() : rest.published_at,
         };
         if (id) {
@@ -242,7 +245,7 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return error ? { error: error.message } : { data, action: "created" };
       }
       case "upsert_portfolio": {
-        const { id, ...rest } = args as Record<string, unknown>;
+        const { id, ...rest } = args;
         if (id) {
           const { data, error } = await adminSupabase.from("portfolio_items").update(rest).eq("id", id).select().single();
           return error ? { error: error.message } : { data, action: "updated" };
@@ -251,7 +254,7 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return error ? { error: error.message } : { data, action: "created" };
       }
       case "upsert_testimonial": {
-        const { id, ...rest } = args as Record<string, unknown>;
+        const { id, ...rest } = args;
         if (id) {
           const { data, error } = await adminSupabase.from("testimonials").update(rest).eq("id", id).select().single();
           return error ? { error: error.message } : { data, action: "updated" };
@@ -260,7 +263,7 @@ async function executeTool(name: string, args: Record<string, unknown>, adminSup
         return error ? { error: error.message } : { data, action: "created" };
       }
       case "delete_item": {
-        const { table, id: itemId } = args as { table: string; id: string };
+        const { table, id: itemId } = args;
         const { error } = await adminSupabase.from(table).delete().eq("id", itemId);
         return error ? { error: error.message } : { action: "deleted", id: itemId };
       }
@@ -278,29 +281,29 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages, conversationId } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const adminClient = createClient(supabaseUrl, serviceRoleKey);
 
     // Check admin status
     let isAdmin = false;
     let adminUserId = "";
     const authHeader = req.headers.get("Authorization");
     
-    if (authHeader?.startsWith("Bearer ")) {
-      const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
-      const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
-      
+    if (authHeader?.startsWith("Bearer ") && authHeader !== `Bearer ${supabaseAnonKey}`) {
       try {
         const userClient = createClient(supabaseUrl, supabaseAnonKey, {
           global: { headers: { Authorization: authHeader } },
         });
-        const { data: claimsData, error: claimsError } = await userClient.auth.getClaims(authHeader.replace("Bearer ", ""));
+        const { data: { user } } = await userClient.auth.getUser();
         
-        if (!claimsError && claimsData?.claims?.sub) {
-          adminUserId = claimsData.claims.sub as string;
-          const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-          const adminClient = createClient(supabaseUrl, serviceRoleKey);
+        if (user) {
+          adminUserId = user.id;
           const { data: roleData } = await adminClient
             .from("user_roles")
             .select("role")
@@ -314,21 +317,47 @@ serve(async (req) => {
       }
     }
 
+    // Load conversation history from DB if conversationId provided
+    let historyMessages: Array<{role: string; content: string}> = [];
+    if (conversationId) {
+      const { data: history } = await adminClient
+        .from("chat_messages")
+        .select("role, content")
+        .eq("conversation_id", conversationId)
+        .order("created_at", { ascending: true })
+        .limit(100);
+      if (history && history.length > 0) {
+        historyMessages = history;
+      }
+    }
+
+    // Save incoming user message to DB
+    const lastMsg = messages[messages.length - 1];
+    if (conversationId && lastMsg?.role === "user") {
+      await adminClient.from("chat_messages").insert({
+        conversation_id: conversationId,
+        role: "user",
+        content: lastMsg.content,
+        is_admin: isAdmin,
+      });
+    }
+
+    // Build full message list: history from DB + current messages (deduped)
     const cleanMessages = messages.filter((m: { content: string }) => m.content !== "AI service error");
+    // Use DB history if available, otherwise use what the client sent
+    const fullMessages = historyMessages.length > 0 
+      ? historyMessages 
+      : cleanMessages;
+
     const systemPrompt = isAdmin ? ADMIN_PROMPT : VISITOR_PROMPT;
 
     if (isAdmin) {
       // Non-streaming admin mode with tool calling
-      const adminSupabaseUrl = Deno.env.get("SUPABASE_URL")!;
-      const adminServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-      const adminSupabase = createClient(adminSupabaseUrl, adminServiceKey);
-
-      let aiMessages = [
+      let aiMessages: any[] = [
         { role: "system", content: systemPrompt },
-        ...cleanMessages,
+        ...fullMessages,
       ];
 
-      // Loop for tool calls (max 5 iterations)
       for (let i = 0; i < 5; i++) {
         const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
           method: "POST",
@@ -337,7 +366,7 @@ serve(async (req) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            model: "openai/gpt-5-mini",
+            model: "google/gemini-3-flash-preview",
             messages: aiMessages,
             tools: ADMIN_TOOLS,
             stream: false,
@@ -364,30 +393,47 @@ serve(async (req) => {
           return new Response(JSON.stringify({ error: "No response from AI" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
         }
 
-        // If no tool calls, return the final response
         if (!choice.message?.tool_calls?.length) {
+          const content = choice.message?.content || "Done! ✨";
+          // Save assistant response to DB
+          if (conversationId) {
+            await adminClient.from("chat_messages").insert({
+              conversation_id: conversationId,
+              role: "assistant",
+              content,
+              is_admin: true,
+            });
+          }
           return new Response(
-            JSON.stringify({ content: choice.message?.content || "Done!", admin: true }),
+            JSON.stringify({ content, admin: true }),
             { headers: { ...corsHeaders, "Content-Type": "application/json" } }
           );
         }
 
-        // Process tool calls
         aiMessages.push(choice.message);
         
         for (const toolCall of choice.message.tool_calls) {
           const args = JSON.parse(toolCall.function.arguments);
-          const toolResult = await executeTool(toolCall.function.name, args, adminSupabase, adminUserId);
+          const toolResult = await executeTool(toolCall.function.name, args, adminClient, adminUserId);
           aiMessages.push({
             role: "tool",
             tool_call_id: toolCall.id,
             content: JSON.stringify(toolResult),
-          } as any);
+          });
         }
       }
 
+      const finalContent = "I've completed the requested changes! ✨";
+      if (conversationId) {
+        await adminClient.from("chat_messages").insert({
+          conversation_id: conversationId,
+          role: "assistant",
+          content: finalContent,
+          is_admin: true,
+        });
+      }
       return new Response(
-        JSON.stringify({ content: "I've completed the requested changes! ✨", admin: true }),
+        JSON.stringify({ content: finalContent, admin: true }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -400,8 +446,8 @@ serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "openai/gpt-5-mini",
-        messages: [{ role: "system", content: systemPrompt }, ...cleanMessages],
+        model: "google/gemini-3-flash-preview",
+        messages: [{ role: "system", content: systemPrompt }, ...fullMessages],
         stream: true,
       }),
     });
@@ -416,6 +462,60 @@ serve(async (req) => {
       const t = await response.text();
       console.error("AI gateway error:", response.status, t);
       return new Response(JSON.stringify({ error: "AI service error" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    }
+
+    // We need to capture the streamed response to save to DB
+    if (conversationId && response.body) {
+      const [streamForClient, streamForCapture] = response.body.tee();
+      
+      // Capture full response in background
+      const capturePromise = (async () => {
+        try {
+          const reader = streamForCapture.getReader();
+          const decoder = new TextDecoder();
+          let fullContent = "";
+          let buf = "";
+          
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            buf += decoder.decode(value, { stream: true });
+            
+            let idx: number;
+            while ((idx = buf.indexOf("\n")) !== -1) {
+              let line = buf.slice(0, idx);
+              buf = buf.slice(idx + 1);
+              if (line.endsWith("\r")) line = line.slice(0, -1);
+              if (!line.startsWith("data: ")) continue;
+              const json = line.slice(6).trim();
+              if (json === "[DONE]") break;
+              try {
+                const parsed = JSON.parse(json);
+                const c = parsed.choices?.[0]?.delta?.content;
+                if (c) fullContent += c;
+              } catch {}
+            }
+          }
+          
+          if (fullContent) {
+            await adminClient.from("chat_messages").insert({
+              conversation_id: conversationId,
+              role: "assistant",
+              content: fullContent,
+              is_admin: false,
+            });
+          }
+        } catch (e) {
+          console.error("Failed to capture response:", e);
+        }
+      })();
+
+      // Don't await - let it run in background
+      capturePromise.catch(() => {});
+
+      return new Response(streamForClient, {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
     }
 
     return new Response(response.body, {

@@ -95,6 +95,33 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          is_admin: boolean | null
+          role: string
+        }
+        Insert: {
+          content: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          is_admin?: boolean | null
+          role: string
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          is_admin?: boolean | null
+          role?: string
+        }
+        Relationships: []
+      }
       portfolio_items: {
         Row: {
           category: string | null
