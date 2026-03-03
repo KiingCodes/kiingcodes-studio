@@ -53,6 +53,8 @@ export const ServicePostersSection = () => {
       <section className="py-16 md:py-24 bg-background relative overflow-hidden">
         <FloatingDiamond className="top-12 left-8 opacity-10" size="w-16" delay={2} />
         <FloatingDiamond className="bottom-16 right-10 opacity-10" size="w-20" delay={5} duration={8} />
+        <FloatingDiamond className="top-1/3 right-4 opacity-8" size="w-12" delay={3.5} duration={10} />
+        <FloatingDiamond className="bottom-1/3 left-1/4 opacity-8" size="w-10" delay={7} duration={11} />
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
           <motion.div

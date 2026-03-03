@@ -29,6 +29,8 @@ export const CTASection = () => {
       <div className="floating-orb w-80 h-80 bg-accent bottom-0 -right-40 opacity-30" style={{ animationDelay: "2s" }} />
       <FloatingDiamond className="top-16 right-12 opacity-15" size="w-24" delay={0.5} />
       <FloatingDiamond className="bottom-20 left-10 opacity-10" size="w-16" delay={3} duration={9} />
+      <FloatingDiamond className="top-1/2 left-4 opacity-10" size="w-14" delay={1.5} duration={10} />
+      <FloatingDiamond className="bottom-10 right-1/3 opacity-8" size="w-10" delay={4.5} duration={11} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div

@@ -30,6 +30,7 @@ export const Footer = () => {
       {/* Subtle Decorations */}
       <FloatingDiamond className="top-20 right-10 opacity-10 z-10" size="w-16" delay={2} />
       <FloatingDiamond className="bottom-32 left-8 opacity-10 z-10" size="w-12" delay={5} duration={10} />
+      <FloatingDiamond className="top-1/2 left-1/3 opacity-8 z-10" size="w-10" delay={3.5} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 py-16 relative z-10">
         {/* Brand */}
