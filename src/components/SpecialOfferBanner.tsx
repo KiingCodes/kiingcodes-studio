@@ -1,4 +1,5 @@
 import specialOffer from "@/assets/special-offer.png";
+import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 export const SpecialOfferBanner = () => {
   return (
@@ -6,6 +7,8 @@ export const SpecialOfferBanner = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern opacity-10" />
       <div className="floating-orb w-64 h-64 bg-accent top-0 -right-32 opacity-20" />
+      <FloatingDiamond className="top-8 left-6 opacity-10" size="w-14" delay={1} />
+      <FloatingDiamond className="bottom-8 right-8 opacity-8" size="w-10" delay={4} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="max-w-4xl mx-auto relative rounded-2xl overflow-hidden shadow-2xl border border-primary/30">

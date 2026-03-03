@@ -27,6 +27,8 @@ export const ServicesPreview = () => {
     <section className="py-24 md:py-32 bg-background relative overflow-hidden">
       <FloatingDiamond className="top-16 right-8 opacity-10" size="w-20" delay={1} />
       <FloatingDiamond className="bottom-24 left-6 opacity-10" size="w-16" delay={4} duration={9} />
+      <FloatingDiamond className="top-1/2 right-1/4 opacity-8" size="w-12" delay={2.5} duration={10} />
+      <FloatingDiamond className="top-32 left-1/3 opacity-8" size="w-10" delay={6} duration={12} />
 
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
