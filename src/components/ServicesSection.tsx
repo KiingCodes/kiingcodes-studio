@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
+import { ServiceDetailDialog } from "@/components/ServiceDetailDialog";
 import { useServices } from "@/hooks/use-dynamic-content";
 import {
   Code2,
@@ -28,7 +29,9 @@ interface Service {
   title: string;
   description: string;
   icon: string;
+  category: string;
   price_from: number;
+  price_unit?: string | null;
 }
 
 /* ----------------------------- ICON MAP ----------------------------- */
@@ -74,9 +77,10 @@ const cardVariants = {
 interface ServiceCardProps {
   service: Service;
   index: number;
+  onClick: () => void;
 }
 
-const ServiceCard = ({ service, index }: ServiceCardProps) => {
+const ServiceCard = ({ service, index, onClick }: ServiceCardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
@@ -90,7 +94,8 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.3 } }}
-      className="group relative bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-all duration-300"
+      onClick={onClick}
+      className="group relative bg-card rounded-2xl p-8 border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
     >
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -131,6 +136,7 @@ export const ServicesSection = () => {
   const isHeaderInView = useInView(headerRef, { once: true });
 
   const { data: services, isLoading } = useServices();
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
 
   return (
     <section
@@ -197,11 +203,18 @@ export const ServicesSection = () => {
                 key={service.id}
                 service={service}
                 index={index}
+                onClick={() => setSelectedService(service)}
               />
             ))}
           </div>
         )}
       </div>
+
+      <ServiceDetailDialog
+        service={selectedService}
+        open={!!selectedService}
+        onOpenChange={(open) => !open && setSelectedService(null)}
+      />
     </section>
   );
 };
