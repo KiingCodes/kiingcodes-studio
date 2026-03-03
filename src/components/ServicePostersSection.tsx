@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
-import { ZoomIn } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ImageLightbox } from "@/components/ImageLightbox";
 import servicesWebAi from "@/assets/services-web-ai.png";
 import servicesMobileIt from "@/assets/services-mobile-it.png";
@@ -12,19 +13,27 @@ import servicesBusinessMarketing from "@/assets/services-business-marketing.png"
 const servicePosters = [
   {
     src: servicesWebAi,
-    alt: "Web Development & AI Solutions - Custom websites, e-commerce, CMS, AI development, automation, and data analytics",
+    alt: "Web Development & AI Solutions",
+    label: "Web & AI Solutions",
+    description: "Custom websites, e-commerce, CMS, AI development, automation, and data analytics",
   },
   {
     src: servicesMobileIt,
-    alt: "Mobile App Development & IT Consulting - iOS, Android, cross-platform apps, cloud solutions, cybersecurity",
+    alt: "Mobile App Development & IT Consulting",
+    label: "Mobile & IT",
+    description: "iOS, Android, cross-platform apps, cloud solutions, cybersecurity",
   },
   {
     src: servicesGraphicDocs,
-    alt: "Graphic Designing & Software Documentation - Logo, branding, UI/UX graphics, technical docs, API documentation",
+    alt: "Graphic Designing & Software Documentation",
+    label: "Design & Docs",
+    description: "Logo, branding, UI/UX graphics, technical docs, API documentation",
   },
   {
     src: servicesBusinessMarketing,
-    alt: "Business Development & Digital Marketing - Market research, strategic planning, social media, SEO, content marketing",
+    alt: "Business Development & Digital Marketing",
+    label: "Business & Marketing",
+    description: "Market research, strategic planning, social media, SEO, content marketing",
   },
 ];
 
@@ -41,11 +50,7 @@ export const ServicePostersSection = () => {
 
   return (
     <>
-      <section className="py-16 md:py-24 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
-        {/* Background Effects */}
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="floating-orb w-96 h-96 bg-primary top-20 -left-48 opacity-10" />
-        <div className="floating-orb w-80 h-80 bg-accent bottom-20 -right-40 opacity-10" />
+      <section className="py-16 md:py-24 bg-background relative overflow-hidden">
         <FloatingDiamond className="top-12 left-8 opacity-10" size="w-16" delay={2} />
         <FloatingDiamond className="bottom-16 right-10 opacity-10" size="w-20" delay={5} duration={8} />
 
@@ -61,7 +66,7 @@ export const ServicePostersSection = () => {
               <span className="text-gradient">Our Services</span> at a Glance
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore our comprehensive range of digital solutions designed to transform your business
+              Tap any category to explore our comprehensive digital solutions
             </p>
           </motion.div>
 
@@ -69,27 +74,16 @@ export const ServicePostersSection = () => {
             {servicePosters.map((poster, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40, rotateX: 8 }}
-                animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: index * 0.15, type: "spring", stiffness: 100 }}
-                className="group relative cursor-pointer perspective-1000"
+                className="group relative cursor-pointer"
                 onClick={() => openLightbox(index)}
               >
-                {/* Animated glow ring */}
                 <motion.div
-                  className="absolute -inset-1 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                  style={{
-                    background: "conic-gradient(from 0deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)))",
-                    filter: "blur(12px)",
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                />
-
-                <motion.div
-                  whileHover={{ scale: 1.03, rotateY: 2, rotateX: -2 }}
+                  whileHover={{ scale: 1.03 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="relative rounded-xl overflow-hidden shadow-xl border border-primary/20 bg-card"
+                  className="relative rounded-xl overflow-hidden"
                 >
                   <img
                     src={poster.src}
@@ -98,26 +92,17 @@ export const ServicePostersSection = () => {
                     loading="lazy"
                   />
 
-                  {/* Hover overlay with zoom icon */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent flex items-center justify-center"
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileHover={{ scale: 1 }}
-                      className="w-16 h-16 rounded-full bg-primary/90 flex items-center justify-center shadow-lg shadow-primary/40"
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-background/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-6 text-center">
+                    <h3 className="text-xl font-bold text-foreground mb-2">{poster.label}</h3>
+                    <p className="text-muted-foreground text-sm mb-4 max-w-xs">{poster.description}</p>
+                    <Link
+                      to="/services"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 text-primary font-semibold text-sm hover:gap-2 transition-all"
                     >
-                      <ZoomIn className="w-7 h-7 text-primary-foreground" />
-                    </motion.div>
-                  </motion.div>
-
-                  {/* Shine sweep effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
-                    <div
-                      className="absolute top-0 -left-full w-1/2 h-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 group-hover:left-[150%] transition-all duration-1000 ease-out"
-                    />
+                      View Services <ArrowRight className="w-4 h-4" />
+                    </Link>
                   </div>
                 </motion.div>
               </motion.div>
