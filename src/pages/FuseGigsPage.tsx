@@ -14,12 +14,7 @@ const features = [
   { icon: Zap, title: "Fast & Simple", description: "Post a gig in minutes, get proposals within hours, and start working with top talent immediately." },
 ];
 
-const stats = [
-  { value: "500+", label: "Active Freelancers" },
-  { value: "1,200+", label: "Gigs Completed" },
-  { value: "98%", label: "Satisfaction Rate" },
-  { value: "24/7", label: "Support Available" },
-];
+
 
 export default function FuseGigsPage() {
   return (
@@ -77,27 +72,6 @@ export default function FuseGigsPage() {
               </Button>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Stats */}
-      <section className="py-12 border-y border-border/30 bg-card/30">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="text-center"
-              >
-                <p className="text-3xl md:text-4xl font-bold text-primary mb-1">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
