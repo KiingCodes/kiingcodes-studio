@@ -14,7 +14,8 @@ const navLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-];
+  { href: "/reports", label: "Reports", authOnly: true },
+] as const;
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,17 +46,20 @@ export const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-sm font-medium transition-colors duration-200 ${
-                  location.pathname === link.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if ("authOnly" in link && link.authOnly && !user) return null;
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`text-sm font-medium transition-colors duration-200 ${
+                    location.pathname === link.href ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -93,18 +97,21 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden bg-card border-b border-border py-4"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`block py-3 px-4 transition-colors duration-200 ${
-                  location.pathname === link.href ? "text-primary bg-primary/5" : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-                }`}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              if ("authOnly" in link && link.authOnly && !user) return null;
+              return (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className={`block py-3 px-4 transition-colors duration-200 ${
+                    location.pathname === link.href ? "text-primary bg-primary/5" : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <div className="px-4 pt-4 space-y-2">
               {user ? (
                 <Button variant="ghost" className="w-full justify-start" onClick={() => { signOut(); setIsMobileMenuOpen(false); }}>

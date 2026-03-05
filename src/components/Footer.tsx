@@ -69,14 +69,16 @@ export const Footer = () => {
             className="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
 
-          <motion.img
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            src={fuseGigsLogo}
-            alt="Fuse Gigs Logo"
-            className="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300"
-          />
+          <a href="https://fusegigs.com" target="_blank" rel="noopener noreferrer">
+            <motion.img
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              src={fuseGigsLogo}
+              alt="Fuse Gigs Logo"
+              className="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            />
+          </a>
         </div>
 
         {/* Bottom */}

@@ -14,7 +14,7 @@ const Index = () => {
       <HeroSection />
       <SpecialOfferBanner />
       <ServicesPreview />
-      <CTASection />
+      <FuseGigsAd />
       <Footer />
       <OwamaChatbot />
     </div>
