@@ -18,6 +18,7 @@ import BlogPostPage from "./pages/BlogPostPage";
 import PortfolioPage from "./pages/PortfolioPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
+import { TouchDiamonds } from "./components/TouchDiamonds";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <TouchDiamonds />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
