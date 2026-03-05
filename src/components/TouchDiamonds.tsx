@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
 
-interface Diamond {
+interface Particle {
   id: number;
   x: number;
   y: number;
@@ -10,39 +10,58 @@ interface Diamond {
   distance: number;
   size: number;
   rotation: number;
+  type: "diamond" | "sparkle";
+  delay: number;
 }
 
 let idCounter = 0;
 
 export const TouchDiamonds = () => {
-  const [diamonds, setDiamonds] = useState<Diamond[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
 
-  const spawnDiamonds = useCallback((clientX: number, clientY: number) => {
-    const count = 3 + Math.floor(Math.random() * 3); // 3-5 diamonds
-    const newDiamonds: Diamond[] = Array.from({ length: count }, () => ({
-      id: ++idCounter,
-      x: clientX,
-      y: clientY,
-      angle: Math.random() * 360,
-      distance: 40 + Math.random() * 80,
-      size: 16 + Math.random() * 20,
-      rotation: -30 + Math.random() * 60,
-    }));
-    setDiamonds((prev) => [...prev, ...newDiamonds]);
+  const spawnParticles = useCallback((clientX: number, clientY: number) => {
+    const diamondCount = 5 + Math.floor(Math.random() * 4); // 5-8 diamonds
+    const sparkleCount = 6 + Math.floor(Math.random() * 5); // 6-10 sparkles
+
+    const newParticles: Particle[] = [
+      ...Array.from({ length: diamondCount }, () => ({
+        id: ++idCounter,
+        x: clientX,
+        y: clientY,
+        angle: Math.random() * 360,
+        distance: 60 + Math.random() * 120,
+        size: 18 + Math.random() * 28,
+        rotation: -45 + Math.random() * 90,
+        type: "diamond" as const,
+        delay: Math.random() * 0.08,
+      })),
+      ...Array.from({ length: sparkleCount }, () => ({
+        id: ++idCounter,
+        x: clientX,
+        y: clientY,
+        angle: Math.random() * 360,
+        distance: 30 + Math.random() * 90,
+        size: 4 + Math.random() * 6,
+        rotation: 0,
+        type: "sparkle" as const,
+        delay: Math.random() * 0.15,
+      })),
+    ];
+    setParticles((prev) => [...prev, ...newParticles]);
   }, []);
 
   const handleClick = useCallback(
-    (e: MouseEvent) => spawnDiamonds(e.clientX, e.clientY),
-    [spawnDiamonds]
+    (e: MouseEvent) => spawnParticles(e.clientX, e.clientY),
+    [spawnParticles]
   );
 
   const handleTouch = useCallback(
     (e: TouchEvent) => {
       Array.from(e.changedTouches).forEach((t) =>
-        spawnDiamonds(t.clientX, t.clientY)
+        spawnParticles(t.clientX, t.clientY)
       );
     },
-    [spawnDiamonds]
+    [spawnParticles]
   );
 
   useEffect(() => {
@@ -54,43 +73,79 @@ export const TouchDiamonds = () => {
     };
   }, [handleClick, handleTouch]);
 
-  const removeDiamond = (id: number) =>
-    setDiamonds((prev) => prev.filter((d) => d.id !== id));
+  const removeParticle = (id: number) =>
+    setParticles((prev) => prev.filter((p) => p.id !== id));
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[9999]">
       <AnimatePresence>
-        {diamonds.map((d) => {
-          const rad = (d.angle * Math.PI) / 180;
-          const tx = Math.cos(rad) * d.distance;
-          const ty = Math.sin(rad) * d.distance;
+        {particles.map((p) => {
+          const rad = (p.angle * Math.PI) / 180;
+          const tx = Math.cos(rad) * p.distance;
+          const ty = Math.sin(rad) * p.distance;
+
+          if (p.type === "sparkle") {
+            return (
+              <motion.div
+                key={p.id}
+                className="absolute rounded-full"
+                style={{
+                  left: p.x,
+                  top: p.y,
+                  width: p.size,
+                  height: p.size,
+                  marginLeft: -p.size / 2,
+                  marginTop: -p.size / 2,
+                  background: `radial-gradient(circle, hsl(var(--primary)), hsl(var(--accent)))`,
+                  boxShadow: `0 0 ${p.size * 2}px hsl(var(--primary) / 0.8)`,
+                }}
+                initial={{ opacity: 1, scale: 0.5, x: 0, y: 0 }}
+                animate={{
+                  opacity: [1, 0.8, 0],
+                  scale: [0.5, 1.2, 0.3],
+                  x: tx,
+                  y: ty - 20,
+                }}
+                transition={{
+                  duration: 0.6 + Math.random() * 0.3,
+                  ease: "easeOut",
+                  delay: p.delay,
+                }}
+                onAnimationComplete={() => removeParticle(p.id)}
+              />
+            );
+          }
+
           return (
             <motion.img
-              key={d.id}
+              key={p.id}
               src={diamondLogo}
               alt=""
               aria-hidden
               className="absolute"
               style={{
-                left: d.x,
-                top: d.y,
-                width: d.size,
-                height: d.size,
-                marginLeft: -d.size / 2,
-                marginTop: -d.size / 2,
-                filter: "drop-shadow(0 0 8px hsl(var(--primary) / 0.6))",
+                left: p.x,
+                top: p.y,
+                width: p.size,
+                height: p.size,
+                marginLeft: -p.size / 2,
+                marginTop: -p.size / 2,
+                filter: `drop-shadow(0 0 12px hsl(var(--primary) / 0.7))`,
               }}
-              initial={{ opacity: 1, scale: 0.3, x: 0, y: 0, rotate: 0 }}
+              initial={{ opacity: 1, scale: 0.2, x: 0, y: 0, rotate: 0 }}
               animate={{
-                opacity: 0,
-                scale: 1,
+                opacity: [1, 0.9, 0],
+                scale: [0.2, 1.1, 0.6],
                 x: tx,
-                y: ty - 30,
-                rotate: d.rotation,
+                y: ty - 40,
+                rotate: p.rotation,
               }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              onAnimationComplete={() => removeDiamond(d.id)}
+              transition={{
+                duration: 0.85,
+                ease: "easeOut",
+                delay: p.delay,
+              }}
+              onAnimationComplete={() => removeParticle(p.id)}
             />
           );
         })}
