@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, LogIn, LogOut, Shield } from "lucide-react";
+import { Menu, X, Settings, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import logo from "@/assets/jeweliq-logo.png";
 
 const navLinks = [
@@ -21,7 +22,8 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-  const { user, isAdmin, signOut } = useAuth();
+  const { user } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -35,7 +37,7 @@ export const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : "bg-transparent"
+        isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -62,33 +64,42 @@ export const Navbar = () => {
             })}
           </div>
 
-          <div className="hidden md:flex items-center gap-3">
-            {user ? (
-              <>
-                {isAdmin && (
-                  <span className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary flex items-center gap-1">
-                    <Shield className="w-3 h-3" /> Admin
-                  </span>
-                )}
-                <Button variant="ghost" size="sm" onClick={signOut} className="text-muted-foreground">
-                  <LogOut className="w-4 h-4 mr-1" /> Sign Out
-                </Button>
-              </>
-            ) : (
-              <Button variant="ghost" size="sm" asChild>
-                <Link to="/login" className="text-muted-foreground">
-                  <LogIn className="w-4 h-4 mr-1" /> Sign In
-                </Link>
-              </Button>
-            )}
+          <div className="hidden md:flex items-center gap-2">
+            {/* Theme toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+
+            {/* Settings */}
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/settings" className="text-muted-foreground hover:text-foreground">
+                <Settings className="w-4 h-4" />
+              </Link>
+            </Button>
+
             <Button variant="hero" size="lg" asChild>
               <Link to="/contact">Book a Call</Link>
             </Button>
           </div>
 
-          <button className="md:hidden text-foreground" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex md:hidden items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="text-muted-foreground"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+            <button className="text-foreground" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {isMobileMenuOpen && (
@@ -113,17 +124,11 @@ export const Navbar = () => {
               );
             })}
             <div className="px-4 pt-4 space-y-2">
-              {user ? (
-                <Button variant="ghost" className="w-full justify-start" onClick={() => { signOut(); setIsMobileMenuOpen(false); }}>
-                  <LogOut className="w-4 h-4 mr-2" /> Sign Out {isAdmin && "(Admin)"}
-                </Button>
-              ) : (
-                <Button variant="ghost" className="w-full justify-start" asChild>
-                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                    <LogIn className="w-4 h-4 mr-2" /> Sign In
-                  </Link>
-                </Button>
-              )}
+              <Button variant="ghost" className="w-full justify-start" asChild>
+                <Link to="/settings" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Settings className="w-4 h-4 mr-2" /> Settings
+                </Link>
+              </Button>
               <Button variant="hero" className="w-full" asChild>
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>Book a Call</Link>
               </Button>
