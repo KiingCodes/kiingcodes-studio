@@ -29,11 +29,13 @@ export const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.88), rgba(245, 247, 250, 0.95)), url(${heroBg})`,
+        backgroundImage: `url(${heroBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
+      {/* Theme-adaptive overlay */}
+      <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
 

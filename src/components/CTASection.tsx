@@ -17,11 +17,12 @@ export const CTASection = () => {
       <div
         className="absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.85), rgba(10, 15, 30, 0.9)), url(${ctaBg})`,
+          backgroundImage: `url(${ctaBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
+      <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
       <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
       {/* Floating Orbs */}
