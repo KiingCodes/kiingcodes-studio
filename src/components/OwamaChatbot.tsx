@@ -233,6 +233,7 @@ export function OwamaChatbot() {
       <AnimatePresence>
         {!isOpen && (
           <motion.button
+            key="chat-trigger-btn"
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
@@ -257,6 +258,7 @@ export function OwamaChatbot() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            key="chat-window"
             initial={{ opacity: 0, y: 40, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
@@ -364,6 +366,7 @@ export function OwamaChatbot() {
               <AnimatePresence>
                 {showLeadForm && !leadCaptured && !isAdmin && (
                   <motion.div
+                    key="lead-form"
                     initial={{ opacity: 0, y: 10, height: 0 }}
                     animate={{ opacity: 1, y: 0, height: "auto" }}
                     exit={{ opacity: 0, y: -10, height: 0 }}
