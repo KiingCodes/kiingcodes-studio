@@ -21,11 +21,12 @@ export const Footer = () => {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.92), rgba(10, 15, 30, 0.96)), url(${footerBg})`,
+          backgroundImage: `url(${footerBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       />
+      <div className="absolute inset-0 z-0 bg-background/90 dark:bg-background/92" />
 
       {/* Subtle Decorations */}
       <FloatingDiamond className="top-20 right-10 opacity-10 z-10" size="w-16" delay={2} />

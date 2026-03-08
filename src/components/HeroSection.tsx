@@ -34,6 +34,8 @@ export const HeroSection = () => {
         backgroundPosition: "center",
       }}
     >
+      {/* Theme-adaptive overlay */}
+      <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
       {/* Animated Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
 
