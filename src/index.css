@@ -8,32 +8,32 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
     --primary: 199 89% 48%;
-    --primary-foreground: 222 47% 6%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 47% 12%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 20% 95%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 222 47% 14%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
     --accent: 265 89% 60%;
-    --accent-foreground: 210 40% 98%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 47% 16%;
-    --input: 222 47% 16%;
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
     --ring: 199 89% 48%;
 
     --radius: 0.75rem;
@@ -44,13 +44,13 @@
     --gradient-start: 199 89% 48%;
     --gradient-end: 265 89% 60%;
     
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 210 40% 98%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222 47% 11%;
     --sidebar-primary: 199 89% 48%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 47% 12%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 47% 16%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 20% 95%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 20% 90%;
     --sidebar-ring: 199 89% 48%;
   }
 
@@ -147,10 +147,10 @@
 
   .animated-gradient-bg {
     background: linear-gradient(-45deg, 
-      hsl(222 47% 6%), 
-      hsl(222 47% 10%), 
-      hsl(199 89% 15% / 0.3), 
-      hsl(265 89% 15% / 0.3)
+      hsl(0 0% 98%), 
+      hsl(210 20% 96%), 
+      hsl(199 89% 95% / 0.5), 
+      hsl(265 89% 95% / 0.5)
     );
     background-size: 400% 400%;
     animation: gradient-shift 15s ease infinite;

@@ -29,7 +29,7 @@ export const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.85), rgba(10, 15, 30, 0.95)), url(${heroBg})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(255, 255, 255, 0.88), rgba(245, 247, 250, 0.95)), url(${heroBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
