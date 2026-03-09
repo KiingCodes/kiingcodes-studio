@@ -21,6 +21,14 @@ import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import { TouchDiamonds } from "./components/TouchDiamonds";
+import { ProtectedRoute } from "./components/portal/ProtectedRoute";
+import { PortalLayout } from "./components/portal/PortalLayout";
+import PortalDashboard from "./pages/portal/PortalDashboard";
+import PortalProjects from "./pages/portal/PortalProjects";
+import PortalMessages from "./pages/portal/PortalMessages";
+import PortalServiceRequests from "./pages/portal/PortalServiceRequests";
+import PortalInvoices from "./pages/portal/PortalInvoices";
+import PortalOnboarding from "./pages/portal/PortalOnboarding";
 
 const queryClient = new QueryClient();
 
