@@ -18,6 +18,7 @@ import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import PortfolioPage from "./pages/PortfolioPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
