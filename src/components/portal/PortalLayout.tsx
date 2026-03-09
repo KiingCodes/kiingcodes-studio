@@ -1,5 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { PortalSidebar } from "./PortalSidebar";
+import { PortalNotifications } from "./PortalNotifications";
 import { Outlet, Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
