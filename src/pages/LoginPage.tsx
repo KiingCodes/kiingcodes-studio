@@ -42,7 +42,20 @@ const LoginPage = () => {
 
   return (
     <PageLayout>
-      <div className="pt-28 pb-20 min-h-screen flex items-center justify-center">
+      <div className="pt-28 pb-20 min-h-screen flex items-center justify-center relative overflow-hidden">
+        {/* Diamond background */}
+        <motion.img
+          src={diamondLogo}
+          alt=""
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-10"
+          style={{ filter: "drop-shadow(0 0 80px hsl(var(--primary) / 0.5))" }}
+          animate={{ rotate: [0, 360], scale: [1, 1.05, 1] }}
+          transition={{
+            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+            scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          }}
+        />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
