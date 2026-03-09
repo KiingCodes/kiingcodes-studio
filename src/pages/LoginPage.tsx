@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Lock, Mail, Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
