@@ -65,9 +65,14 @@ export default function PortalOnboarding() {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center p-4">
       <Card className="max-w-2xl w-full">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center">
-            <Building2 className="h-8 w-8 text-primary" />
-          </div>
+          <motion.img 
+            src="/src/assets/jeweliq-logo.png" 
+            alt="JewelIQ" 
+            className="h-24 mx-auto mb-4"
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          />
           <CardTitle className="text-3xl">Welcome to JewelIQ Client Portal</CardTitle>
           <CardDescription>
             Let's set up your company profile to get started
