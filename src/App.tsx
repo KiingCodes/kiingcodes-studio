@@ -42,6 +42,7 @@ import AdminBlog from "./pages/admin/AdminBlog";
 import AdminPortfolio from "./pages/admin/AdminPortfolio";
 import AdminInvoices from "./pages/admin/AdminInvoices";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminApplications from "./pages/admin/AdminApplications";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +90,7 @@ const AnimatedRoutes = () => {
                 <Route path="invoices" element={<AdminInvoices />} />
                 <Route path="blog" element={<AdminBlog />} />
                 <Route path="portfolio" element={<AdminPortfolio />} />
+                <Route path="applications" element={<AdminApplications />} />
               </Route>
               
               <Route path="*" element={<NotFound />} />

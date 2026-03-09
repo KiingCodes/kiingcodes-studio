@@ -1,4 +1,4 @@
-import { LayoutDashboard, MessageSquare, FileText, Users, LogOut, UserCircle, BookOpen, Briefcase, DollarSign, BarChart } from "lucide-react";
+import { LayoutDashboard, MessageSquare, FileText, Users, LogOut, UserCircle, BookOpen, Briefcase, DollarSign, BarChart, ClipboardList } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +27,7 @@ const adminItems = [
   { title: "Invoices", url: "/admin/invoices", icon: DollarSign },
   { title: "Blog", url: "/admin/blog", icon: BookOpen },
   { title: "Portfolio", url: "/admin/portfolio", icon: Briefcase },
+  { title: "Applications", url: "/admin/applications", icon: ClipboardList },
 ];
 
 export function AdminSidebar() {
