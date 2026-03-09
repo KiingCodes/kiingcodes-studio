@@ -34,6 +34,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminServiceRequests from "./pages/admin/AdminServiceRequests";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AdminClients from "./pages/admin/AdminClients";
+import AdminLeads from "./pages/admin/AdminLeads";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminPortfolio from "./pages/admin/AdminPortfolio";
+import AdminInvoices from "./pages/admin/AdminInvoices";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
 
 const queryClient = new QueryClient();
 
