@@ -48,7 +48,7 @@ const LoginPage = () => {
           src={diamondLogo}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-10"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 pointer-events-none select-none opacity-10"
           style={{ filter: "drop-shadow(0 0 80px hsl(var(--primary) / 0.5))" }}
           animate={{ rotate: [0, 360], scale: [1, 1.05, 1] }}
           transition={{
