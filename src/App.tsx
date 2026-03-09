@@ -34,6 +34,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminServiceRequests from "./pages/admin/AdminServiceRequests";
 import AdminMessages from "./pages/admin/AdminMessages";
 import AdminClients from "./pages/admin/AdminClients";
+import AdminLeads from "./pages/admin/AdminLeads";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminPortfolio from "./pages/admin/AdminPortfolio";
+import AdminInvoices from "./pages/admin/AdminInvoices";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
 
 const queryClient = new QueryClient();
 
@@ -75,9 +80,14 @@ const App = () => (
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
+                <Route path="analytics" element={<AdminAnalytics />} />
+                <Route path="leads" element={<AdminLeads />} />
+                <Route path="clients" element={<AdminClients />} />
                 <Route path="requests" element={<AdminServiceRequests />} />
                 <Route path="messages" element={<AdminMessages />} />
-                <Route path="clients" element={<AdminClients />} />
+                <Route path="invoices" element={<AdminInvoices />} />
+                <Route path="blog" element={<AdminBlog />} />
+                <Route path="portfolio" element={<AdminPortfolio />} />
               </Route>
               
               <Route path="*" element={<NotFound />} />
