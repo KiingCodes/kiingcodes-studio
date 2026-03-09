@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { Building2 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function PortalOnboarding() {
   const { user } = useAuth();
