@@ -22,6 +22,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
+import CareersPage from "./pages/CareersPage";
 
 import { ProtectedRoute } from "./components/portal/ProtectedRoute";
 import { PortalLayout } from "./components/portal/PortalLayout";
@@ -65,6 +66,7 @@ const AnimatedRoutes = () => {
               <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/careers" element={<CareersPage />} />
               
               {/* Portal Routes */}
               <Route path="/portal/onboarding" element={<ProtectedRoute><PortalOnboarding /></ProtectedRoute>} />
