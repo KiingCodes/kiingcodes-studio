@@ -71,6 +71,14 @@ const App = () => (
                 <Route path="requests" element={<PortalServiceRequests />} />
                 <Route path="invoices" element={<PortalInvoices />} />
               </Route>
+
+              {/* Admin Routes */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="requests" element={<AdminServiceRequests />} />
+                <Route path="messages" element={<AdminMessages />} />
+                <Route path="clients" element={<AdminClients />} />
+              </Route>
               
               <Route path="*" element={<NotFound />} />
             </Routes>
