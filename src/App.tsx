@@ -22,6 +22,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
+import CareersPage from "./pages/CareersPage";
 
 import { ProtectedRoute } from "./components/portal/ProtectedRoute";
 import { PortalLayout } from "./components/portal/PortalLayout";
