@@ -49,9 +49,11 @@ const LoginPage = () => {
         >
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center mx-auto mb-4">
-                <Lock className="w-8 h-8 text-primary-foreground" />
-              </div>
+              <img 
+                src="/src/assets/jeweliq-logo.png" 
+                alt="JewelIQ" 
+                className="h-12 mx-auto mb-6"
+              />
               <h1 className="text-2xl font-bold text-foreground">
                 {isSignUp ? "Create Account" : "Welcome Back"}
               </h1>
