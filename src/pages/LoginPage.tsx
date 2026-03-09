@@ -49,10 +49,13 @@ const LoginPage = () => {
         >
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
-              <img 
+              <motion.img 
                 src="/src/assets/jeweliq-logo.png" 
                 alt="JewelIQ" 
                 className="h-24 mx-auto mb-6"
+                initial={{ opacity: 0, scale: 0.7 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               />
               <h1 className="text-2xl font-bold text-foreground">
                 {isSignUp ? "Create Account" : "Welcome Back"}
