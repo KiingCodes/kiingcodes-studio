@@ -88,7 +88,21 @@ const AnimatedRoutes = () => {
               </Route>
               
               <Route path="*" element={<NotFound />} />
-            </Routes>
+      </Routes>
+    </AnimatePresence>
+  );
+};
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          
+          <BrowserRouter>
+            <AnimatedRoutes />
           </BrowserRouter>
         </TooltipProvider>
       </AuthProvider>

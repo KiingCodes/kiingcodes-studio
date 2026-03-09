@@ -175,6 +175,6 @@ export default function PortalOnboarding() {
           </form>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 }
