@@ -18,6 +18,7 @@ import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import PortfolioPage from "./pages/PortfolioPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
@@ -61,6 +62,7 @@ const AnimatedRoutes = () => {
               <Route path="/reports" element={<ReportsPage />} />
               <Route path="/settings" element={<SettingsPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
               

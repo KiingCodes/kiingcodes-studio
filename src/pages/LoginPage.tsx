@@ -5,17 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { Lock, Mail, Eye, EyeOff } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
+
+type View = "login" | "signup" | "forgot";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [view, setView] = useState<View>("login");
   const [loading, setLoading] = useState(false);
-  const { signIn, signUp } = useAuth();
+  const { signIn, signUp, resetPassword } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -23,13 +25,24 @@ const LoginPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { error } = isSignUp
+      if (view === "forgot") {
+        const { error } = await resetPassword(email);
+        if (error) {
+          toast({ title: "Error", description: error.message, variant: "destructive" });
+        } else {
+          toast({ title: "Check your email ✉️", description: "We sent you a password reset link." });
+          setView("login");
+        }
+        return;
+      }
+
+      const { error } = view === "signup"
         ? await signUp(email, password)
         : await signIn(email, password);
 
       if (error) {
         toast({ title: "Error", description: error.message, variant: "destructive" });
-      } else if (isSignUp) {
+      } else if (view === "signup") {
         toast({ title: "Check your email", description: "We sent you a confirmation link." });
       } else {
         toast({ title: "Welcome back! ✨" });
@@ -61,22 +74,25 @@ const LoginPage = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="w-full max-w-md mx-auto px-4"
+          className="w-full max-w-md mx-auto px-4 relative z-10"
+          key={view}
         >
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
-              <img 
-                src="/src/assets/jeweliq-logo.png" 
-                alt="JewelIQ" 
+              <img
+                src="/src/assets/jeweliq-logo.png"
+                alt="JewelIQ"
                 className="h-32 mx-auto mb-6"
-                style={{ animation: "spin 1s ease-in-out 1" }}
               />
-              <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
               <h1 className="text-2xl font-bold text-foreground">
-                {isSignUp ? "Create Account" : "Welcome Back"}
+                {view === "forgot" ? "Reset Password" : view === "signup" ? "Create Account" : "Welcome Back"}
               </h1>
               <p className="text-muted-foreground text-sm mt-2">
-                {isSignUp ? "Sign up for a JewelIQ account" : "Sign in to your JewelIQ account"}
+                {view === "forgot"
+                  ? "Enter your email and we'll send you a reset link"
+                  : view === "signup"
+                  ? "Sign up for a JewelIQ account"
+                  : "Sign in to your JewelIQ account"}
               </p>
             </div>
 
@@ -95,42 +111,78 @@ const LoginPage = () => {
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-muted-foreground mb-2">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                    minLength={6}
-                    className="pl-10 pr-10 bg-secondary/50"
-                  />
+
+              {view !== "forgot" && (
+                <div>
+                  <label className="block text-sm font-medium text-muted-foreground mb-2">Password</label>
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="••••••••"
+                      required
+                      minLength={6}
+                      className="pl-10 pr-10 bg-secondary/50"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {view === "login" && (
+                <div className="text-right">
                   <button
                     type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                    onClick={() => setView("forgot")}
+                    className="text-xs text-primary hover:underline"
                   >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    Forgot password?
                   </button>
                 </div>
-              </div>
+              )}
 
               <Button type="submit" variant="hero" className="w-full" disabled={loading}>
-                {loading ? "Please wait..." : isSignUp ? "Create Account" : "Sign In"}
+                {loading
+                  ? "Please wait..."
+                  : view === "forgot"
+                  ? "Send Reset Link"
+                  : view === "signup"
+                  ? "Create Account"
+                  : "Sign In"}
               </Button>
             </form>
 
             <p className="text-center text-sm text-muted-foreground mt-6">
-              {isSignUp ? "Already have an account?" : "Don't have an account?"}{" "}
-              <button
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-primary hover:underline font-medium"
-              >
-                {isSignUp ? "Sign In" : "Sign Up"}
-              </button>
+              {view === "forgot" ? (
+                <button
+                  onClick={() => setView("login")}
+                  className="text-primary hover:underline font-medium inline-flex items-center gap-1"
+                >
+                  <ArrowLeft className="w-3 h-3" /> Back to Sign In
+                </button>
+              ) : view === "signup" ? (
+                <>
+                  Already have an account?{" "}
+                  <button onClick={() => setView("login")} className="text-primary hover:underline font-medium">
+                    Sign In
+                  </button>
+                </>
+              ) : (
+                <>
+                  Don't have an account?{" "}
+                  <button onClick={() => setView("signup")} className="text-primary hover:underline font-medium">
+                    Sign Up
+                  </button>
+                </>
+              )}
             </p>
           </div>
         </motion.div>
