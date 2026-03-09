@@ -55,13 +55,11 @@ const LoginPage = () => {
                 src="/src/assets/jeweliq-logo.png" 
                 alt="JewelIQ" 
                 className="h-24 mx-auto mb-6"
-                animate={{ 
-                  rotate: 360
-                }}
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
                 transition={{ 
                   duration: 1,
-                  ease: "easeInOut",
-                  repeat: 0
+                  ease: "easeInOut"
                 }}
               />
               <h1 className="text-2xl font-bold text-foreground">
