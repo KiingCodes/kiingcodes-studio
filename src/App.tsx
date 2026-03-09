@@ -56,6 +56,17 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              
+              {/* Portal Routes */}
+              <Route path="/portal/onboarding" element={<ProtectedRoute><PortalOnboarding /></ProtectedRoute>} />
+              <Route path="/portal" element={<ProtectedRoute><PortalLayout /></ProtectedRoute>}>
+                <Route index element={<PortalDashboard />} />
+                <Route path="projects" element={<PortalProjects />} />
+                <Route path="messages" element={<PortalMessages />} />
+                <Route path="requests" element={<PortalServiceRequests />} />
+                <Route path="invoices" element={<PortalInvoices />} />
+              </Route>
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
