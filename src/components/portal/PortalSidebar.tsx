@@ -22,6 +22,7 @@ const items = [
   { title: "Messages", url: "/portal/messages", icon: MessageSquare },
   { title: "Service Requests", url: "/portal/requests", icon: FileText },
   { title: "Invoices & Files", url: "/portal/invoices", icon: Receipt },
+  { title: "Settings", url: "/settings", icon: Settings },
 ];
 
 export function PortalSidebar() {
