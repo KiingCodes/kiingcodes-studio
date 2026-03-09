@@ -3,7 +3,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
-import heroDiamondLogo from "@/assets/hero-diamond-logo.png";
+import heroDiamondLogo from "@/assets/jeweliq-diamond-logo.png";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const floatingVariants = {
