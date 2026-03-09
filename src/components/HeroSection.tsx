@@ -37,6 +37,27 @@ export const HeroSection = () => {
     >
       {/* Theme-adaptive overlay */}
       <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
+      
+      {/* Large Diamond Background Logo - Full Coverage */}
+      <motion.img
+        src={heroDiamondLogo}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none opacity-30 dark:opacity-40"
+        style={{
+          filter: "drop-shadow(0 0 150px hsl(var(--primary) / 0.6)) brightness(1.1)",
+        }}
+        animate={{
+          scale: [1, 1.03, 1],
+          rotate: [0, 1, -1, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut" as const,
+        }}
+      />
+      
       {/* Animated Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30" />
 
