@@ -29,6 +29,11 @@ import PortalMessages from "./pages/portal/PortalMessages";
 import PortalServiceRequests from "./pages/portal/PortalServiceRequests";
 import PortalInvoices from "./pages/portal/PortalInvoices";
 import PortalOnboarding from "./pages/portal/PortalOnboarding";
+import { AdminLayout } from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminServiceRequests from "./pages/admin/AdminServiceRequests";
+import AdminMessages from "./pages/admin/AdminMessages";
+import AdminClients from "./pages/admin/AdminClients";
 
 const queryClient = new QueryClient();
 
