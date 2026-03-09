@@ -21,6 +21,14 @@ import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import { TouchDiamonds } from "./components/TouchDiamonds";
+import { ProtectedRoute } from "./components/portal/ProtectedRoute";
+import { PortalLayout } from "./components/portal/PortalLayout";
+import PortalDashboard from "./pages/portal/PortalDashboard";
+import PortalProjects from "./pages/portal/PortalProjects";
+import PortalMessages from "./pages/portal/PortalMessages";
+import PortalServiceRequests from "./pages/portal/PortalServiceRequests";
+import PortalInvoices from "./pages/portal/PortalInvoices";
+import PortalOnboarding from "./pages/portal/PortalOnboarding";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +56,17 @@ const App = () => (
               <Route path="/login" element={<LoginPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              
+              {/* Portal Routes */}
+              <Route path="/portal/onboarding" element={<ProtectedRoute><PortalOnboarding /></ProtectedRoute>} />
+              <Route path="/portal" element={<ProtectedRoute><PortalLayout /></ProtectedRoute>}>
+                <Route index element={<PortalDashboard />} />
+                <Route path="projects" element={<PortalProjects />} />
+                <Route path="messages" element={<PortalMessages />} />
+                <Route path="requests" element={<PortalServiceRequests />} />
+                <Route path="invoices" element={<PortalInvoices />} />
+              </Route>
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
