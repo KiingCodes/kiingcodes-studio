@@ -38,6 +38,7 @@ export function PortalLayout() {
 
   return (
     <SidebarProvider>
+      <PortalNotifications companyId={company.id} />
       <div className="min-h-screen flex w-full">
         <PortalSidebar />
         
