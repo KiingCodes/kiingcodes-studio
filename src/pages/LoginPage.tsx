@@ -52,7 +52,7 @@ const LoginPage = () => {
               <img 
                 src="/src/assets/jeweliq-logo.png" 
                 alt="JewelIQ" 
-                className="h-12 mx-auto mb-6"
+                className="h-24 mx-auto mb-6"
               />
               <h1 className="text-2xl font-bold text-foreground">
                 {isSignUp ? "Create Account" : "Welcome Back"}
