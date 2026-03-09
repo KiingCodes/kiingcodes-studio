@@ -27,6 +27,7 @@ const adminItems = [
   { title: "Invoices", url: "/admin/invoices", icon: DollarSign },
   { title: "Blog", url: "/admin/blog", icon: BookOpen },
   { title: "Portfolio", url: "/admin/portfolio", icon: Briefcase },
+  { title: "Applications", url: "/admin/applications", icon: ClipboardList },
 ];
 
 export function AdminSidebar() {
