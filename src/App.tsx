@@ -20,7 +20,7 @@ import PortfolioPage from "./pages/PortfolioPage";
 import FuseGigsPage from "./pages/FuseGigsPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
-import { TouchDiamonds } from "./components/TouchDiamonds";
+
 import { ProtectedRoute } from "./components/portal/ProtectedRoute";
 import { PortalLayout } from "./components/portal/PortalLayout";
 import PortalDashboard from "./pages/portal/PortalDashboard";
@@ -49,7 +49,7 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <TouchDiamonds />
+          
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
