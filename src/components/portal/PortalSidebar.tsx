@@ -47,7 +47,7 @@ export function PortalSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarContent>
-        <SidebarGroup open={isExpanded}>
+        <SidebarGroup>
           <SidebarGroupLabel>Client Portal</SidebarGroupLabel>
           
           <SidebarGroupContent>
