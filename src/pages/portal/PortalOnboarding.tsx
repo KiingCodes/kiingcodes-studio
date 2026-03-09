@@ -75,13 +75,11 @@ export default function PortalOnboarding() {
             src="/src/assets/jeweliq-logo.png" 
             alt="JewelIQ" 
             className="h-24 mx-auto mb-4"
-            animate={{ 
-              rotate: 360
-            }}
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
             transition={{ 
               duration: 1,
-              ease: "easeInOut",
-              repeat: 0
+              ease: "easeInOut"
             }}
           />
           <CardTitle className="text-3xl">Welcome to JewelIQ Client Portal</CardTitle>
