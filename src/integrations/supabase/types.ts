@@ -286,6 +286,110 @@ export type Database = {
           },
         ]
       }
+      job_applications: {
+        Row: {
+          city: string | null
+          cover_letter: string | null
+          created_at: string
+          cv_url: string | null
+          education: string | null
+          email: string
+          experience_years: number | null
+          full_name: string
+          id: string
+          job_id: string
+          phone: string
+          portfolio_url: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          education?: string | null
+          email: string
+          experience_years?: number | null
+          full_name: string
+          id?: string
+          job_id: string
+          phone: string
+          portfolio_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          cover_letter?: string | null
+          created_at?: string
+          cv_url?: string | null
+          education?: string | null
+          email?: string
+          experience_years?: number | null
+          full_name?: string
+          id?: string
+          job_id?: string
+          phone?: string
+          portfolio_url?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "job_listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      job_listings: {
+        Row: {
+          created_at: string
+          department: string | null
+          description: string
+          id: string
+          is_active: boolean | null
+          location: string | null
+          requirements: string[] | null
+          responsibilities: string[] | null
+          salary_range: string | null
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          description: string
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          responsibilities?: string[] | null
+          salary_range?: string | null
+          title: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          description?: string
+          id?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          responsibilities?: string[] | null
+          salary_range?: string | null
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       portal_messages: {
         Row: {
           client_id: string
