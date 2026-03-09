@@ -80,9 +80,14 @@ const App = () => (
               {/* Admin Routes */}
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminDashboard />} />
+                <Route path="analytics" element={<AdminAnalytics />} />
+                <Route path="leads" element={<AdminLeads />} />
+                <Route path="clients" element={<AdminClients />} />
                 <Route path="requests" element={<AdminServiceRequests />} />
                 <Route path="messages" element={<AdminMessages />} />
-                <Route path="clients" element={<AdminClients />} />
+                <Route path="invoices" element={<AdminInvoices />} />
+                <Route path="blog" element={<AdminBlog />} />
+                <Route path="portfolio" element={<AdminPortfolio />} />
               </Route>
               
               <Route path="*" element={<NotFound />} />
