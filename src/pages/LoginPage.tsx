@@ -51,18 +51,13 @@ const LoginPage = () => {
         >
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
-              <motion.div
-                className="h-24 w-24 mx-auto mb-6"
-                initial={{ rotate: 0, scale: 0.5, opacity: 0 }}
-                animate={{ rotate: 360, scale: 1, opacity: 1 }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-              >
-                <img 
-                  src="/src/assets/jeweliq-logo.png" 
-                  alt="JewelIQ" 
-                  className="h-full w-full object-contain"
-                />
-              </motion.div>
+              <img 
+                src="/src/assets/jeweliq-logo.png" 
+                alt="JewelIQ" 
+                className="h-32 mx-auto mb-6"
+                style={{ animation: "spin 1s ease-in-out 1" }}
+              />
+              <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
               <h1 className="text-2xl font-bold text-foreground">
                 {isSignUp ? "Create Account" : "Welcome Back"}
               </h1>
