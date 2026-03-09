@@ -42,6 +42,7 @@ import AdminBlog from "./pages/admin/AdminBlog";
 import AdminPortfolio from "./pages/admin/AdminPortfolio";
 import AdminInvoices from "./pages/admin/AdminInvoices";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminApplications from "./pages/admin/AdminApplications";
 
 const queryClient = new QueryClient();
 
