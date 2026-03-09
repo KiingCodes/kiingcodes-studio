@@ -38,7 +38,7 @@ export const HeroSection = () => {
       {/* Theme-adaptive overlay */}
       <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
       
-      {/* Large Diamond Background Logo - Animated */}
+      {/* Large Diamond Background Logo - Spinning */}
       <motion.img
         src={heroDiamondLogo}
         alt=""
@@ -48,14 +48,14 @@ export const HeroSection = () => {
           filter: "drop-shadow(0 0 150px hsl(var(--primary) / 0.6)) brightness(1.1)",
         }}
         animate={{
-          scale: [1, 1.08, 1, 1.04, 1],
-          rotate: [0, 3, -3, 1, 0],
-          opacity: [0.3, 0.38, 0.3, 0.35, 0.3],
+          rotate: [0, 360],
+          scale: [1, 1.05, 1],
+          opacity: [0.3, 0.35, 0.3],
         }}
         transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut" as const,
+          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+          scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          opacity: { duration: 6, repeat: Infinity, ease: "easeInOut" },
         }}
       />
       
