@@ -50,8 +50,32 @@ export default function PortalMessages() {
         is_admin: false,
       });
       if (error) throw error;
+      return message;
     },
-    onSuccess: () => {
+    onSuccess: async (message) => {
+      // Send email notification to admin
+      try {
+        const { data: profile } = await supabase
+          .from("profiles")
+          .select("display_name")
+          .eq("user_id", user!.id)
+          .single();
+        
+        await supabase.functions.invoke("send-notification", {
+          body: {
+            type: "new_message",
+            to: "kiingncube@gmail.com",
+            data: {
+              message,
+              sender_name: profile?.display_name || "Client",
+              company_name: company!.company_name,
+            },
+          },
+        });
+      } catch (error) {
+        console.error("Failed to send email notification:", error);
+      }
+      
       queryClient.invalidateQueries({ queryKey: ["portal-messages"] });
       setNewMessage("");
       toast.success("Message sent");
