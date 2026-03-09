@@ -54,8 +54,25 @@ export default function PortalServiceRequests() {
         client_id: company!.id,
       });
       if (error) throw error;
+      return data;
     },
-    onSuccess: () => {
+    onSuccess: async (requestData) => {
+      // Send email notification to admin
+      try {
+        await supabase.functions.invoke("send-notification", {
+          body: {
+            type: "service_request",
+            to: "kiingncube@gmail.com",
+            data: {
+              ...requestData,
+              company_name: company!.company_name,
+            },
+          },
+        });
+      } catch (error) {
+        console.error("Failed to send email notification:", error);
+      }
+      
       queryClient.invalidateQueries({ queryKey: ["service-requests"] });
       setDialogOpen(false);
       reset();

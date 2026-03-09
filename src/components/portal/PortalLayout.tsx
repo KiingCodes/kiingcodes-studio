@@ -1,5 +1,6 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { PortalSidebar } from "./PortalSidebar";
+import { PortalNotifications } from "./PortalNotifications";
 import { Outlet, Navigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -37,6 +38,7 @@ export function PortalLayout() {
 
   return (
     <SidebarProvider>
+      <PortalNotifications companyId={company.id} />
       <div className="min-h-screen flex w-full">
         <PortalSidebar />
         
