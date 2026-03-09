@@ -14,6 +14,7 @@ const navLinks = [
   { href: "/fuse-gigs", label: "Fuse Gigs" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
+  { href: "/careers", label: "Careers" },
   { href: "/contact", label: "Contact" },
   { href: "/reports", label: "Reports", authOnly: true },
 ] as const;

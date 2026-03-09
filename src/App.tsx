@@ -66,6 +66,7 @@ const AnimatedRoutes = () => {
               <Route path="/reset-password" element={<ResetPasswordPage />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/careers" element={<CareersPage />} />
               
               {/* Portal Routes */}
               <Route path="/portal/onboarding" element={<ProtectedRoute><PortalOnboarding /></ProtectedRoute>} />
