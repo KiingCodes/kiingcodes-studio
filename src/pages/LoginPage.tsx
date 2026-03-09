@@ -45,6 +45,8 @@ const LoginPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
           className="w-full max-w-md mx-auto px-4"
         >
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
@@ -53,9 +55,17 @@ const LoginPage = () => {
                 src="/src/assets/jeweliq-logo.png" 
                 alt="JewelIQ" 
                 className="h-24 mx-auto mb-6"
-                initial={{ opacity: 0, scale: 0.7 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
+                initial={{ opacity: 0, scale: 0.7, rotate: 0 }}
+                animate={{ 
+                  opacity: 1, 
+                  scale: 1,
+                  rotate: 360
+                }}
+                transition={{ 
+                  opacity: { duration: 0.5 },
+                  scale: { duration: 0.5, ease: "easeOut" },
+                  rotate: { duration: 1, ease: "easeInOut" }
+                }}
               />
               <h1 className="text-2xl font-bold text-foreground">
                 {isSignUp ? "Create Account" : "Welcome Back"}

@@ -62,16 +62,30 @@ export default function PortalOnboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center p-4">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5 flex items-center justify-center p-4"
+    >
       <Card className="max-w-2xl w-full">
         <CardHeader className="text-center">
           <motion.img 
             src="/src/assets/jeweliq-logo.png" 
             alt="JewelIQ" 
             className="h-24 mx-auto mb-4"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.7, rotate: 0 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1,
+              rotate: 360
+            }}
+            transition={{ 
+              opacity: { duration: 0.5 },
+              scale: { duration: 0.5, ease: "easeOut" },
+              rotate: { duration: 1, ease: "easeInOut" }
+            }}
           />
           <CardTitle className="text-3xl">Welcome to JewelIQ Client Portal</CardTitle>
           <CardDescription>
@@ -161,6 +175,6 @@ export default function PortalOnboarding() {
           </form>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 }
