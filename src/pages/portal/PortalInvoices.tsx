@@ -7,14 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Download, FileText, Upload, Trash2, File, Image, FileArchive, Loader2 } from "lucide-react";
+import { Download, FileText, Upload, Trash2, File, Image, FileArchive, Loader2, Eye } from "lucide-react";
 import { format } from "date-fns";
 import { useState, useRef } from "react";
 import { toast } from "sonner";
+import { FilePreview } from "@/components/portal/FilePreview";
 
 export default function PortalInvoices() {
   const { user } = useAuth();
   const [uploading, setUploading] = useState(false);
+  const [previewFile, setPreviewFile] = useState<{ url: string; name: string; type: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
 
@@ -101,6 +103,23 @@ export default function PortalInvoices() {
     URL.revokeObjectURL(url);
   };
 
+  const previewFileHandler = async (fileName: string) => {
+    if (!company) return;
+    
+    try {
+      const { data: { publicUrl } } = supabase.storage
+        .from("client-files")
+        .getPublicUrl(`${company.id}/${fileName}`);
+      
+      const fileType = fileName.split(".").pop()?.toLowerCase();
+      const mimeType = fileType === "pdf" ? "application/pdf" : `image/${fileType}`;
+      
+      setPreviewFile({ url: publicUrl, name: fileName, type: mimeType });
+    } catch (error) {
+      toast.error("Failed to preview file");
+    }
+  };
+
   const deleteFile = useMutation({
     mutationFn: async (fileName: string) => {
       if (!company) return;
@@ -132,13 +151,13 @@ export default function PortalInvoices() {
   const getFileIcon = (fileName: string) => {
     const ext = fileName.split(".").pop()?.toLowerCase();
     if (["jpg", "jpeg", "png", "gif", "webp"].includes(ext || "")) {
-      return <Image className="h-5 w-5 text-green-500" />;
+      return <Image className="h-5 w-5 text-success" />;
     }
     if (["zip", "rar", "7z", "tar"].includes(ext || "")) {
-      return <FileArchive className="h-5 w-5 text-yellow-500" />;
+      return <FileArchive className="h-5 w-5 text-warning" />;
     }
     if (["pdf"].includes(ext || "")) {
-      return <FileText className="h-5 w-5 text-red-500" />;
+      return <FileText className="h-5 w-5 text-destructive" />;
     }
     return <File className="h-5 w-5 text-muted-foreground" />;
   };
@@ -150,10 +169,10 @@ export default function PortalInvoices() {
   };
 
   const statusColors = {
-    draft: "bg-gray-500/10 text-gray-600 border-gray-500/20",
-    sent: "bg-blue-500/10 text-blue-600 border-blue-500/20",
-    paid: "bg-green-500/10 text-green-600 border-green-500/20",
-    overdue: "bg-red-500/10 text-red-600 border-red-500/20",
+    draft: "bg-muted text-muted-foreground border-border",
+    sent: "bg-primary/10 text-primary border-primary/20",
+    paid: "bg-success/10 text-success border-success/20",
+    overdue: "bg-destructive/10 text-destructive border-destructive/20",
   };
 
   return (
@@ -282,6 +301,13 @@ export default function PortalInvoices() {
                           {file.created_at ? format(new Date(file.created_at), "MMM d, yyyy") : "—"}
                         </TableCell>
                         <TableCell className="text-right space-x-1">
+                          <Button 
+                            variant="ghost" 
+                            size="sm"
+                            onClick={() => previewFileHandler(file.name)}
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
                           <Button 
                             variant="ghost" 
                             size="sm"
