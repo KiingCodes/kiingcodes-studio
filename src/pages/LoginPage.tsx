@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { PageLayout } from "@/components/PageLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useAuth } from "@/contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Lock, Mail, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
+import logo from "@/assets/jeweliq-logo.png";
 
 type View = "login" | "signup" | "forgot";
 
@@ -19,7 +19,15 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const { signIn, signUp, resetPassword } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { toast } = useToast();
+
+  useEffect(() => {
+    const mode = searchParams.get("mode");
+    if (mode === "login" || mode === "signup" || mode === "forgot") {
+      setView(mode);
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,33 +64,21 @@ const LoginPage = () => {
   return (
     <PageLayout>
       <div className="pt-28 pb-20 min-h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Diamond background */}
-        <motion.img
+        <img
           src={diamondLogo}
           alt=""
           aria-hidden
           className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none opacity-20"
           style={{ filter: "drop-shadow(0 0 80px hsl(var(--primary) / 0.5))" }}
-          animate={{ rotate: [0, 360], scale: [1, 1.05, 1] }}
-          transition={{
-            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
-            scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-          }}
         />
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-          className="w-full max-w-md mx-auto px-4 relative z-10"
-          key={view}
-        >
+
+        <div className="w-full max-w-md mx-auto px-4 relative z-10">
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
               <img
-                src="/src/assets/jeweliq-logo.png"
+                src={logo}
                 alt="JewelIQ"
-                className="h-32 mx-auto mb-6"
+                className="h-28 mx-auto mb-5 object-contain"
               />
               <h1 className="text-2xl font-bold text-foreground">
                 {view === "forgot" ? "Reset Password" : view === "signup" ? "Create Account" : "Welcome Back"}
@@ -170,14 +166,14 @@ const LoginPage = () => {
                 </button>
               ) : view === "signup" ? (
                 <>
-                  Already have an account?{" "}
+                  Already have an account{" "}
                   <button onClick={() => setView("login")} className="text-primary hover:underline font-medium">
                     Sign In
                   </button>
                 </>
               ) : (
                 <>
-                  Don't have an account?{" "}
+                  Don't have an account{" "}
                   <button onClick={() => setView("signup")} className="text-primary hover:underline font-medium">
                     Sign Up
                   </button>
@@ -185,7 +181,7 @@ const LoginPage = () => {
               )}
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </PageLayout>
   );

@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { LogOut, Moon, Sun, Trash2, User, Shield, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
@@ -154,7 +154,7 @@ const SettingsPage = () => {
               </CardHeader>
               <CardContent>
                 <Button variant="hero" asChild>
-                  <a href="/login">Sign In</a>
+                  <Link to="/login">Sign In</Link>
                 </Button>
               </CardContent>
             </Card>
