@@ -154,7 +154,7 @@ const SettingsPage = () => {
               </CardHeader>
               <CardContent>
                 <Button variant="hero" asChild>
-                  <a href="/login">Sign In</a>
+                  <Link to="/login">Sign In</Link>
                 </Button>
               </CardContent>
             </Card>
