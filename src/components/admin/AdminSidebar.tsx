@@ -1,4 +1,4 @@
-import { LayoutDashboard, MessageSquare, FileText, Users, LogOut, UserCircle, BookOpen, Briefcase, DollarSign, BarChart, ClipboardList } from "lucide-react";
+import { LayoutDashboard, MessageSquare, FileText, Users, LogOut, UserCircle, BookOpen, Briefcase, DollarSign, BarChart, ClipboardList, Shield } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,7 @@ const adminItems = [
   { title: "Blog", url: "/admin/blog", icon: BookOpen },
   { title: "Portfolio", url: "/admin/portfolio", icon: Briefcase },
   { title: "Applications", url: "/admin/applications", icon: ClipboardList },
+  { title: "Roles", url: "/admin/roles", icon: Shield },
 ];
 
 export function AdminSidebar() {
