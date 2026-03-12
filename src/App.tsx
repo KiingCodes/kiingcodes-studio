@@ -97,6 +97,7 @@ const AnimatedRoutes = () => {
           <Route path="blog" element={<AdminBlog />} />
           <Route path="portfolio" element={<AdminPortfolio />} />
           <Route path="applications" element={<AdminApplications />} />
+          <Route path="roles" element={<AdminRoles />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

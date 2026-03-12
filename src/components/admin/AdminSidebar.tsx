@@ -28,6 +28,7 @@ const adminItems = [
   { title: "Blog", url: "/admin/blog", icon: BookOpen },
   { title: "Portfolio", url: "/admin/portfolio", icon: Briefcase },
   { title: "Applications", url: "/admin/applications", icon: ClipboardList },
+  { title: "Roles", url: "/admin/roles", icon: Shield },
 ];
 
 export function AdminSidebar() {
