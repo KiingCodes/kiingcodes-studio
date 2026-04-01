@@ -239,14 +239,6 @@ export const PricingSection = () => {
           transition={{ delay: 0.5 }}
           className="text-center mt-12 text-muted-foreground"
         >
-          <p className="mb-4">
-            Need something custom? We also offer App
-            Development starting from{" "}
-            <span className="text-primary font-semibold">
-              R15,000
-            </span>
-          </p>
-
           <p className="text-sm">
             * Final pricing depends on specific
             requirements. Contact us for a detailed
