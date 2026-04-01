@@ -74,11 +74,6 @@ export const ServicesPreview = () => {
                   </motion.div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">{service.title}</h3>
                   <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                  {service.price_from && (
-                    <p className="text-primary font-semibold mt-4 text-sm">
-                      From R{Number(service.price_from).toLocaleString()}
-                    </p>
-                  )}
                   <span className="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 group-hover:gap-2 transition-all">
                     Learn more <ArrowRight className="w-4 h-4" />
                   </span>

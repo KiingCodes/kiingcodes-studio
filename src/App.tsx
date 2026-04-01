@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ServicesPage from "./pages/ServicesPage";
-import PricingPage from "./pages/PricingPage";
+
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
@@ -19,7 +19,7 @@ import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
 import PortfolioPage from "./pages/PortfolioPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
-import FuseGigsPage from "./pages/FuseGigsPage";
+
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
 import CareersPage from "./pages/CareersPage";
@@ -55,13 +55,13 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<ServicesPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
+        
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/fuse-gigs" element={<FuseGigsPage />} />
+        
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={<LoginPage />} />

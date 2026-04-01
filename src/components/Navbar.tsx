@@ -10,8 +10,6 @@ import logo from "@/assets/jeweliq-logo.png";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/fuse-gigs", label: "Fuse Gigs" },
   { href: "/blog", label: "Blog" },
   { href: "/about", label: "About" },
   { href: "/careers", label: "Careers" },

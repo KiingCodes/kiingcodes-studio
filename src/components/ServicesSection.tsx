@@ -119,11 +119,6 @@ const ServiceCard = ({ service, index, onClick }: ServiceCardProps) => {
           {service.description}
         </p>
 
-        {service.price_from > 0 && (
-          <span className="text-sm text-primary font-medium">
-            From R{service.price_from.toLocaleString()}
-          </span>
-        )}
       </div>
     </motion.div>
   );
