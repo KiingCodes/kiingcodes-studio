@@ -1,10 +1,11 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { PortalSidebar } from "./PortalSidebar";
 import { PortalNotifications } from "./PortalNotifications";
-import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
+import logo from "@/assets/jeweliq-logo.png";
 
 export function PortalLayout() {
   const { user } = useAuth();
