@@ -3,8 +3,6 @@ import { ArrowUp, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/jeweliq-logo.png";
 import footerBg from "@/assets/wallpaper-footer.jpg";
-import sceneLogo from "@/assets/scene-logo.png"; // <-- add this
-import fuseGigsLogo from "@/assets/fusegigs-logo.png"; // <-- add this
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 export const Footer = () => {
