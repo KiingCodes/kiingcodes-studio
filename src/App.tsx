@@ -11,7 +11,7 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ServicesPage from "./pages/ServicesPage";
-import PricingPage from "./pages/PricingPage";
+
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
