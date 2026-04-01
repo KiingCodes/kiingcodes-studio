@@ -46,7 +46,10 @@ export function PortalLayout() {
         <div className="flex-1 flex flex-col">
           <header className="sticky top-0 z-10 h-14 flex items-center border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <SidebarTrigger className="ml-4" />
-            <h2 className="ml-4 text-lg font-semibold">Client Portal</h2>
+            <Link to="/portal" className="ml-3">
+              <img src={logo} alt="Jewel IQ" className="h-8 w-auto object-contain" />
+            </Link>
+            <h2 className="ml-3 text-lg font-semibold">Client Portal</h2>
           </header>
           
           <main className="flex-1">
