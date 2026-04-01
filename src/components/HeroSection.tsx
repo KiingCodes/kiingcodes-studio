@@ -140,29 +140,6 @@ export const HeroSection = () => {
             </Button>
           </motion.div>
 
-          {/* Stats */}
-          <motion.div
-            variants={staggerItem}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
-          >
-            {[
-              { value: "29+", label: "Projects Completed" },
-              { value: "85%", label: "Client Satisfaction" },
-              { value: "24/7", label: "Support Available" },
-              { value: "3+", label: "Years Experience" },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="text-center"
-              >
-                <div className="text-3xl md:text-4xl font-bold text-gradient mb-2">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
 
         {/* Floating Icons */}

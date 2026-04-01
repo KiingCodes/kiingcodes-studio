@@ -61,7 +61,7 @@ const AnimatedRoutes = () => {
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/fuse-gigs" element={<FuseGigsPage />} />
+        
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/login" element={<LoginPage />} />

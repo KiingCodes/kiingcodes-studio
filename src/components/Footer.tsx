@@ -57,28 +57,6 @@ export const Footer = () => {
           </a>
         </div>
 
-        {/* Partner / Project Logos */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 mb-12">
-          <motion.img
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            src={sceneLogo}
-            alt="Scene Logo"
-            className="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300"
-          />
-
-          <a href="https://fusegigs.com" target="_blank" rel="noopener noreferrer">
-            <motion.img
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              src={fuseGigsLogo}
-              alt="Fuse Gigs Logo"
-              className="h-24 w-auto object-contain hover:scale-105 transition-transform duration-300"
-            />
-          </a>
-        </div>
 
         {/* Bottom */}
         <div className="text-center pt-8 border-t border-border">

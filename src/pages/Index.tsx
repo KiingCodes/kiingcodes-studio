@@ -12,7 +12,6 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <ServicesPreview />
-      <FuseGigsAd />
       <Footer />
       <OwamaChatbot />
     </div>

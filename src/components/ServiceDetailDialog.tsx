@@ -112,11 +112,6 @@ export const ServiceDetailDialog = ({ service, open, onOpenChange }: ServiceDeta
                 <Badge variant="secondary" className="text-xs">
                   {service.category}
                 </Badge>
-                {service.price_from > 0 && (
-                  <span className="text-sm text-primary font-semibold">
-                    From R{service.price_from.toLocaleString()}
-                  </span>
-                )}
               </div>
             </div>
           </div>
