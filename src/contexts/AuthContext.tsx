@@ -22,7 +22,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const checkAdminRole = async (userId: string) => {
+  const checkAdminRole = async (userId: string): Promise<boolean> => {
     try {
       const { data } = await supabase
         .from("user_roles")
@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .eq("user_id", userId)
         .eq("role", "admin")
         .maybeSingle();
-
       return !!data;
     } catch {
       return false;
@@ -38,22 +37,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // IMPORTANT: Set up listener BEFORE getSession
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, nextSession) => {
+      async (event, nextSession) => {
         setSession(nextSession);
         setUser(nextSession?.user ?? null);
 
         if (nextSession?.user) {
-          const admin = await checkAdminRole(nextSession.user.id);
-          setIsAdmin(admin);
+          // Use setTimeout to avoid deadlock in onAuthStateChange
+          setTimeout(async () => {
+            const admin = await checkAdminRole(nextSession.user.id);
+            setIsAdmin(admin);
+          }, 0);
         } else {
           setIsAdmin(false);
+        }
+
+        if (event === "SIGNED_OUT") {
+          setIsAdmin(false);
+          setUser(null);
+          setSession(null);
         }
 
         setIsLoading(false);
       }
     );
 
+    // Initial session restore
     supabase.auth.getSession().then(async ({ data: { session: existingSession } }) => {
       setSession(existingSession);
       setUser(existingSession?.user ?? null);
@@ -61,8 +71,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (existingSession?.user) {
         const admin = await checkAdminRole(existingSession.user.id);
         setIsAdmin(admin);
-      } else {
-        setIsAdmin(false);
       }
 
       setIsLoading(false);
@@ -82,8 +90,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
     setIsAdmin(false);
+    setUser(null);
+    setSession(null);
+    await supabase.auth.signOut();
   };
 
   const resetPassword = async (email: string) => {
