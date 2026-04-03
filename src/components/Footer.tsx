@@ -2,8 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowUp, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/jeweliq-logo.png";
-import footerBg from "@/assets/wallpaper-footer.jpg";
-import { FloatingDiamond } from "@/components/FloatingDiamond";
+import heroDiamondLogo from "@/assets/jeweliq-diamond-logo.png";
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -13,50 +12,104 @@ export const Footer = () => {
   const whatsappNumber = "27604334341";
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
+  const quickLinks = [
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/about", label: "About" },
+    { href: "/blog", label: "Blog" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/contact", label: "Contact" },
+    { href: "/careers", label: "Careers" },
+  ];
+
+  const serviceLinks = [
+    { href: "/services/branding", label: "Branding" },
+    { href: "/services/design", label: "Design" },
+    { href: "/services/development", label: "Development" },
+    { href: "/services/marketing", label: "Marketing" },
+    { href: "/services/data-insights", label: "Data & Insights" },
+  ];
+
+  const legalLinks = [
+    { href: "/privacy-policy", label: "Privacy Policy" },
+    { href: "/terms-of-service", label: "Terms of Service" },
+  ];
+
   return (
     <footer className="relative overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: `url(${footerBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      />
-      <div className="absolute inset-0 z-0 bg-background/90 dark:bg-background/92" />
-
-      {/* Subtle Decorations */}
-      <FloatingDiamond className="top-20 right-10 opacity-10 z-10" size="w-16" delay={2} />
-      <FloatingDiamond className="bottom-32 left-8 opacity-10 z-10" size="w-12" delay={5} duration={10} />
-      <FloatingDiamond className="top-1/2 left-1/3 opacity-8 z-10" size="w-10" delay={3.5} duration={9} />
+      {/* Diamond Background */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <motion.img
+          src={heroDiamondLogo}
+          alt=""
+          aria-hidden
+          className="w-[600px] h-[600px] object-contain opacity-[0.06] dark:opacity-[0.08]"
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+      <div className="absolute inset-0 z-0 bg-secondary/80 dark:bg-card/90" />
 
       <div className="container mx-auto px-4 md:px-6 py-16 relative z-10">
-        {/* Brand */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <Link to="/" className="mb-4">
-            <img 
-              src={logo} 
-              alt="Jewel IQ Logo" 
-              className="h-16 w-auto object-contain"
-            />
-          </Link>
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+          {/* Brand */}
+          <div>
+            <Link to="/" className="inline-block mb-4">
+              <img src={logo} alt="Jewel IQ Logo" className="h-14 w-auto object-contain" />
+            </Link>
+            <p className="text-muted-foreground text-sm mb-4">
+              Intelligent systems built with precision. We create premium digital experiences that drive real growth.
+            </p>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-10 h-10 rounded-xl bg-background/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-background/80 transition-colors inline-flex"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </a>
+          </div>
 
-          <p className="text-muted-foreground text-sm max-w-md">
-            Intelligent systems built with precision.  
-            We create premium digital experiences that drive real growth.
-          </p>
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          <a
-            href={whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-secondary/80 transition-colors"
-          >
-            <MessageCircle className="w-5 h-5" />
-          </a>
+          {/* Services */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Services</h4>
+            <ul className="space-y-2">
+              {serviceLinks.map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal & Contact */}
+          <div>
+            <h4 className="font-semibold text-foreground mb-4">Legal</h4>
+            <ul className="space-y-2 mb-6">
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+            <h4 className="font-semibold text-foreground mb-2">Contact</h4>
+            <p className="text-sm text-muted-foreground">kiingncube@gmail.com</p>
+            <p className="text-sm text-muted-foreground">+27 60 433 4341</p>
+          </div>
         </div>
-
 
         {/* Bottom */}
         <div className="text-center pt-8 border-t border-border">

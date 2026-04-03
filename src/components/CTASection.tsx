@@ -13,7 +13,6 @@ export const CTASection = () => {
 
   return (
     <section className="py-24 md:py-32 relative overflow-hidden">
-      {/* Wallpaper Background */}
       <div
         className="absolute inset-0"
         style={{
@@ -25,13 +24,10 @@ export const CTASection = () => {
       <div className="absolute inset-0 bg-background/85 dark:bg-background/80" />
       <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
-      {/* Floating Orbs */}
       <div className="floating-orb w-96 h-96 bg-primary top-0 -left-48 opacity-30" />
       <div className="floating-orb w-80 h-80 bg-accent bottom-0 -right-40 opacity-30" style={{ animationDelay: "2s" }} />
       <FloatingDiamond className="top-16 right-12 opacity-15" size="w-24" delay={0.5} />
       <FloatingDiamond className="bottom-20 left-10 opacity-10" size="w-16" delay={3} duration={9} />
-      <FloatingDiamond className="top-1/2 left-4 opacity-10" size="w-14" delay={1.5} duration={10} />
-      <FloatingDiamond className="bottom-10 right-1/3 opacity-8" size="w-10" delay={4.5} duration={11} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div
@@ -61,17 +57,12 @@ export const CTASection = () => {
             Get in touch today and let's discuss your next big project.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/contact" className="group">
-                Start Your Project
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button variant="heroOutline" size="xl" asChild>
-              <Link to="/pricing">View Pricing</Link>
-            </Button>
-          </div>
+          <Button variant="hero" size="xl" asChild>
+            <Link to="/contact" className="group">
+              Start Your Project
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
 
           <motion.div
             initial={{ opacity: 0 }}

@@ -11,6 +11,11 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ServicesPage from "./pages/ServicesPage";
+import BrandingPage from "./pages/BrandingPage";
+import DesignPage from "./pages/DesignPage";
+import DevelopmentPage from "./pages/DevelopmentPage";
+import MarketingPage from "./pages/MarketingPage";
+import DataInsightsPage from "./pages/DataInsightsPage";
 
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -55,6 +60,11 @@ const AnimatedRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/branding" element={<BrandingPage />} />
+        <Route path="/services/design" element={<DesignPage />} />
+        <Route path="/services/development" element={<DevelopmentPage />} />
+        <Route path="/services/marketing" element={<MarketingPage />} />
+        <Route path="/services/data-insights" element={<DataInsightsPage />} />
         
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
