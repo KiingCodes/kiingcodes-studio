@@ -22,7 +22,7 @@ import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/BlogPage";
 import BlogPostPage from "./pages/BlogPostPage";
-import PortfolioPage from "./pages/PortfolioPage";
+
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 
 import ReportsPage from "./pages/ReportsPage";
@@ -70,7 +70,7 @@ const AnimatedRoutes = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/portfolio" element={<PortfolioPage />} />
+        
         
         <Route path="/reports" element={<ReportsPage />} />
         <Route path="/settings" element={<SettingsPage />} />
