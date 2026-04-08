@@ -44,7 +44,7 @@ import AdminMessages from "./pages/admin/AdminMessages";
 import AdminClients from "./pages/admin/AdminClients";
 import AdminLeads from "./pages/admin/AdminLeads";
 import AdminBlog from "./pages/admin/AdminBlog";
-import AdminPortfolio from "./pages/admin/AdminPortfolio";
+
 import AdminInvoices from "./pages/admin/AdminInvoices";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminApplications from "./pages/admin/AdminApplications";
@@ -105,7 +105,7 @@ const AnimatedRoutes = () => {
           <Route path="messages" element={<AdminMessages />} />
           <Route path="invoices" element={<AdminInvoices />} />
           <Route path="blog" element={<AdminBlog />} />
-          <Route path="portfolio" element={<AdminPortfolio />} />
+          
           <Route path="applications" element={<AdminApplications />} />
           <Route path="roles" element={<AdminRoles />} />
         </Route>
