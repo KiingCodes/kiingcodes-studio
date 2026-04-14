@@ -351,6 +351,34 @@ export const ContactSection = () => {
             </form>
           </motion.div>
         </div>
+
+        {/* Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 max-w-6xl mx-auto"
+        >
+          <div className="bg-card rounded-2xl border border-border overflow-hidden">
+            <div className="p-6 pb-0">
+              <h3 className="text-xl font-semibold text-foreground mb-1">Our Location</h3>
+              <p className="text-sm text-muted-foreground">7 Caledon Street, Wilro Park, Roodepoort, Johannesburg</p>
+            </div>
+            <div className="p-6">
+              <iframe
+                title="Jewel IQ Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.0!2d27.8636!3d-26.1496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDA4JzU4LjYiUyAyN8KwNTEnNDkuMCJF!5e0!3m2!1sen!2sza!4v1700000000000"
+                width="100%"
+                height="350"
+                style={{ border: 0, borderRadius: "0.75rem" }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full"
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
