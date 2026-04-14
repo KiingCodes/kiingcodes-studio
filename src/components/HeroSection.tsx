@@ -68,11 +68,8 @@ export const HeroSection = () => {
       <div className="floating-orb w-64 h-64 bg-primary top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" style={{ animationDelay: "4s" }} />
 
       {/* Floating Diamonds */}
-      <FloatingDiamond className="top-28 right-8 md:right-16 lg:right-24 opacity-15 md:opacity-25" size="w-24 md:w-36 lg:w-48" />
-      <FloatingDiamond className="bottom-32 left-8 md:left-16 opacity-10" size="w-16 md:w-24" delay={3} duration={9} />
-      <FloatingDiamond className="top-1/3 left-4 md:left-12 opacity-10" size="w-12 md:w-20" delay={1.5} duration={8} />
-      <FloatingDiamond className="bottom-48 right-1/4 opacity-8" size="w-10 md:w-14" delay={5} duration={11} />
-      <FloatingDiamond className="top-2/3 right-4 md:right-8 opacity-10" size="w-14" delay={2.5} duration={10} />
+      <FloatingDiamond className="top-28 right-8 md:right-16 opacity-15" size="w-20 md:w-28" />
+      <FloatingDiamond className="bottom-32 left-8 opacity-10" size="w-14 md:w-20" delay={3} duration={9} />
 
       <div className="container mx-auto px-4 md:px-6 relative z-10 pt-20">
         <motion.div
@@ -81,17 +78,6 @@ export const HeroSection = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div
-            variants={staggerItem}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/50 border border-border mb-8"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm text-muted-foreground">
-              Premium Web Development & Entrepreneurship Studio
-            </span>
-          </motion.div>
-
           {/* Main Heading */}
           <motion.h1
             variants={staggerItem}
