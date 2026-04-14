@@ -101,12 +101,7 @@ export const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="py-24 md:py-32 relative overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, rgba(10, 15, 30, 0.9), rgba(10, 15, 30, 0.95)), url(${contactBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="py-24 md:py-32 relative overflow-hidden bg-background"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
