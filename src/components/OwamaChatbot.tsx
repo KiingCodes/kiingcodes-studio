@@ -34,6 +34,30 @@ function generateConversationId() {
   return `conv_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
+// Typewriter effect for the greeting message — renders markdown progressively
+function TypewriterGreeting({ text, isAdmin }: { text: string; isAdmin: boolean }) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    setDisplayed("");
+    const id = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(id);
+    }, 18);
+    return () => clearInterval(id);
+  }, [text]);
+  const isDone = displayed.length >= text.length;
+  return (
+    <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_strong]:text-foreground">
+      <ReactMarkdown>{displayed}</ReactMarkdown>
+      {!isDone && (
+        <span className={`inline-block w-1 h-3.5 align-middle ml-0.5 animate-pulse ${isAdmin ? "bg-amber-500" : "bg-primary"}`} />
+      )}
+    </div>
+  );
+}
+
 export function OwamaChatbot() {
   const { user, isAdmin, session } = useAuth();
   const queryClient = useQueryClient();
@@ -263,86 +287,102 @@ export function OwamaChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/20 border border-border/50 bg-background"
+            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/30 border border-border/50 bg-background/95 backdrop-blur-xl"
           >
             {/* Header */}
-            <div className={`relative px-5 py-4 border-b border-border/30 flex items-center gap-3 ${
-              isAdmin ? "bg-gradient-to-r from-amber-500/10 to-primary/10" : "bg-gradient-to-r from-primary/10 to-accent/10"
+            <div className={`relative px-5 py-3.5 border-b border-border/40 flex items-center gap-3 backdrop-blur-md ${
+              isAdmin ? "bg-gradient-to-r from-amber-500/10 via-primary/5 to-accent/10" : "bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10"
             }`}>
+              {/* Shimmer accent */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               <div className="relative">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  isAdmin ? "bg-gradient-to-br from-amber-500 to-primary" : "bg-gradient-to-br from-primary to-accent"
-                }`}>
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg ${
+                    isAdmin ? "bg-gradient-to-br from-amber-500 to-primary shadow-amber-500/30" : "bg-gradient-to-br from-primary to-accent shadow-primary/30"
+                  }`}
+                >
                   <img src={owamiIcon} alt="Owami" className="w-6 h-6 object-contain" />
-                </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
+                </motion.div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background">
+                  <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75" />
+                </span>
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-foreground text-sm flex items-center gap-2">
                   Owami
                   {isAdmin && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-medium flex items-center gap-1">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-500 font-semibold flex items-center gap-1 border border-amber-500/30">
                       <Shield className="w-2.5 h-2.5" /> ADMIN
                     </span>
                   )}
                 </h3>
-                <p className="text-xs text-muted-foreground truncate">
-                  {isAdmin ? "Admin Mode • Full Access" : "JewelIQ AI Assistant • Online"}
+                <p className="text-[11px] text-muted-foreground truncate flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {isAdmin ? "Admin Mode • Full Access" : "AI Strategist • Online"}
                 </p>
               </div>
-              <Button variant="ghost" size="icon" onClick={handleNewChat} className="h-8 w-8 text-muted-foreground hover:text-foreground" title="New conversation">
+              <Button variant="ghost" size="icon" onClick={handleNewChat} className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all" title="New conversation">
                 <RotateCcw className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all">
                 <X className="w-4 h-4" />
               </Button>
             </div>
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 scrollbar-thin">
-              {messages.map((msg, i) => (
+              {messages.map((msg, i) => {
+                const isGreeting = i === 0 && msg.role === "assistant" && (msg.content === VISITOR_GREETING || msg.content === ADMIN_GREETING);
+                return (
                 <motion.div
                   key={`${i}-${msg.content.slice(0, 20)}`}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, delay: i === messages.length - 1 ? 0.05 : 0 }}
-                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} mb-3`}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: i === messages.length - 1 ? 0.05 : 0 }}
+                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} mb-4`}
                 >
                   {/* Avatar + Name row */}
-                  <div className={`flex items-center gap-1.5 mb-1 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+                  <div className={`flex items-center gap-1.5 mb-1.5 px-1 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                     {msg.role === "assistant" ? (
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        isAdmin ? "bg-amber-500/20" : "bg-primary/20"
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center shadow-sm ${
+                        isAdmin ? "bg-gradient-to-br from-amber-500/30 to-primary/20" : "bg-gradient-to-br from-primary/30 to-accent/20"
                       }`}>
                         <img src={owamiIcon} alt="" className="w-3.5 h-3.5 object-contain" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center shadow-sm">
                         <User className="w-3 h-3 text-primary" />
                       </div>
                     )}
-                    <span className="text-[10px] text-muted-foreground font-medium">
+                    <span className="text-[10px] text-muted-foreground font-semibold tracking-wide">
                       {msg.role === "assistant" ? "Owami" : "You"}
                     </span>
                     <span className="text-[10px] text-muted-foreground/50">{formatTime(msg.timestamp)}</span>
                   </div>
 
                   {/* Message bubble */}
-                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  <div className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm transition-all ${
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-sm"
-                      : "bg-muted/50 text-foreground rounded-bl-sm border border-border/30"
+                      ? "bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-br-md shadow-primary/20"
+                      : "bg-gradient-to-br from-muted/60 to-muted/30 text-foreground rounded-bl-md border border-border/40 backdrop-blur-sm"
                   }`}>
                     {msg.role === "assistant" ? (
-                      <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_code]:text-xs [&_code]:bg-secondary/50 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-secondary/50 [&_pre]:rounded-lg [&_pre]:p-3 [&_blockquote]:border-primary/30 [&_a]:text-primary [&_strong]:text-foreground">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
-                      </div>
+                      isGreeting ? (
+                        <TypewriterGreeting text={msg.content} isAdmin={isAdmin} />
+                      ) : (
+                        <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_code]:text-xs [&_code]:bg-secondary/50 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-secondary/50 [&_pre]:rounded-lg [&_pre]:p-3 [&_blockquote]:border-primary/30 [&_a]:text-primary [&_strong]:text-foreground">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
+                      )
                     ) : (
                       <span className="whitespace-pre-wrap">{msg.content}</span>
                     )}
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
 
               {/* Typing indicator */}
               {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
@@ -392,18 +432,24 @@ export function OwamaChatbot() {
 
               {/* Suggestions */}
               {messages.length === 1 && !isLoading && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="grid grid-cols-2 gap-2 pt-2">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-col gap-2 pt-3">
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold px-1 mb-0.5">Quick start</p>
                   {suggestions.map((s, i) => (
                     <motion.button
                       key={s.label}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 + i * 0.08 }}
+                      whileHover={{ x: 2, scale: 1.01 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => sendMessage(s.message)}
-                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-muted/30 border border-border/30 text-foreground hover:bg-primary/10 hover:border-primary/30 transition-all duration-200 text-left cursor-pointer"
+                      className="group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-medium bg-gradient-to-br from-muted/40 to-muted/20 border border-border/40 text-foreground hover:from-primary/10 hover:to-accent/10 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 text-left cursor-pointer"
                     >
-                      <s.icon className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                      {s.label}
+                      <span className="w-7 h-7 rounded-lg bg-primary/15 group-hover:bg-primary/25 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <s.icon className="w-3.5 h-3.5 text-primary" />
+                      </span>
+                      <span className="flex-1">{s.label}</span>
+                      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                     </motion.button>
                   ))}
                 </motion.div>
@@ -413,15 +459,15 @@ export function OwamaChatbot() {
             </div>
 
             {/* Input area */}
-            <div className="p-3 border-t border-border/30 bg-muted/20">
+            <div className="p-3 border-t border-border/40 bg-gradient-to-b from-muted/10 to-muted/30 backdrop-blur-sm">
               <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="flex items-end gap-2">
                 <textarea
                   ref={textareaRef}
                   value={input}
                   onChange={handleTextareaInput}
                   onKeyDown={handleKeyDown}
-                  placeholder={isAdmin ? "Tell Owami what to update..." : "Ask Owami anything..."}
-                  className="flex-1 min-h-[40px] max-h-[120px] resize-none rounded-xl border border-border/30 bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+                  placeholder={isAdmin ? "Tell Owami what to update..." : "Share your idea or ask anything..."}
+                  className="flex-1 min-h-[42px] max-h-[120px] resize-none rounded-xl border border-border/40 bg-background/80 backdrop-blur-sm px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 focus:bg-background transition-all shadow-sm"
                   disabled={isLoading}
                   rows={1}
                 />
@@ -429,9 +475,9 @@ export function OwamaChatbot() {
                   type="submit"
                   size="icon"
                   disabled={!input.trim() || isLoading}
-                  className="h-10 w-10 rounded-xl bg-primary hover:bg-primary/90 transition-colors flex-shrink-0"
+                  className="h-[42px] w-[42px] rounded-xl bg-gradient-to-br from-primary to-accent hover:shadow-lg hover:shadow-primary/30 disabled:opacity-40 disabled:shadow-none transition-all flex-shrink-0 group"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
               </form>
               <p className="text-[10px] text-muted-foreground/50 text-center mt-1.5">Powered by JewelIQ • Owami AI</p>
