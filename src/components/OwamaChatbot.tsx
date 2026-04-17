@@ -27,8 +27,8 @@ const ADMIN_SUGGESTIONS = [
   { label: "Add Portfolio", icon: ChevronRight, message: "I want to add a new portfolio item" },
 ];
 
-const VISITOR_GREETING = "Hey there! ✨ I'm **Owami**, your JewelIQ assistant. I can help you explore our services, get pricing info, or book a consultation. What can I help you with today?";
-const ADMIN_GREETING = "Welcome back, Admin! 🛡️ I'm **Owami** in **Admin Mode**. I can help you manage your website — update services, pricing, blog posts, portfolio items, and view leads. What would you like to do?";
+const VISITOR_GREETING = "Hey, I'm **Owami** — JewelIQ's AI strategist. ✨\n\nI turn raw ideas into scalable products across **Tech 🛠**, **Design 🎨**, **Business 📈** and **Growth 🚀**.\n\nGot an idea, a problem to solve, or a product to scale? Tell me where you're at and I'll map the path forward.";
+const ADMIN_GREETING = "Welcome back, Chief. 🛡️ **Admin Mode** active.\n\nI'm wired into your site — services, pricing, blog, portfolio, testimonials, leads. Tell me what to ship, update, or analyze.";
 
 function generateConversationId() {
   return `conv_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
