@@ -432,18 +432,24 @@ export function OwamaChatbot() {
 
               {/* Suggestions */}
               {messages.length === 1 && !isLoading && (
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="grid grid-cols-2 gap-2 pt-2">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="flex flex-col gap-2 pt-3">
+                  <p className="text-[10px] uppercase tracking-wider text-muted-foreground/70 font-semibold px-1 mb-0.5">Quick start</p>
                   {suggestions.map((s, i) => (
                     <motion.button
                       key={s.label}
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 + i * 0.08 }}
+                      whileHover={{ x: 2, scale: 1.01 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => sendMessage(s.message)}
-                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-medium bg-muted/30 border border-border/30 text-foreground hover:bg-primary/10 hover:border-primary/30 transition-all duration-200 text-left cursor-pointer"
+                      className="group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs font-medium bg-gradient-to-br from-muted/40 to-muted/20 border border-border/40 text-foreground hover:from-primary/10 hover:to-accent/10 hover:border-primary/40 hover:shadow-md hover:shadow-primary/10 transition-all duration-200 text-left cursor-pointer"
                     >
-                      <s.icon className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                      {s.label}
+                      <span className="w-7 h-7 rounded-lg bg-primary/15 group-hover:bg-primary/25 flex items-center justify-center flex-shrink-0 transition-colors">
+                        <s.icon className="w-3.5 h-3.5 text-primary" />
+                      </span>
+                      <span className="flex-1">{s.label}</span>
+                      <ChevronRight className="w-3.5 h-3.5 text-muted-foreground/50 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
                     </motion.button>
                   ))}
                 </motion.div>
@@ -453,15 +459,15 @@ export function OwamaChatbot() {
             </div>
 
             {/* Input area */}
-            <div className="p-3 border-t border-border/30 bg-muted/20">
+            <div className="p-3 border-t border-border/40 bg-gradient-to-b from-muted/10 to-muted/30 backdrop-blur-sm">
               <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="flex items-end gap-2">
                 <textarea
                   ref={textareaRef}
                   value={input}
                   onChange={handleTextareaInput}
                   onKeyDown={handleKeyDown}
-                  placeholder={isAdmin ? "Tell Owami what to update..." : "Ask Owami anything..."}
-                  className="flex-1 min-h-[40px] max-h-[120px] resize-none rounded-xl border border-border/30 bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all"
+                  placeholder={isAdmin ? "Tell Owami what to update..." : "Share your idea or ask anything..."}
+                  className="flex-1 min-h-[42px] max-h-[120px] resize-none rounded-xl border border-border/40 bg-background/80 backdrop-blur-sm px-3.5 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/60 focus:bg-background transition-all shadow-sm"
                   disabled={isLoading}
                   rows={1}
                 />
@@ -469,9 +475,9 @@ export function OwamaChatbot() {
                   type="submit"
                   size="icon"
                   disabled={!input.trim() || isLoading}
-                  className="h-10 w-10 rounded-xl bg-primary hover:bg-primary/90 transition-colors flex-shrink-0"
+                  className="h-[42px] w-[42px] rounded-xl bg-gradient-to-br from-primary to-accent hover:shadow-lg hover:shadow-primary/30 disabled:opacity-40 disabled:shadow-none transition-all flex-shrink-0 group"
                 >
-                  <Send className="w-4 h-4" />
+                  <Send className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </Button>
               </form>
               <p className="text-[10px] text-muted-foreground/50 text-center mt-1.5">Powered by JewelIQ • Owami AI</p>
