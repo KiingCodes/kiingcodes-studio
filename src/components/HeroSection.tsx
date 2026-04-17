@@ -116,14 +116,6 @@ export const HeroSection = () => {
                 </Link>
               </motion.div>
             </Button>
-            <Button variant="heroOutline" size="xl" asChild>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <Link to="/services">Explore Services</Link>
-              </motion.div>
-            </Button>
           </motion.div>
 
         </motion.div>
