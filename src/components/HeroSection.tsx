@@ -52,6 +52,20 @@ const staggerItem = {
 };
 
 export const HeroSection = () => {
+  const typed = useTypewriter(FULL_HEADLINE_LENGTH);
+  const isTyping = typed < FULL_HEADLINE_LENGTH;
+
+  let remaining = typed;
+  const renderedParts = HEADLINE_PARTS.map((part, idx) => {
+    const slice = part.text.slice(0, Math.max(0, Math.min(remaining, part.text.length)));
+    remaining -= part.text.length;
+    return (
+      <span key={idx} className={part.className}>
+        {slice}
+      </span>
+    );
+  });
+
   return (
     <section
       id="home"
