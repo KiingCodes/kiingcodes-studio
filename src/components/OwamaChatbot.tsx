@@ -15,8 +15,8 @@ type Message = { role: "user" | "assistant"; content: string; timestamp?: Date }
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/owami-chat`;
 
 const VISITOR_SUGGESTIONS = [
-  { label: "Services", icon: Sparkles, message: "What services does JewelIQ offer?" },
-  { label: "Pricing", icon: ChevronRight, message: "Can you tell me about JewelIQ's pricing?" },
+  { label: "Turn my idea into a product", icon: Sparkles, message: "I have an idea I want to turn into a scalable product. Walk me through how JewelIQ would approach it across tech, design, business and growth." },
+  { label: "Services & Pricing", icon: ChevronRight, message: "What services does JewelIQ offer and what does pricing look like?" },
   { label: "Book Consultation", icon: ChevronRight, message: "I'd like to book a free consultation" },
 ];
 
