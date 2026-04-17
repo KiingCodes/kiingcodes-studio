@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
+import { TypewriterText } from "@/components/TypewriterText";
 import {
   Target,
   Shield,
@@ -166,28 +167,22 @@ export const AboutSection = () => {
             </h3>
 
             <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <p>
-                At Jewel IQ, we understand that in today's digital age,
-                having a strong online presence is crucial for business
-                success. That's why we combine our expertise in full-stack
-                development with intelligent systems to deliver solutions
-                that not only look great but drive real business results.
-              </p>
+              <TypewriterText
+                text="At Jewel IQ, we understand that in today's digital age, having a strong online presence is crucial for business success. That's why we combine our expertise in full-stack development with intelligent systems to deliver solutions that not only look great but drive real business results."
+                speed={15}
+              />
 
-              <p>
-                Our team brings together years of experience in web
-                development, mobile applications, and business strategy.
-                We've helped startups launch their MVPs, established
-                businesses modernize their digital infrastructure, and
-                entrepreneurs turn their ideas into thriving online ventures.
-              </p>
+              <TypewriterText
+                text="Our team brings together years of experience in web development, mobile applications, and business strategy. We've helped startups launch their MVPs, established businesses modernize their digital infrastructure, and entrepreneurs turn their ideas into thriving online ventures."
+                speed={15}
+                delay={300}
+              />
 
-              <p>
-                Whether you need a simple landing page or a complex
-                enterprise application, we approach every project with the
-                same level of dedication and attention to detail. Your
-                vision, our expertise – together, we create digital excellence.
-              </p>
+              <TypewriterText
+                text="Whether you need a simple landing page or a complex enterprise application, we approach every project with the same level of dedication and attention to detail. Your vision, our expertise – together, we create digital excellence."
+                speed={15}
+                delay={600}
+              />
             </div>
           </motion.div>
 
