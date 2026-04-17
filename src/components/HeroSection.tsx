@@ -1,10 +1,37 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 import heroDiamondLogo from "@/assets/jeweliq-diamond-logo.png";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
+
+const HEADLINE_PARTS = [
+  { text: "JewelIQ Builds ", className: "" },
+  { text: "Digital Experiences", className: "text-gradient" },
+  { text: " That Drive Growth", className: "" },
+];
+const FULL_HEADLINE_LENGTH = HEADLINE_PARTS.reduce((n, p) => n + p.text.length, 0);
+
+const useTypewriter = (totalLength: number, speed = 45, startDelay = 300) => {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const start = setTimeout(() => {
+      const id = setInterval(() => {
+        setCount((c) => {
+          if (c >= totalLength) {
+            clearInterval(id);
+            return c;
+          }
+          return c + 1;
+        });
+      }, speed);
+    }, startDelay);
+    return () => clearTimeout(start);
+  }, [totalLength, speed, startDelay]);
+  return count;
+};
 
 const floatingVariants = {
   animate: {
@@ -81,12 +108,12 @@ export const HeroSection = () => {
           {/* Main Heading */}
           <motion.h1
             variants={staggerItem}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight min-h-[6rem] md:min-h-[12rem]"
           >
-            JewelIQ Builds{" "}
-            <span className="text-gradient">Digital Experiences</span>
-            <br />
-            That Drive Growth
+            {renderedParts}
+            {isTyping && (
+              <span className="inline-block w-[3px] md:w-[4px] h-[0.9em] bg-primary ml-1 align-middle animate-pulse" />
+            )}
           </motion.h1>
 
           {/* Subheading */}
