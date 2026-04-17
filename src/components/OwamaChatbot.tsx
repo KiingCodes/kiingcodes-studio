@@ -34,6 +34,30 @@ function generateConversationId() {
   return `conv_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
 }
 
+// Typewriter effect for the greeting message — renders markdown progressively
+function TypewriterGreeting({ text, isAdmin }: { text: string; isAdmin: boolean }) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    setDisplayed("");
+    const id = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(id);
+    }, 18);
+    return () => clearInterval(id);
+  }, [text]);
+  const isDone = displayed.length >= text.length;
+  return (
+    <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_strong]:text-foreground">
+      <ReactMarkdown>{displayed}</ReactMarkdown>
+      {!isDone && (
+        <span className={`inline-block w-1 h-3.5 align-middle ml-0.5 animate-pulse ${isAdmin ? "bg-amber-500" : "bg-primary"}`} />
+      )}
+    </div>
+  );
+}
+
 export function OwamaChatbot() {
   const { user, isAdmin, session } = useAuth();
   const queryClient = useQueryClient();
