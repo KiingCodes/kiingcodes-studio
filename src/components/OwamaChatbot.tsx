@@ -300,49 +300,56 @@ export function OwamaChatbot() {
 
             {/* Messages */}
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 scrollbar-thin">
-              {messages.map((msg, i) => (
+              {messages.map((msg, i) => {
+                const isGreeting = i === 0 && msg.role === "assistant" && (msg.content === VISITOR_GREETING || msg.content === ADMIN_GREETING);
+                return (
                 <motion.div
                   key={`${i}-${msg.content.slice(0, 20)}`}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.25, delay: i === messages.length - 1 ? 0.05 : 0 }}
-                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} mb-3`}
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1], delay: i === messages.length - 1 ? 0.05 : 0 }}
+                  className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} mb-4`}
                 >
                   {/* Avatar + Name row */}
-                  <div className={`flex items-center gap-1.5 mb-1 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
+                  <div className={`flex items-center gap-1.5 mb-1.5 px-1 ${msg.role === "user" ? "flex-row-reverse" : ""}`}>
                     {msg.role === "assistant" ? (
-                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                        isAdmin ? "bg-amber-500/20" : "bg-primary/20"
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center shadow-sm ${
+                        isAdmin ? "bg-gradient-to-br from-amber-500/30 to-primary/20" : "bg-gradient-to-br from-primary/30 to-accent/20"
                       }`}>
                         <img src={owamiIcon} alt="" className="w-3.5 h-3.5 object-contain" />
                       </div>
                     ) : (
-                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary/30 to-accent/20 flex items-center justify-center shadow-sm">
                         <User className="w-3 h-3 text-primary" />
                       </div>
                     )}
-                    <span className="text-[10px] text-muted-foreground font-medium">
+                    <span className="text-[10px] text-muted-foreground font-semibold tracking-wide">
                       {msg.role === "assistant" ? "Owami" : "You"}
                     </span>
                     <span className="text-[10px] text-muted-foreground/50">{formatTime(msg.timestamp)}</span>
                   </div>
 
                   {/* Message bubble */}
-                  <div className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  <div className={`max-w-[88%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm transition-all ${
                     msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-sm"
-                      : "bg-muted/50 text-foreground rounded-bl-sm border border-border/30"
+                      ? "bg-gradient-to-br from-primary to-primary/90 text-primary-foreground rounded-br-md shadow-primary/20"
+                      : "bg-gradient-to-br from-muted/60 to-muted/30 text-foreground rounded-bl-md border border-border/40 backdrop-blur-sm"
                   }`}>
                     {msg.role === "assistant" ? (
-                      <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_code]:text-xs [&_code]:bg-secondary/50 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-secondary/50 [&_pre]:rounded-lg [&_pre]:p-3 [&_blockquote]:border-primary/30 [&_a]:text-primary [&_strong]:text-foreground">
-                        <ReactMarkdown>{msg.content}</ReactMarkdown>
-                      </div>
+                      isGreeting ? (
+                        <TypewriterGreeting text={msg.content} isAdmin={isAdmin} />
+                      ) : (
+                        <div className="prose prose-sm dark:prose-invert max-w-none [&_p]:my-1 [&_p:first-child]:mt-0 [&_p:last-child]:mb-0 [&_ul]:my-1.5 [&_ol]:my-1.5 [&_li]:my-0.5 [&_h1]:text-base [&_h2]:text-sm [&_h3]:text-sm [&_code]:text-xs [&_code]:bg-secondary/50 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_pre]:bg-secondary/50 [&_pre]:rounded-lg [&_pre]:p-3 [&_blockquote]:border-primary/30 [&_a]:text-primary [&_strong]:text-foreground">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
+                      )
                     ) : (
                       <span className="whitespace-pre-wrap">{msg.content}</span>
                     )}
                   </div>
                 </motion.div>
-              ))}
+                );
+              })}
 
               {/* Typing indicator */}
               {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
