@@ -287,37 +287,46 @@ export function OwamaChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/20 border border-border/50 bg-background"
+            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/30 border border-border/50 bg-background/95 backdrop-blur-xl"
           >
             {/* Header */}
-            <div className={`relative px-5 py-4 border-b border-border/30 flex items-center gap-3 ${
-              isAdmin ? "bg-gradient-to-r from-amber-500/10 to-primary/10" : "bg-gradient-to-r from-primary/10 to-accent/10"
+            <div className={`relative px-5 py-3.5 border-b border-border/40 flex items-center gap-3 backdrop-blur-md ${
+              isAdmin ? "bg-gradient-to-r from-amber-500/10 via-primary/5 to-accent/10" : "bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10"
             }`}>
+              {/* Shimmer accent */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
               <div className="relative">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                  isAdmin ? "bg-gradient-to-br from-amber-500 to-primary" : "bg-gradient-to-br from-primary to-accent"
-                }`}>
+                <motion.div
+                  animate={{ scale: [1, 1.05, 1] }}
+                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center shadow-lg ${
+                    isAdmin ? "bg-gradient-to-br from-amber-500 to-primary shadow-amber-500/30" : "bg-gradient-to-br from-primary to-accent shadow-primary/30"
+                  }`}
+                >
                   <img src={owamiIcon} alt="Owami" className="w-6 h-6 object-contain" />
-                </div>
-                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background" />
+                </motion.div>
+                <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background">
+                  <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75" />
+                </span>
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-semibold text-foreground text-sm flex items-center gap-2">
                   Owami
                   {isAdmin && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-medium flex items-center gap-1">
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-500 font-semibold flex items-center gap-1 border border-amber-500/30">
                       <Shield className="w-2.5 h-2.5" /> ADMIN
                     </span>
                   )}
                 </h3>
-                <p className="text-xs text-muted-foreground truncate">
-                  {isAdmin ? "Admin Mode • Full Access" : "JewelIQ AI Assistant • Online"}
+                <p className="text-[11px] text-muted-foreground truncate flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  {isAdmin ? "Admin Mode • Full Access" : "AI Strategist • Online"}
                 </p>
               </div>
-              <Button variant="ghost" size="icon" onClick={handleNewChat} className="h-8 w-8 text-muted-foreground hover:text-foreground" title="New conversation">
+              <Button variant="ghost" size="icon" onClick={handleNewChat} className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all" title="New conversation">
                 <RotateCcw className="w-4 h-4" />
               </Button>
-              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-all">
                 <X className="w-4 h-4" />
               </Button>
             </div>
