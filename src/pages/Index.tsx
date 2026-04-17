@@ -4,14 +4,14 @@ import { HeroSection } from "@/components/HeroSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { OwamaChatbot } from "@/components/OwamaChatbot";
-import { ServicesPreview } from "@/components/ServicesPreview";
+import { ServicesSection } from "@/components/ServicesSection";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ServicesPreview />
+      <ServicesSection />
       <Footer />
       <OwamaChatbot />
     </div>

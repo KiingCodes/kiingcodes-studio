@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 import { useServices } from "@/hooks/use-dynamic-content";
+import { TypewriterText } from "@/components/TypewriterText";
 
 import serviceWebDev from "@/assets/service-web-dev.jpg";
 import serviceMobileDev from "@/assets/service-mobile-dev.jpg";
@@ -105,7 +106,12 @@ export const ServicesSection = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{service.description}</p>
+                    <TypewriterText
+                      text={service.description || ""}
+                      speed={20}
+                      delay={index * 100}
+                      className="text-muted-foreground text-sm leading-relaxed min-h-[60px]"
+                    />
                   </div>
                 </motion.div>
               );
