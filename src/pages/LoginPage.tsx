@@ -8,6 +8,7 @@ import { Lock, Mail, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
 import logo from "@/assets/jeweliq-logo.png";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 type View = "login" | "signup" | "forgot";
 
@@ -64,11 +65,12 @@ const LoginPage = () => {
   return (
     <PageLayout>
       <div className="pt-28 pb-20 min-h-screen flex items-center justify-center relative overflow-hidden">
+        <AnimatedBackground variant="vivid" className="z-0" />
         <img
           src={diamondLogo}
           alt=""
           aria-hidden
-          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none opacity-20"
+          className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none opacity-20 z-0"
           style={{ filter: "drop-shadow(0 0 80px hsl(var(--primary) / 0.5))" }}
         />
 

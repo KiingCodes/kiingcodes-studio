@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 import logo from "@/assets/jeweliq-logo.png";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 export function PortalLayout() {
   const { user } = useAuth();
@@ -40,21 +41,24 @@ export function PortalLayout() {
   return (
     <SidebarProvider>
       <PortalNotifications companyId={company.id} />
-      <div className="min-h-screen flex w-full">
-        <PortalSidebar />
-        
-        <div className="flex-1 flex flex-col">
-          <header className="sticky top-0 z-10 h-14 flex items-center border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-            <SidebarTrigger className="ml-4" />
-            <Link to="/portal" className="ml-3">
-              <img src={logo} alt="Jewel IQ" className="h-8 w-auto object-contain" />
-            </Link>
-            <h2 className="ml-3 text-lg font-semibold">Client Portal</h2>
-          </header>
-          
-          <main className="flex-1">
-            <Outlet />
-          </main>
+      <div className="min-h-screen flex w-full relative">
+        <AnimatedBackground variant="soft" className="z-0 fixed" />
+        <div className="relative z-10 flex w-full">
+          <PortalSidebar />
+
+          <div className="flex-1 flex flex-col">
+            <header className="sticky top-0 z-10 h-14 flex items-center border-b bg-background/70 backdrop-blur-md supports-[backdrop-filter]:bg-background/40">
+              <SidebarTrigger className="ml-4" />
+              <Link to="/portal" className="ml-3">
+                <img src={logo} alt="Jewel IQ" className="h-8 w-auto object-contain" />
+              </Link>
+              <h2 className="ml-3 text-lg font-semibold">Client Portal</h2>
+            </header>
+
+            <main className="flex-1">
+              <Outlet />
+            </main>
+          </div>
         </div>
       </div>
     </SidebarProvider>
