@@ -340,9 +340,12 @@ async function executeTool(name: string, args: Record<string, any>, adminSupabas
       case "list_items": {
         const table = args.table as string;
         let query = adminSupabase.from(table).select("*").order("created_at", { ascending: false }).limit(50);
-        if (!args.include_inactive) {
+        if (table === "page_sections") {
+          query = adminSupabase.from(table).select("*").order("page_slug").order("order_index").limit(100);
+          if (args.page_slug) query = query.eq("page_slug", args.page_slug);
+        } else if (!args.include_inactive) {
           if (table === "blog_posts") query = query.eq("is_published", true);
-          else if (table !== "chat_leads") query = query.eq("is_active", true);
+          else if (table !== "chat_leads" && table !== "media_uploads") query = query.eq("is_active", true);
         }
         const { data, error } = await query;
         if (error) return { error: error.message };
@@ -404,6 +407,44 @@ async function executeTool(name: string, args: Record<string, any>, adminSupabas
         const { table, id: itemId } = args;
         const { error } = await adminSupabase.from(table).delete().eq("id", itemId);
         return error ? { error: error.message } : { action: "deleted", id: itemId };
+      }
+      case "upsert_page_section": {
+        const { id, ...rest } = args;
+        if (id) {
+          const { data, error } = await adminSupabase.from("page_sections").update(rest).eq("id", id).select().single();
+          return error ? { error: error.message } : { data, action: "updated" };
+        }
+        const { data, error } = await adminSupabase
+          .from("page_sections")
+          .upsert(rest, { onConflict: "page_slug,section_key" })
+          .select()
+          .single();
+        return error ? { error: error.message } : { data, action: "upserted" };
+      }
+      case "upsert_premium_blog_post": {
+        const { id, ...rest } = args;
+        const row = {
+          ...rest,
+          author_id: adminUserId,
+          slug: rest.slug || (rest.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+          published_at: rest.is_published ? new Date().toISOString() : null,
+          layout_style: rest.layout_style || "magazine",
+          animation_preset: rest.animation_preset || "fade-in",
+        };
+        if (id) {
+          const { data, error } = await adminSupabase.from("blog_posts").update(row).eq("id", id).select().single();
+          return error ? { error: error.message } : { data, action: "updated" };
+        }
+        const { data, error } = await adminSupabase.from("blog_posts").insert(row).select().single();
+        return error ? { error: error.message } : { data, action: "created" };
+      }
+      case "list_media": {
+        const limit = args.limit || 30;
+        let query = adminSupabase.from("media_uploads").select("*").order("created_at", { ascending: false }).limit(limit);
+        if (args.file_type && args.file_type !== "all") query = query.eq("file_type", args.file_type);
+        const { data, error } = await query;
+        if (error) return { error: error.message };
+        return { data };
       }
       default:
         return { error: `Unknown tool: ${name}` };
