@@ -3,6 +3,7 @@ import { ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/jeweliq-logo.png";
 import heroDiamondLogo from "@/assets/jeweliq-diamond-logo.png";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 export const Footer = () => {
   const scrollToTop = () => {
@@ -15,14 +16,7 @@ export const Footer = () => {
     { href: "/about", label: "About" },
     { href: "/blog", label: "Blog" },
     { href: "/careers", label: "Careers" },
-  ];
-
-  const serviceLinks = [
-    { href: "/services/branding", label: "Branding" },
-    { href: "/services/design", label: "Design" },
-    { href: "/services/development", label: "Development" },
-    { href: "/services/marketing", label: "Marketing" },
-    { href: "/services/data-insights", label: "Data & Insights" },
+    { href: "/contact", label: "Contact" },
   ];
 
   const legalLinks = [
