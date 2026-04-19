@@ -9,6 +9,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useQueryClient } from "@tanstack/react-query";
 import owamiIcon from "@/assets/owami-bot-icon.png";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 type Attachment = { url: string; type: "image" | "video"; name: string };
 type Message = {
@@ -459,8 +460,11 @@ export function OwamaChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.9 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/30 border border-border/50 bg-background/95 backdrop-blur-xl"
+            className="fixed bottom-6 right-6 z-50 w-[420px] max-w-[calc(100vw-2rem)] h-[650px] max-h-[calc(100vh-3rem)] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-primary/30 border border-border/50 bg-background/80 backdrop-blur-xl"
           >
+            {/* Animated brand wallpaper */}
+            <AnimatedBackground variant="panel" className="z-0" />
+
             {/* Header */}
             <div className={`relative px-5 py-3.5 border-b border-border/40 flex items-center gap-3 backdrop-blur-md ${
               isAdmin ? "bg-gradient-to-r from-amber-500/10 via-primary/5 to-accent/10" : "bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10"
