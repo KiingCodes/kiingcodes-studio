@@ -26,8 +26,11 @@ export const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden">
+      {/* Animated brand background */}
+      <AnimatedBackground variant="soft" className="z-0" />
+
       {/* Diamond Background */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
         <motion.img
           src={heroDiamondLogo}
           alt=""
@@ -37,7 +40,7 @@ export const Footer = () => {
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         />
       </div>
-      <div className="absolute inset-0 z-0 bg-secondary/80 dark:bg-card/90" />
+      <div className="absolute inset-0 z-0 bg-secondary/60 dark:bg-card/70 pointer-events-none" />
 
       <div className="container mx-auto px-4 md:px-6 py-10 relative z-10">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-8">
@@ -57,16 +60,6 @@ export const Footer = () => {
               <h4 className="font-semibold text-foreground text-sm mb-2">Pages</h4>
               <ul className="flex flex-wrap gap-x-4 gap-y-1">
                 {quickLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link to={link.href} className="text-xs text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold text-foreground text-sm mb-2">Services</h4>
-              <ul className="flex flex-wrap gap-x-4 gap-y-1">
-                {serviceLinks.map((link) => (
                   <li key={link.href}>
                     <Link to={link.href} className="text-xs text-muted-foreground hover:text-primary transition-colors">{link.label}</Link>
                   </li>
