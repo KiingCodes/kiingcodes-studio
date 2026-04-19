@@ -16,42 +16,57 @@ export type Database = {
     Tables: {
       blog_posts: {
         Row: {
+          accent_color: string | null
+          animation_preset: string | null
           author_id: string | null
           content: string
+          cover_gradient: string | null
           cover_image_url: string | null
           created_at: string
           excerpt: string | null
           id: string
           is_published: boolean | null
+          layout_style: string | null
           published_at: string | null
+          reading_time_minutes: number | null
           slug: string
           tags: string[] | null
           title: string
           updated_at: string
         }
         Insert: {
+          accent_color?: string | null
+          animation_preset?: string | null
           author_id?: string | null
           content: string
+          cover_gradient?: string | null
           cover_image_url?: string | null
           created_at?: string
           excerpt?: string | null
           id?: string
           is_published?: boolean | null
+          layout_style?: string | null
           published_at?: string | null
+          reading_time_minutes?: number | null
           slug: string
           tags?: string[] | null
           title: string
           updated_at?: string
         }
         Update: {
+          accent_color?: string | null
+          animation_preset?: string | null
           author_id?: string | null
           content?: string
+          cover_gradient?: string | null
           cover_image_url?: string | null
           created_at?: string
           excerpt?: string | null
           id?: string
           is_published?: boolean | null
+          layout_style?: string | null
           published_at?: string | null
+          reading_time_minutes?: number | null
           slug?: string
           tags?: string[] | null
           title?: string
@@ -386,6 +401,111 @@ export type Database = {
           salary_range?: string | null
           title?: string
           type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      media_uploads: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          file_path: string
+          file_size_bytes: number | null
+          file_type: string
+          id: string
+          mime_type: string | null
+          public_url: string
+          uploaded_by: string | null
+          used_in: string | null
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_path: string
+          file_size_bytes?: number | null
+          file_type: string
+          id?: string
+          mime_type?: string | null
+          public_url: string
+          uploaded_by?: string | null
+          used_in?: string | null
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          file_path?: string
+          file_size_bytes?: number | null
+          file_type?: string
+          id?: string
+          mime_type?: string | null
+          public_url?: string
+          uploaded_by?: string | null
+          used_in?: string | null
+        }
+        Relationships: []
+      }
+      page_sections: {
+        Row: {
+          accent_color: string | null
+          animation_preset: string | null
+          background_gradient: string | null
+          background_image_url: string | null
+          body: string | null
+          created_at: string
+          cta_label: string | null
+          cta_url: string | null
+          extra: Json | null
+          headline: string | null
+          id: string
+          is_active: boolean
+          order_index: number
+          page_slug: string
+          section_key: string
+          section_type: string
+          subheadline: string | null
+          updated_at: string
+        }
+        Insert: {
+          accent_color?: string | null
+          animation_preset?: string | null
+          background_gradient?: string | null
+          background_image_url?: string | null
+          body?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          extra?: Json | null
+          headline?: string | null
+          id?: string
+          is_active?: boolean
+          order_index?: number
+          page_slug: string
+          section_key: string
+          section_type?: string
+          subheadline?: string | null
+          updated_at?: string
+        }
+        Update: {
+          accent_color?: string | null
+          animation_preset?: string | null
+          background_gradient?: string | null
+          background_image_url?: string | null
+          body?: string | null
+          created_at?: string
+          cta_label?: string | null
+          cta_url?: string | null
+          extra?: Json | null
+          headline?: string | null
+          id?: string
+          is_active?: boolean
+          order_index?: number
+          page_slug?: string
+          section_key?: string
+          section_type?: string
+          subheadline?: string | null
           updated_at?: string
         }
         Relationships: []

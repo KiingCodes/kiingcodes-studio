@@ -103,13 +103,42 @@ export const ContactSection = () => {
       id="contact"
       className="py-24 md:py-32 relative overflow-hidden bg-background"
     >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <div className="floating-orb w-80 h-80 bg-primary -top-40 -right-40" />
-        <div className="floating-orb w-80 h-80 bg-accent -bottom-40 -left-40" style={{ animationDelay: "3s" }} />
-        <FloatingDiamond className="top-20 left-8 opacity-10" size="w-20" delay={2} />
-        <FloatingDiamond className="bottom-32 right-10 opacity-10" size="w-14" delay={4.5} duration={8} />
+      {/* Brand Wallpaper Background — combines primary (cyan) + accent (purple) JewelIQ tokens */}
+      <div className="absolute inset-0 -z-0">
+        {/* Base brand gradient wash */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 90% 60% at 15% 0%, hsl(var(--primary) / 0.22), transparent 60%), radial-gradient(ellipse 80% 60% at 85% 100%, hsl(var(--accent) / 0.22), transparent 60%), linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--secondary)) 100%)",
+          }}
+        />
+        {/* Conic accent shimmer */}
+        <div
+          className="absolute inset-0 opacity-40 mix-blend-soft-light"
+          style={{
+            background:
+              "conic-gradient(from 180deg at 50% 50%, hsl(var(--primary) / 0.15), hsl(var(--accent) / 0.18), hsl(var(--primary) / 0.10), hsl(var(--accent) / 0.18), hsl(var(--primary) / 0.15))",
+          }}
+        />
+        {/* Diamond grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.07]"
+          style={{
+            backgroundImage:
+              "linear-gradient(45deg, hsl(var(--primary)) 1px, transparent 1px), linear-gradient(-45deg, hsl(var(--accent)) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
+        {/* Top divider */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+        {/* Floating brand orbs (clearer than before) */}
+        <div className="floating-orb w-96 h-96 bg-primary/40 -top-40 -right-40" />
+        <div className="floating-orb w-96 h-96 bg-accent/40 -bottom-40 -left-40" style={{ animationDelay: "3s" }} />
+        <div className="floating-orb w-72 h-72 bg-primary/25 top-1/3 left-1/4" style={{ animationDelay: "6s" }} />
+        <FloatingDiamond className="top-20 left-8 opacity-30" size="w-24" delay={2} />
+        <FloatingDiamond className="bottom-32 right-10 opacity-25" size="w-16" delay={4.5} duration={8} />
+        <FloatingDiamond className="top-1/2 right-1/4 opacity-20" size="w-12" delay={1} duration={7} />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">

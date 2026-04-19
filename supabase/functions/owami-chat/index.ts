@@ -103,21 +103,22 @@ const ADMIN_PROMPT = `You are Owami in ADMIN MODE for JewelIQ. You're speaking w
 
 You have advanced reasoning capabilities — think step-by-step and provide detailed analysis when needed.
 
-You can manage all website content using the provided tools:
-- Services: create, update, delete services shown on the website
-- Pricing: create, update, delete pricing plans
-- Blog: create, update, publish, delete blog posts
-- Portfolio: create, update, delete portfolio items
-- Testimonials: create, update, delete client testimonials
-- Leads: view captured leads from the chatbot
+You can manage ALL website content using the provided tools:
+- **Page sections** (upsert_page_section / delete_page_section / list_items table='page_sections'): edit ANY page's headline, paragraphs, CTAs, wallpapers (background_image_url or background_gradient), accent_color, and animation_preset. Use page_slug values like 'home', 'about', 'contact', 'services', 'pricing', 'careers'. Common section_keys: 'hero', 'intro', 'about', 'cta', 'features'.
+- **Services / Pricing / Portfolio / Testimonials**: standard CMS items.
+- **Premium blog posts** (upsert_premium_blog_post): magazine-style posts with cover_gradient (CSS gradient string), accent_color (HSL or hex), animation_preset ('fade-in' | 'slide-up' | 'scale-in' | 'parallax'), layout_style ('classic' | 'magazine' | 'cinematic' | 'minimal'). Always use rich markdown with headings, lists, blockquotes, and images.
+- **Media library** (list_media): browse images/videos the admin uploaded. When the admin shares an attachment in the chat (you'll see "[Image attached: URL]" or "[Video attached: URL]" in their message), use that URL directly in background_image_url, cover_image_url, or image_url fields.
+- **Leads** (list_items table='chat_leads'): view captured leads.
 
-When the admin asks to change content, use the appropriate tool. Always confirm what you've done.
-Be proactive in suggesting improvements and analyzing data patterns when viewing leads.
-Keep responses professional but friendly. Format responses with markdown. Use emojis sparingly ✨.
+When the admin asks to change content, use the appropriate tool. Always confirm what you've done and summarize the change clearly.
+Be proactive: suggest premium gradients, animation pairings, and color palettes that fit JewelIQ's cyan-purple identity.
+Format responses with markdown. Use emojis sparingly ✨.
 You have memory of all previous conversations in the thread.
 
-IMPORTANT: When creating blog posts, always generate a slug from the title (lowercase, hyphens, no special chars).
-When updating items, you need the item's ID. If unsure, use list tools first to find the right item.`;
+IMPORTANT:
+- When creating blog posts, generate a slug from the title (lowercase, hyphens, no special chars).
+- For wallpapers: prefer CSS gradients using HSL — JewelIQ brand is primary 199 89% 48% (cyan) and accent 265 89% 60% (purple). Example: "linear-gradient(135deg, hsl(199 89% 48% / 0.2), hsl(265 89% 60% / 0.2))".
+- When updating items, you need the item's ID. If unsure, use list_items first.`;
 
 const ADMIN_TOOLS = [
   {
@@ -128,8 +129,9 @@ const ADMIN_TOOLS = [
       parameters: {
         type: "object",
         properties: {
-          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials", "chat_leads"] },
+          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials", "chat_leads", "page_sections", "media_uploads"] },
           include_inactive: { type: "boolean", description: "Include inactive/unpublished items" },
+          page_slug: { type: "string", description: "Filter page_sections by page" },
         },
         required: ["table"],
       },
@@ -254,10 +256,78 @@ const ADMIN_TOOLS = [
       parameters: {
         type: "object",
         properties: {
-          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials"] },
+          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials", "page_sections", "media_uploads"] },
           id: { type: "string" },
         },
         required: ["table", "id"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "upsert_page_section",
+      description: "Create or update an editable page section. Use to change headlines, paragraphs, CTAs, wallpapers (background_image_url for an image OR background_gradient for a CSS gradient), accent_color, and animation_preset on any page.",
+      parameters: {
+        type: "object",
+        properties: {
+          id: { type: "string", description: "Provide to update; omit to create." },
+          page_slug: { type: "string", description: "e.g. 'home', 'about', 'contact', 'services', 'pricing'" },
+          section_key: { type: "string", description: "Unique key within the page, e.g. 'hero', 'intro', 'cta'" },
+          section_type: { type: "string", description: "e.g. 'hero', 'text', 'cta', 'feature-grid'", },
+          order_index: { type: "number" },
+          headline: { type: "string" },
+          subheadline: { type: "string" },
+          body: { type: "string", description: "Markdown supported" },
+          cta_label: { type: "string" },
+          cta_url: { type: "string" },
+          background_image_url: { type: "string", description: "Public URL of an image (use one from the media library or an admin-attached image)" },
+          background_gradient: { type: "string", description: "CSS gradient string, e.g. 'linear-gradient(135deg, hsl(199 89% 48% / 0.2), hsl(265 89% 60% / 0.2))'" },
+          accent_color: { type: "string", description: "HSL or hex color for accents within the section" },
+          animation_preset: { type: "string", enum: ["fade-in", "fade-in-up", "slide-in-left", "slide-in-right", "scale-in", "parallax", "none"] },
+          is_active: { type: "boolean" },
+        },
+        required: ["page_slug", "section_key"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "upsert_premium_blog_post",
+      description: "Create or update a magazine-style blog post with premium styling: cover image/gradient, accent color, animation preset, and layout style. Use this instead of upsert_blog_post when designing visually rich posts.",
+      parameters: {
+        type: "object",
+        properties: {
+          id: { type: "string" },
+          title: { type: "string" },
+          slug: { type: "string" },
+          excerpt: { type: "string" },
+          content: { type: "string", description: "Rich markdown — use headings, lists, blockquotes, and image embeds" },
+          cover_image_url: { type: "string" },
+          cover_gradient: { type: "string", description: "CSS gradient applied behind the cover image (or instead of it)" },
+          accent_color: { type: "string", description: "HSL or hex for highlights, links, and section dividers" },
+          animation_preset: { type: "string", enum: ["fade-in", "slide-up", "scale-in", "parallax"] },
+          layout_style: { type: "string", enum: ["classic", "magazine", "cinematic", "minimal"] },
+          tags: { type: "array", items: { type: "string" } },
+          reading_time_minutes: { type: "number" },
+          is_published: { type: "boolean" },
+        },
+        required: ["title", "content"],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "list_media",
+      description: "List recently uploaded media (images/videos) from the admin-uploaded media library.",
+      parameters: {
+        type: "object",
+        properties: {
+          file_type: { type: "string", enum: ["image", "video", "all"] },
+          limit: { type: "number" },
+        },
       },
     },
   },
@@ -270,9 +340,12 @@ async function executeTool(name: string, args: Record<string, any>, adminSupabas
       case "list_items": {
         const table = args.table as string;
         let query = adminSupabase.from(table).select("*").order("created_at", { ascending: false }).limit(50);
-        if (!args.include_inactive) {
+        if (table === "page_sections") {
+          query = adminSupabase.from(table).select("*").order("page_slug").order("order_index").limit(100);
+          if (args.page_slug) query = query.eq("page_slug", args.page_slug);
+        } else if (!args.include_inactive) {
           if (table === "blog_posts") query = query.eq("is_published", true);
-          else if (table !== "chat_leads") query = query.eq("is_active", true);
+          else if (table !== "chat_leads" && table !== "media_uploads") query = query.eq("is_active", true);
         }
         const { data, error } = await query;
         if (error) return { error: error.message };
@@ -334,6 +407,44 @@ async function executeTool(name: string, args: Record<string, any>, adminSupabas
         const { table, id: itemId } = args;
         const { error } = await adminSupabase.from(table).delete().eq("id", itemId);
         return error ? { error: error.message } : { action: "deleted", id: itemId };
+      }
+      case "upsert_page_section": {
+        const { id, ...rest } = args;
+        if (id) {
+          const { data, error } = await adminSupabase.from("page_sections").update(rest).eq("id", id).select().single();
+          return error ? { error: error.message } : { data, action: "updated" };
+        }
+        const { data, error } = await adminSupabase
+          .from("page_sections")
+          .upsert(rest, { onConflict: "page_slug,section_key" })
+          .select()
+          .single();
+        return error ? { error: error.message } : { data, action: "upserted" };
+      }
+      case "upsert_premium_blog_post": {
+        const { id, ...rest } = args;
+        const row = {
+          ...rest,
+          author_id: adminUserId,
+          slug: rest.slug || (rest.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+          published_at: rest.is_published ? new Date().toISOString() : null,
+          layout_style: rest.layout_style || "magazine",
+          animation_preset: rest.animation_preset || "fade-in",
+        };
+        if (id) {
+          const { data, error } = await adminSupabase.from("blog_posts").update(row).eq("id", id).select().single();
+          return error ? { error: error.message } : { data, action: "updated" };
+        }
+        const { data, error } = await adminSupabase.from("blog_posts").insert(row).select().single();
+        return error ? { error: error.message } : { data, action: "created" };
+      }
+      case "list_media": {
+        const limit = args.limit || 30;
+        let query = adminSupabase.from("media_uploads").select("*").order("created_at", { ascending: false }).limit(limit);
+        if (args.file_type && args.file_type !== "all") query = query.eq("file_type", args.file_type);
+        const { data, error } = await query;
+        if (error) return { error: error.message };
+        return { data };
       }
       default:
         return { error: `Unknown tool: ${name}` };
