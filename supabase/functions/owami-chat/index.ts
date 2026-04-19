@@ -129,8 +129,9 @@ const ADMIN_TOOLS = [
       parameters: {
         type: "object",
         properties: {
-          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials", "chat_leads"] },
+          table: { type: "string", enum: ["services", "pricing_plans", "blog_posts", "portfolio_items", "testimonials", "chat_leads", "page_sections", "media_uploads"] },
           include_inactive: { type: "boolean", description: "Include inactive/unpublished items" },
+          page_slug: { type: "string", description: "Filter page_sections by page" },
         },
         required: ["table"],
       },
