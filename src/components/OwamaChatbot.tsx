@@ -466,7 +466,7 @@ export function OwamaChatbot() {
             <AnimatedBackground variant="panel" className="z-0" />
 
             {/* Header */}
-            <div className={`relative px-5 py-3.5 border-b border-border/40 flex items-center gap-3 backdrop-blur-md ${
+            <div className={`relative z-10 px-5 py-3.5 border-b border-border/40 flex items-center gap-3 backdrop-blur-md ${
               isAdmin ? "bg-gradient-to-r from-amber-500/10 via-primary/5 to-accent/10" : "bg-gradient-to-r from-primary/10 via-accent/5 to-primary/10"
             }`}>
               <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
@@ -507,7 +507,7 @@ export function OwamaChatbot() {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1 scrollbar-thin">
+            <div className="relative z-10 flex-1 overflow-y-auto px-4 py-4 space-y-1 scrollbar-thin">
               {messages.map((msg, i) => {
                 const isGreeting = i === 0 && msg.role === "assistant" && (msg.content === VISITOR_GREETING || msg.content === ADMIN_GREETING);
                 const isLast = i === messages.length - 1;
@@ -692,7 +692,7 @@ export function OwamaChatbot() {
             )}
 
             {/* Input area */}
-            <div className="p-3 border-t border-border/40 bg-gradient-to-b from-muted/10 to-muted/30 backdrop-blur-sm">
+            <div className="relative z-10 p-3 border-t border-border/40 bg-gradient-to-b from-muted/10 to-muted/30 backdrop-blur-sm">
               <form onSubmit={e => { e.preventDefault(); sendMessage(input); }} className="flex items-end gap-2">
                 {/* Admin-only file upload */}
                 {isAdmin && (
