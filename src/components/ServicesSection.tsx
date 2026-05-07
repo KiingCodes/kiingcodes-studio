@@ -14,25 +14,39 @@ import serviceSeo from "@/assets/service-seo.jpg";
 import serviceUiux from "@/assets/service-uiux.jpg";
 import serviceEcommerce from "@/assets/service-ecommerce.jpg";
 import serviceAnalytics from "@/assets/service-analytics.jpg";
+import serviceDocumentation from "@/assets/service-documentation.png";
+import serviceGraphicDesignNew from "@/assets/service-graphic-design-new.png";
+import serviceCopywriting from "@/assets/service-copywriting.png";
+import serviceMarketingNew from "@/assets/service-marketing-new.png";
+import serviceFullstack from "@/assets/service-fullstack.png";
 
 const serviceImages: Record<string, string> = {
   Globe: serviceWebDev,
   Smartphone: serviceMobileDev,
   Database: serviceCloud,
   Cloud: serviceCloud,
-  Palette: serviceGraphicDesign,
+  Palette: serviceGraphicDesignNew,
   PenTool: serviceUiux,
-  Image: serviceGraphicDesign,
-  Megaphone: serviceDigitalMarketing,
+  Image: serviceGraphicDesignNew,
+  Megaphone: serviceMarketingNew,
   TrendingUp: serviceAnalytics,
   Lightbulb: serviceConsulting,
   Briefcase: serviceConsulting,
   Code2: serviceWebDev,
-  Video: serviceDigitalMarketing,
-  FileText: serviceSeo,
+  Video: serviceMarketingNew,
+  FileText: serviceDocumentation,
   Users: serviceConsulting,
   Sparkles: serviceEcommerce,
 };
+
+// Title-based overrides take precedence over icon mapping
+const titleImageOverrides: { match: RegExp; image: string }[] = [
+  { match: /document/i, image: serviceDocumentation },
+  { match: /graphic\s*design/i, image: serviceGraphicDesignNew },
+  { match: /copywriting|storytelling/i, image: serviceCopywriting },
+  { match: /marketing|social/i, image: serviceMarketingNew },
+  { match: /full[-\s]?stack/i, image: serviceFullstack },
+];
 
 export const ServicesSection = () => {
   const headerRef = useRef<HTMLDivElement | null>(null);
@@ -84,7 +98,13 @@ export const ServicesSection = () => {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services?.map((service: any, index: number) => {
-              const image = serviceImages[service.icon] || serviceWebDev;
+              const titleMatch = titleImageOverrides.find((o) =>
+                o.match.test(service.title || "")
+              );
+              const image =
+                titleMatch?.image ||
+                serviceImages[service.icon] ||
+                serviceWebDev;
               return (
                 <motion.div
                   key={service.id}
