@@ -103,7 +103,10 @@ export const CookieConsent = () => {
                     >
                       Privacy Policy
                     </Link>
-                    .
+                    {" "}or{" "}
+                    <Link to="/cookie-policy" className="text-primary hover:underline">
+                      Cookie Policy
+                    </Link>.
                   </p>
                 </div>
               </div>
