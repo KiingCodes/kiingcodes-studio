@@ -6,6 +6,8 @@ import { TypewriterText } from "@/components/TypewriterText";
 
 import serviceWebDev from "@/assets/service-web-dev.jpg";
 import serviceMobileDev from "@/assets/service-mobile-dev.jpg";
+import serviceWebDevNew from "@/assets/service-web-dev-new.jpg";
+import serviceMobileDevNew from "@/assets/service-mobile-dev-new.jpg";
 import serviceCloud from "@/assets/service-cloud.jpg";
 import serviceGraphicDesign from "@/assets/service-graphic-design.jpg";
 import serviceDigitalMarketing from "@/assets/service-digital-marketing.jpg";
@@ -21,8 +23,8 @@ import serviceMarketingNew from "@/assets/service-marketing-new.png";
 import serviceFullstack from "@/assets/service-fullstack.png";
 
 const serviceImages: Record<string, string> = {
-  Globe: serviceWebDev,
-  Smartphone: serviceMobileDev,
+  Globe: serviceWebDevNew,
+  Smartphone: serviceMobileDevNew,
   Database: serviceCloud,
   Cloud: serviceCloud,
   Palette: serviceGraphicDesignNew,
@@ -32,7 +34,7 @@ const serviceImages: Record<string, string> = {
   TrendingUp: serviceAnalytics,
   Lightbulb: serviceConsulting,
   Briefcase: serviceConsulting,
-  Code2: serviceWebDev,
+  Code2: serviceWebDevNew,
   Video: serviceMarketingNew,
   FileText: serviceDocumentation,
   Users: serviceConsulting,
@@ -41,6 +43,8 @@ const serviceImages: Record<string, string> = {
 
 // Title-based overrides take precedence over icon mapping
 const titleImageOverrides: { match: RegExp; image: string }[] = [
+  { match: /website\s*development|web\s*development/i, image: serviceWebDevNew },
+  { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileDevNew },
   { match: /document/i, image: serviceDocumentation },
   { match: /graphic\s*design/i, image: serviceGraphicDesignNew },
   { match: /copywriting|storytelling/i, image: serviceCopywriting },
