@@ -29,10 +29,12 @@ export type Database = {
           layout_style: string | null
           published_at: string | null
           reading_time_minutes: number | null
+          scheduled_for: string | null
           slug: string
           tags: string[] | null
           title: string
           updated_at: string
+          workflow_status: string
         }
         Insert: {
           accent_color?: string | null
@@ -48,10 +50,12 @@ export type Database = {
           layout_style?: string | null
           published_at?: string | null
           reading_time_minutes?: number | null
+          scheduled_for?: string | null
           slug: string
           tags?: string[] | null
           title: string
           updated_at?: string
+          workflow_status?: string
         }
         Update: {
           accent_color?: string | null
@@ -67,10 +71,12 @@ export type Database = {
           layout_style?: string | null
           published_at?: string | null
           reading_time_minutes?: number | null
+          scheduled_for?: string | null
           slug?: string
           tags?: string[] | null
           title?: string
           updated_at?: string
+          workflow_status?: string
         }
         Relationships: []
       }
