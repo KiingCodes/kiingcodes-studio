@@ -14,7 +14,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PremiumBlogPost } from "@/components/PremiumBlogPost";
 import { BACKGROUND_PRESETS, ANIMATION_PRESETS } from "@/lib/background-presets";
 import { format } from "date-fns";
-import { Loader2, Plus, Pencil, Trash2, Sparkles } from "lucide-react";
 import { Loader2, Plus, Pencil, Trash2, Sparkles, Upload, Image as ImageIcon, Calendar } from "lucide-react";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
