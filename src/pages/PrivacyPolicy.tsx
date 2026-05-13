@@ -3,6 +3,9 @@ import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Shield, Lock, Eye, Database, UserCheck, Mail, Cookie, Globe, AlertCircle, FileText } from "lucide-react";
+import { LegalTOC } from "@/components/LegalTOC";
+
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const sections = [
   {
@@ -213,7 +216,7 @@ const PrivacyPolicy = () => {
       <div className="relative z-10">
         <Navbar />
         <main className="pt-24 pb-16">
-          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
             {/* Hero */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -237,18 +240,21 @@ const PrivacyPolicy = () => {
               </p>
             </motion.div>
 
-            {/* Sections */}
-            <div className="space-y-5">
+            <div className="grid lg:grid-cols-[220px_1fr] gap-10">
+              <LegalTOC items={sections.map((s) => ({ id: slugify(s.title), title: s.title }))} />
+              {/* Sections */}
+              <div className="space-y-5">
               {sections.map((section, idx) => {
                 const Icon = section.icon;
                 return (
                   <motion.section
                     key={section.title}
+                    id={slugify(section.title)}
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.4, delay: Math.min(idx * 0.04, 0.3) }}
-                    className="group relative rounded-2xl border border-border/60 bg-card/60 backdrop-blur-md p-6 md:p-8 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-primary/5"
+                    className="group relative scroll-mt-28 rounded-2xl border border-border/60 bg-card/60 backdrop-blur-md p-6 md:p-8 hover:border-primary/40 hover:bg-card/80 transition-all duration-300 shadow-sm hover:shadow-md hover:shadow-primary/5"
                   >
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-105 transition-transform">
@@ -262,6 +268,7 @@ const PrivacyPolicy = () => {
                   </motion.section>
                 );
               })}
+              </div>
             </div>
           </div>
         </main>

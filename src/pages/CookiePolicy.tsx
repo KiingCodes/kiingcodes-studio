@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Cookie, Shield, Settings, BarChart3, Megaphone, Clock, Globe, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LegalTOC } from "@/components/LegalTOC";
+import jeweliqLogo from "@/assets/jeweliq-logo.png";
+
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
 const cookies = [
   {
@@ -150,13 +154,18 @@ const CookiePolicy = () => {
       <div className="relative z-10">
         <Navbar />
         <main className="pt-28 pb-20">
-          <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+          <div className="container mx-auto px-4 md:px-6 max-w-6xl">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
+              <img
+                src={jeweliqLogo}
+                alt="Jewel IQ"
+                className="h-14 w-auto mx-auto mb-6 drop-shadow-[0_4px_24px_hsl(var(--primary)/0.35)]"
+              />
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium uppercase tracking-wider mb-4">
                 <Cookie className="w-3.5 h-3.5" /> Cookie Policy
               </span>
@@ -171,15 +180,23 @@ const CookiePolicy = () => {
               </p>
             </motion.div>
 
-            <div className="space-y-6">
+            <div className="grid lg:grid-cols-[220px_1fr] gap-10">
+              <LegalTOC
+                items={[
+                  ...sections.map((s) => ({ id: slugify(s.title), title: s.title })),
+                  { id: "cookies-table", title: "7. Cookies We Set" },
+                ]}
+              />
+              <div className="space-y-6">
               {sections.map((section, i) => (
                 <motion.section
                   key={section.title}
+                  id={slugify(section.title)}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="bg-card/60 backdrop-blur-md border border-border rounded-2xl p-6 md:p-8 shadow-sm"
+                  className="bg-card/60 backdrop-blur-md border border-border rounded-2xl p-6 md:p-8 shadow-sm scroll-mt-28"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="rounded-xl bg-primary/10 text-primary p-2">
@@ -194,10 +211,11 @@ const CookiePolicy = () => {
               ))}
 
               <motion.section
+                id="cookies-table"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-card/60 backdrop-blur-md border border-border rounded-2xl p-6 md:p-8 shadow-sm"
+                className="bg-card/60 backdrop-blur-md border border-border rounded-2xl p-6 md:p-8 shadow-sm scroll-mt-28"
               >
                 <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-4">7. Cookies We Set</h2>
                 <div className="overflow-x-auto -mx-2">
@@ -229,6 +247,7 @@ const CookiePolicy = () => {
                   </table>
                 </div>
               </motion.section>
+              </div>
             </div>
           </div>
         </main>
