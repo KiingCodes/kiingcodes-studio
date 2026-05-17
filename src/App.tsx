@@ -46,6 +46,7 @@ import AdminMessages from "./pages/admin/AdminMessages";
 import AdminClients from "./pages/admin/AdminClients";
 import AdminLeads from "./pages/admin/AdminLeads";
 import AdminBlog from "./pages/admin/AdminBlog";
+import AdminMedia from "./pages/admin/AdminMedia";
 
 import AdminInvoices from "./pages/admin/AdminInvoices";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
@@ -108,6 +109,7 @@ const AnimatedRoutes = () => {
           <Route path="messages" element={<AdminMessages />} />
           <Route path="invoices" element={<AdminInvoices />} />
           <Route path="blog" element={<AdminBlog />} />
+          <Route path="media" element={<AdminMedia />} />
           
           <Route path="applications" element={<AdminApplications />} />
           <Route path="roles" element={<AdminRoles />} />
