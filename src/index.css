@@ -147,6 +147,15 @@
     background-clip: text;
   }
 
+  /* JewelIQ wordmark — mirrors the diamond logo gradient (cyan → blue) */
+  .jeweliq-logo-text {
+    background: linear-gradient(135deg, hsl(195 100% 60%), hsl(215 95% 55%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+
   .bg-grid-pattern {
     background-image: 
       linear-gradient(to right, hsl(var(--border) / 0.3) 1px, transparent 1px),
