@@ -72,7 +72,7 @@ export const PremiumBlogPost = ({ post }: Props) => {
     };
 
     track(upsertMeta('meta[name="description"]', { name: "description", content: desc }));
-    track(upsertMeta('meta[property="og:title"]', { property: "og:title", content: post.title, content: post.title }));
+    track(upsertMeta('meta[property="og:title"]', { property: "og:title", content: post.title }));
     track(upsertMeta('meta[property="og:description"]', { property: "og:description", content: desc }));
     track(upsertMeta('meta[property="og:type"]', { property: "og:type", content: "article" }));
     if (post.cover_image_url) {
