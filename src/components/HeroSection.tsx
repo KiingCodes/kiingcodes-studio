@@ -8,7 +8,8 @@ import heroDiamondLogo from "@/assets/jeweliq-diamond-logo.png";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
 
 const HEADLINE_PARTS = [
-  { text: "JewelIQ Builds ", className: "" },
+  { text: "JewelIQ", className: "jeweliq-logo-text" },
+  { text: " Builds ", className: "" },
   { text: "Digital Experiences", className: "text-gradient" },
   { text: " That Drive Growth", className: "" },
 ];
@@ -135,9 +136,9 @@ export const HeroSection = () => {
             variants={staggerItem}
             className="text-lg md:text-xl text-muted-foreground mb-10 max-w-3xl mx-auto leading-relaxed"
           >
-            JewelIQ transforms your vision into powerful digital solutions — from stunning
-            websites to scalable applications. Expert full-stack web development and
-            intelligent systems, proudly based in South Africa.
+            <span className="jeweliq-logo-text font-semibold">JewelIQ</span> is a premium
+            digital studio crafting high-performing websites, apps and brand experiences
+            engineered to scale. Strategy, design and engineering — proudly from South Africa.
           </motion.p>
 
           {/* CTA Buttons */}
