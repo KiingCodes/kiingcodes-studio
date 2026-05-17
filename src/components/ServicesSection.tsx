@@ -8,6 +8,10 @@ import serviceWebDev from "@/assets/service-web-dev.jpg";
 import serviceMobileDev from "@/assets/service-mobile-dev.jpg";
 import serviceWebDevNew from "@/assets/service-web-dev-new.jpg";
 import serviceMobileDevNew from "@/assets/service-mobile-dev-new.jpg";
+import serviceWebDevV2 from "@/assets/service-web-dev-v2.jpg";
+import serviceMobileDevV2 from "@/assets/service-mobile-dev-v2.jpg";
+import serviceStartupConsulting from "@/assets/service-startup-consulting.jpg";
+import serviceBusinessDev from "@/assets/service-business-dev.jpg";
 import serviceCloud from "@/assets/service-cloud.jpg";
 import serviceGraphicDesign from "@/assets/service-graphic-design.jpg";
 import serviceDigitalMarketing from "@/assets/service-digital-marketing.jpg";
@@ -23,8 +27,8 @@ import serviceMarketingNew from "@/assets/service-marketing-new.png";
 import serviceFullstack from "@/assets/service-fullstack.png";
 
 const serviceImages: Record<string, string> = {
-  Globe: serviceWebDevNew,
-  Smartphone: serviceMobileDevNew,
+  Globe: serviceWebDevV2,
+  Smartphone: serviceMobileDevV2,
   Database: serviceCloud,
   Cloud: serviceCloud,
   Palette: serviceGraphicDesignNew,
@@ -32,9 +36,9 @@ const serviceImages: Record<string, string> = {
   Image: serviceGraphicDesignNew,
   Megaphone: serviceMarketingNew,
   TrendingUp: serviceAnalytics,
-  Lightbulb: serviceConsulting,
-  Briefcase: serviceConsulting,
-  Code2: serviceWebDevNew,
+  Lightbulb: serviceStartupConsulting,
+  Briefcase: serviceBusinessDev,
+  Code2: serviceWebDevV2,
   Video: serviceMarketingNew,
   FileText: serviceDocumentation,
   Users: serviceConsulting,
@@ -43,8 +47,10 @@ const serviceImages: Record<string, string> = {
 
 // Title-based overrides take precedence over icon mapping
 const titleImageOverrides: { match: RegExp; image: string }[] = [
-  { match: /website\s*development|web\s*development/i, image: serviceWebDevNew },
-  { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileDevNew },
+  { match: /website\s*development|web\s*development/i, image: serviceWebDevV2 },
+  { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileDevV2 },
+  { match: /startup\s*consult/i, image: serviceStartupConsulting },
+  { match: /business\s*development|project\s*management/i, image: serviceBusinessDev },
   { match: /document/i, image: serviceDocumentation },
   { match: /graphic\s*design/i, image: serviceGraphicDesignNew },
   { match: /copywriting|storytelling/i, image: serviceCopywriting },
