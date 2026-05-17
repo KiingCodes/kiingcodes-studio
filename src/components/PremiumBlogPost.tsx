@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, Tag } from "lucide-react";
 import { format } from "date-fns";
 import ReactMarkdown from "react-markdown";
+import { useEffect } from "react";
 import { resolveBackground, animationVariants } from "@/lib/background-presets";
 
 export interface PremiumBlogPostData {
@@ -37,6 +38,90 @@ export const PremiumBlogPost = ({ post }: Props) => {
   const variants = animationVariants(post.animation_preset);
   const coverBg = resolveBackground(post.cover_gradient);
   const accent = post.accent_color || "var(--primary)";
+
+  // ---- SEO: title, description, canonical, OpenGraph, Twitter, JSON-LD ----
+  useEffect(() => {
+    if (!post?.title) return;
+    const prevTitle = document.title;
+    const title = `${post.title} | JewelIQ Blog`;
+    document.title = title.length > 60 ? `${post.title}` : title;
+
+    const desc = (post.excerpt || post.content || "")
+      .replace(/[#*`>_\-!\[\]()]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 158);
+
+    const upsertMeta = (selector: string, attrs: Record<string, string>) => {
+      let el = document.head.querySelector(selector) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement("meta");
+        Object.entries(attrs).forEach(([k, v]) => k !== "content" && el!.setAttribute(k, v));
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", attrs.content);
+      return el;
+    };
+
+    const created: HTMLElement[] = [];
+    const track = (el: HTMLElement | null) => {
+      if (el && !el.dataset.jeweliqSeo) {
+        el.dataset.jeweliqSeo = "1";
+        created.push(el);
+      }
+    };
+
+    track(upsertMeta('meta[name="description"]', { name: "description", content: desc }));
+    track(upsertMeta('meta[property="og:title"]', { property: "og:title", content: post.title }));
+    track(upsertMeta('meta[property="og:description"]', { property: "og:description", content: desc }));
+    track(upsertMeta('meta[property="og:type"]', { property: "og:type", content: "article" }));
+    if (post.cover_image_url) {
+      track(upsertMeta('meta[property="og:image"]', { property: "og:image", content: post.cover_image_url }));
+      track(upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: post.cover_image_url }));
+    }
+    track(upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" }));
+    track(upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: post.title }));
+    track(upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: desc }));
+    if (post.tags?.length) {
+      track(upsertMeta('meta[name="keywords"]', { name: "keywords", content: post.tags.join(", ") }));
+    }
+
+    // Canonical
+    let canonical = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    const url = typeof window !== "undefined" ? window.location.href.split("?")[0] : "";
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
+      document.head.appendChild(canonical);
+      canonical.dataset.jeweliqSeo = "1";
+      created.push(canonical);
+    }
+    canonical.href = url;
+
+    // JSON-LD Article structured data
+    const ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.dataset.jeweliqSeo = "1";
+    ld.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: desc,
+      image: post.cover_image_url || undefined,
+      datePublished: post.published_at || undefined,
+      keywords: post.tags?.join(", ") || undefined,
+      author: { "@type": "Organization", name: "JewelIQ" },
+      publisher: { "@type": "Organization", name: "JewelIQ" },
+      mainEntityOfPage: url,
+    });
+    document.head.appendChild(ld);
+    created.push(ld);
+
+    return () => {
+      document.title = prevTitle;
+      created.forEach((el) => el.parentElement?.removeChild(el));
+    };
+  }, [post]);
 
   // Custom CSS variable so prose links/highlights pick up the post's accent
   const accentStyle = {
