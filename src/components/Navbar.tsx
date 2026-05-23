@@ -11,9 +11,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   {
     label: "Services",
-    href: "/services",
     children: [
-      { href: "/services", label: "All Services" },
       { href: "/services/branding", label: "Branding" },
       { href: "/services/design", label: "Design" },
       { href: "/services/development", label: "Development" },
@@ -80,15 +78,14 @@ export const Navbar = () => {
             {navLinks.map((link) =>
               link.children ? (
                 <div key={link.label} className="relative group">
-                  <Link
-                    to={link.href}
-                    className={`text-sm font-medium transition-colors duration-200 flex items-center gap-1 ${
-                      isRouteActive(link.href) ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  <span
+                    className={`text-sm font-medium transition-colors duration-200 flex items-center gap-1 cursor-default ${
+                      link.children.some((c) => location.pathname.startsWith(c.href)) ? "text-primary" : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {link.label}
                     <ChevronDown className="w-3 h-3" />
-                  </Link>
+                  </span>
                   <div className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <div className="bg-card border border-border rounded-xl shadow-lg py-2 min-w-[180px]">
                       {link.children.map((child) => (
