@@ -12,7 +12,6 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
-import ServicesPage from "./pages/ServicesPage";
 import BrandingPage from "./pages/BrandingPage";
 import DesignPage from "./pages/DesignPage";
 import DevelopmentPage from "./pages/DevelopmentPage";
