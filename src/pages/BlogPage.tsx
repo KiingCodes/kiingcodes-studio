@@ -4,30 +4,26 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Calendar, ArrowRight, Tag } from "lucide-react";
 import { format } from "date-fns";
+import { PageHero } from "@/components/PageHero";
+import heroImage from "@/assets/wallpaper-tech.jpg";
 
 const BlogPage = () => {
   const { data: posts, isLoading } = useBlogPosts();
 
   return (
     <PageLayout>
-      <div className="pt-28 pb-20">
+      <PageHero
+        eyebrow="Journal"
+        title={
+          <>
+            Insights & <span className="text-gradient">Articles</span>
+          </>
+        }
+        description="Stay updated with the latest in tech, design, and digital strategy."
+        image={heroImage}
+      />
+      <div className="pb-20 pt-10">
         <div className="container mx-auto px-4 md:px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary font-medium text-sm uppercase tracking-wider mb-4 block">
-              Blog
-            </span>
-            <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-              Insights & <span className="text-gradient">Articles</span>
-            </h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-              Stay updated with the latest in tech, design, and digital strategy.
-            </p>
-          </motion.div>
-
           {isLoading ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[1, 2, 3].map((i) => (
