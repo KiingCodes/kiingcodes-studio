@@ -64,8 +64,7 @@ interface Props {
 }
 
 const ServiceCard = ({ service }: { service: any }) => (
-  <Link
-    to="/services"
+  <div
     className="group relative block w-[320px] md:w-[360px] shrink-0 rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.45)] hover:border-primary/50 transition-all duration-500"
   >
     <div className="relative h-44 overflow-hidden">
@@ -86,11 +85,11 @@ const ServiceCard = ({ service }: { service: any }) => (
           {service.description}
         </p>
       )}
-      <span className="text-primary text-sm font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+      <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
         Explore <ArrowRight className="w-3.5 h-3.5" />
       </span>
     </div>
-  </Link>
+  </div>
 );
 
 export const ServicesMarquee = ({ speed = 45, reverse = false }: Props) => {
