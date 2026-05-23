@@ -1,17 +1,24 @@
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { OwamaChatbot } from "@/components/OwamaChatbot";
-import { ServicesSection } from "@/components/ServicesSection";
+import { ServicesMarquee } from "@/components/ServicesMarquee";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
-      <ServicesSection />
+      <div className="relative">
+        <AnimatedBackground variant="soft" className="z-0" />
+        <div className="relative z-10">
+          <ServicesMarquee speed={50} />
+          <ServicesMarquee speed={60} reverse />
+        </div>
+      </div>
+      <CTASection />
       <Footer />
       <OwamaChatbot />
     </div>
