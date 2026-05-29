@@ -4,12 +4,12 @@ export const HeroSection = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen w-full overflow-hidden"
+      className="relative w-full overflow-hidden bg-[#0a4cff] pt-16"
     >
       <img
         src={heroBg}
         alt="JewelIQ digital network"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="block w-full h-auto object-contain"
       />
     </section>
   );
