@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/Navbar";
 import { HeroSection } from "@/components/HeroSection";
-import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { OwamaChatbot } from "@/components/OwamaChatbot";
 import { ServicesMarquee } from "@/components/ServicesMarquee";
@@ -17,7 +16,6 @@ const Index = () => {
           <ServicesMarquee speed={120} />
         </div>
       </div>
-      <CTASection />
       <Footer />
       <OwamaChatbot />
     </div>
