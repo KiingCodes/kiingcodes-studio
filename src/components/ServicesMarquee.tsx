@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { useServices } from "@/hooks/use-dynamic-content";
 
 import serviceWebDev from "@/assets/service-web-dev.jpg";
@@ -76,17 +75,9 @@ const ServiceCard = ({ service }: { service: any }) => (
       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
     </div>
     <div className="p-3">
-      <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
+      <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1 text-center">
         {service.title}
       </h3>
-      {service.description && (
-        <p className="text-muted-foreground text-xs leading-snug line-clamp-2 mb-2">
-          {service.description}
-        </p>
-      )}
-      <span className="text-primary text-xs font-medium inline-flex items-center gap-1">
-        Explore <ArrowRight className="w-3 h-3" />
-      </span>
     </div>
   </div>
 );
