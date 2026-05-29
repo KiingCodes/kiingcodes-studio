@@ -14,8 +14,7 @@ const Index = () => {
       <div className="relative">
         <AnimatedBackground variant="soft" className="z-0" />
         <div className="relative z-10">
-          <ServicesMarquee speed={90} />
-          <ServicesMarquee speed={110} reverse />
+          <ServicesMarquee speed={120} />
         </div>
       </div>
       <CTASection />

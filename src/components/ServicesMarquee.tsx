@@ -64,9 +64,9 @@ interface Props {
 
 const ServiceCard = ({ service }: { service: any }) => (
   <div
-    className="group relative block w-[320px] md:w-[360px] shrink-0 rounded-2xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-lg hover:shadow-[0_20px_60px_-15px_hsl(var(--primary)/0.45)] hover:border-primary/50 transition-all duration-500"
+    className="group relative block w-[220px] md:w-[250px] shrink-0 rounded-xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-md hover:shadow-[0_15px_40px_-15px_hsl(var(--primary)/0.45)] hover:border-primary/50 transition-all duration-500"
   >
-    <div className="relative h-44 overflow-hidden">
+    <div className="relative h-28 md:h-32 overflow-hidden">
       <img
         src={pickImage(service)}
         alt={service.title}
@@ -75,17 +75,17 @@ const ServiceCard = ({ service }: { service: any }) => (
       />
       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
     </div>
-    <div className="p-5">
-      <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+    <div className="p-3">
+      <h3 className="text-sm font-semibold text-foreground mb-1 group-hover:text-primary transition-colors line-clamp-1">
         {service.title}
       </h3>
       {service.description && (
-        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-3">
+        <p className="text-muted-foreground text-xs leading-snug line-clamp-2 mb-2">
           {service.description}
         </p>
       )}
-      <span className="text-primary text-sm font-medium inline-flex items-center gap-1">
-        Explore <ArrowRight className="w-3.5 h-3.5" />
+      <span className="text-primary text-xs font-medium inline-flex items-center gap-1">
+        Explore <ArrowRight className="w-3 h-3" />
       </span>
     </div>
   </div>
