@@ -6,8 +6,9 @@ import {
   SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiVuedotjs, SiFramer,
   SiNodedotjs, SiPython, SiExpress, SiFastapi, SiGraphql,
   SiPostgresql, SiMongodb, SiMysql, SiRedis, SiFirebase, SiSupabase,
-  SiGit, SiDocker, SiAmazon, SiVercel, SiFigma,
+  SiGit, SiDocker, SiVercel, SiFigma,
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
 import { VscVscode } from "react-icons/vsc";
 import { TbApi } from "react-icons/tb";
 import type { IconType } from "react-icons";
@@ -40,7 +41,7 @@ const technologies = {
   tools: [
     { name: "Git", color: "from-orange-400 to-red-500", Icon: SiGit, brand: "#F05032" },
     { name: "Docker", color: "from-blue-400 to-blue-600", Icon: SiDocker, brand: "#2496ED" },
-    { name: "AWS", color: "from-yellow-400 to-orange-500", Icon: SiAmazon, brand: "#FF9900" },
+    { name: "AWS", color: "from-yellow-400 to-orange-500", Icon: FaAws, brand: "#FF9900" },
     { name: "Vercel", color: "from-gray-400 to-gray-600", Icon: SiVercel, brand: "#FFFFFF" },
     { name: "Figma", color: "from-pink-400 to-purple-500", Icon: SiFigma, brand: "#F24E1E" },
     { name: "VS Code", color: "from-blue-400 to-blue-600", Icon: VscVscode, brand: "#007ACC" },
