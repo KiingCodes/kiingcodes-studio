@@ -108,8 +108,8 @@ export const TechStackSection = () => {
           </p>
         </motion.div>
 
-        {/* Tech Categories */}
-        <div className="space-y-12">
+        {/* Tech Carousels */}
+        <div className="space-y-10">
           {categories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -118,15 +118,15 @@ export const TechStackSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
             >
-              <h3 className="text-lg font-semibold text-foreground mb-6 flex items-center gap-3">
+              <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-3">
                 <span className="w-8 h-[2px] bg-gradient-to-r from-primary to-accent rounded-full" />
                 {category.title}
               </h3>
-              <div className="flex flex-wrap gap-4">
-                {category.techs.map((tech, index) => (
-                  <TechBadge key={tech.name} tech={tech} index={index} />
-                ))}
-              </div>
+              <TechMarquee
+                techs={category.techs}
+                reverse={categoryIndex % 2 === 1}
+                duration={28 + categoryIndex * 4}
+              />
             </motion.div>
           ))}
         </div>
@@ -145,5 +145,36 @@ export const TechStackSection = () => {
         </motion.div>
       </div>
     </section>
+  );
+};
+
+const TechMarquee = ({
+  techs,
+  reverse = false,
+  duration = 30,
+}: {
+  techs: { name: string; color: string; Icon: IconType; brand: string }[];
+  reverse?: boolean;
+  duration?: number;
+}) => {
+  const loop = [...techs, ...techs, ...techs, ...techs];
+  return (
+    <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      <motion.div
+        className="flex gap-4 w-max"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration, ease: "linear", repeat: Infinity }}
+      >
+        {loop.map((tech, i) => (
+          <div
+            key={`${tech.name}-${i}`}
+            className={`flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r ${tech.color} bg-opacity-10 border border-border hover:border-primary/50 transition-colors duration-300 shrink-0`}
+          >
+            <tech.Icon className="w-5 h-5 shrink-0" style={{ color: tech.brand }} aria-hidden />
+            <span className="text-sm font-medium text-foreground whitespace-nowrap">{tech.name}</span>
+          </div>
+        ))}
+      </motion.div>
+    </div>
   );
 };
