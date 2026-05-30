@@ -17,6 +17,11 @@ import serviceGraphicDesignNew from "@/assets/service-graphic-design-new.png";
 import serviceCopywriting from "@/assets/service-copywriting.png";
 import serviceMarketingNew from "@/assets/service-marketing-new.png";
 import serviceFullstack from "@/assets/service-fullstack.png";
+import serviceMobileApp from "@/assets/service-mobile-app.png";
+import serviceWebsiteDev from "@/assets/service-website-dev.png";
+import serviceProjectMgmt from "@/assets/service-project-management.png";
+import serviceBusinessDevNew from "@/assets/service-business-development.png";
+import serviceStartupConsultation from "@/assets/service-startup-consultation.png";
 
 const iconImages: Record<string, string> = {
   Globe: serviceWebDevV2,
@@ -38,10 +43,11 @@ const iconImages: Record<string, string> = {
 };
 
 const titleOverrides: { match: RegExp; image: string }[] = [
-  { match: /website\s*development|web\s*development/i, image: serviceWebDevV2 },
-  { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileDevV2 },
-  { match: /startup\s*consult/i, image: serviceStartupConsulting },
-  { match: /business\s*development|project\s*management/i, image: serviceBusinessDev },
+  { match: /website\s*development|web\s*development/i, image: serviceWebsiteDev },
+  { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileApp },
+  { match: /project\s*management/i, image: serviceProjectMgmt },
+  { match: /startup\s*consult/i, image: serviceStartupConsultation },
+  { match: /business\s*development/i, image: serviceBusinessDevNew },
   { match: /document/i, image: serviceDocumentation },
   { match: /graphic\s*design/i, image: serviceGraphicDesignNew },
   { match: /copywriting|storytelling/i, image: serviceCopywriting },
