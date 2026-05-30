@@ -2,43 +2,53 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiVuedotjs, SiFramer,
+  SiNodedotjs, SiPython, SiExpress, SiFastapi, SiGraphql,
+  SiPostgresql, SiMongodb, SiMysql, SiRedis, SiFirebase, SiSupabase,
+  SiGit, SiDocker, SiVercel, SiFigma,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa";
+import { VscVscode } from "react-icons/vsc";
+import { TbApi } from "react-icons/tb";
+import type { IconType } from "react-icons";
 
 const technologies = {
   frontend: [
-    { name: "React", color: "from-cyan-400 to-blue-500" },
-    { name: "Next.js", color: "from-gray-400 to-gray-600" },
-    { name: "TypeScript", color: "from-blue-400 to-blue-600" },
-    { name: "Tailwind CSS", color: "from-teal-400 to-cyan-500" },
-    { name: "Vue.js", color: "from-green-400 to-emerald-500" },
-    { name: "Framer Motion", color: "from-pink-400 to-purple-500" },
+    { name: "React", color: "from-cyan-400 to-blue-500", Icon: SiReact, brand: "#61DAFB" },
+    { name: "Next.js", color: "from-gray-400 to-gray-600", Icon: SiNextdotjs, brand: "#FFFFFF" },
+    { name: "TypeScript", color: "from-blue-400 to-blue-600", Icon: SiTypescript, brand: "#3178C6" },
+    { name: "Tailwind CSS", color: "from-teal-400 to-cyan-500", Icon: SiTailwindcss, brand: "#06B6D4" },
+    { name: "Vue.js", color: "from-green-400 to-emerald-500", Icon: SiVuedotjs, brand: "#4FC08D" },
+    { name: "Framer Motion", color: "from-pink-400 to-purple-500", Icon: SiFramer, brand: "#E94CC9" },
   ],
   backend: [
-    { name: "Node.js", color: "from-green-500 to-green-700" },
-    { name: "Python", color: "from-yellow-400 to-blue-500" },
-    { name: "Express.js", color: "from-gray-400 to-gray-600" },
-    { name: "FastAPI", color: "from-teal-400 to-green-500" },
-    { name: "GraphQL", color: "from-pink-500 to-pink-700" },
-    { name: "REST APIs", color: "from-orange-400 to-red-500" },
+    { name: "Node.js", color: "from-green-500 to-green-700", Icon: SiNodedotjs, brand: "#5FA04E" },
+    { name: "Python", color: "from-yellow-400 to-blue-500", Icon: SiPython, brand: "#3776AB" },
+    { name: "Express.js", color: "from-gray-400 to-gray-600", Icon: SiExpress, brand: "#FFFFFF" },
+    { name: "FastAPI", color: "from-teal-400 to-green-500", Icon: SiFastapi, brand: "#009688" },
+    { name: "GraphQL", color: "from-pink-500 to-pink-700", Icon: SiGraphql, brand: "#E10098" },
+    { name: "REST APIs", color: "from-orange-400 to-red-500", Icon: TbApi, brand: "#FF6B35" },
   ],
   database: [
-    { name: "PostgreSQL", color: "from-blue-400 to-blue-600" },
-    { name: "MongoDB", color: "from-green-400 to-green-600" },
-    { name: "MySQL", color: "from-blue-500 to-orange-500" },
-    { name: "Redis", color: "from-red-500 to-red-700" },
-    { name: "Firebase", color: "from-yellow-400 to-orange-500" },
-    { name: "Supabase", color: "from-green-400 to-emerald-500" },
+    { name: "PostgreSQL", color: "from-blue-400 to-blue-600", Icon: SiPostgresql, brand: "#4169E1" },
+    { name: "MongoDB", color: "from-green-400 to-green-600", Icon: SiMongodb, brand: "#47A248" },
+    { name: "MySQL", color: "from-blue-500 to-orange-500", Icon: SiMysql, brand: "#4479A1" },
+    { name: "Redis", color: "from-red-500 to-red-700", Icon: SiRedis, brand: "#FF4438" },
+    { name: "Firebase", color: "from-yellow-400 to-orange-500", Icon: SiFirebase, brand: "#FFCA28" },
+    { name: "Supabase", color: "from-green-400 to-emerald-500", Icon: SiSupabase, brand: "#3FCF8E" },
   ],
   tools: [
-    { name: "Git", color: "from-orange-400 to-red-500" },
-    { name: "Docker", color: "from-blue-400 to-blue-600" },
-    { name: "AWS", color: "from-yellow-400 to-orange-500" },
-    { name: "Vercel", color: "from-gray-400 to-gray-600" },
-    { name: "Figma", color: "from-pink-400 to-purple-500" },
-    { name: "VS Code", color: "from-blue-400 to-blue-600" },
+    { name: "Git", color: "from-orange-400 to-red-500", Icon: SiGit, brand: "#F05032" },
+    { name: "Docker", color: "from-blue-400 to-blue-600", Icon: SiDocker, brand: "#2496ED" },
+    { name: "AWS", color: "from-yellow-400 to-orange-500", Icon: FaAws, brand: "#FF9900" },
+    { name: "Vercel", color: "from-gray-400 to-gray-600", Icon: SiVercel, brand: "#FFFFFF" },
+    { name: "Figma", color: "from-pink-400 to-purple-500", Icon: SiFigma, brand: "#F24E1E" },
+    { name: "VS Code", color: "from-blue-400 to-blue-600", Icon: VscVscode, brand: "#007ACC" },
   ],
 };
 
-const TechBadge = ({ tech, index }: { tech: { name: string; color: string }; index: number }) => {
+const TechBadge = ({ tech, index }: { tech: { name: string; color: string; Icon: IconType; brand: string }; index: number }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
@@ -48,7 +58,8 @@ const TechBadge = ({ tech, index }: { tech: { name: string; color: string }; ind
       whileHover={{ scale: 1.05, y: -2 }}
       className="group relative"
     >
-      <div className={`px-5 py-3 rounded-xl bg-gradient-to-r ${tech.color} bg-opacity-10 border border-border hover:border-primary/50 transition-all duration-300`}>
+      <div className={`flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r ${tech.color} bg-opacity-10 border border-border hover:border-primary/50 transition-all duration-300`}>
+        <tech.Icon className="w-5 h-5 shrink-0" style={{ color: tech.brand }} aria-hidden />
         <span className="text-sm font-medium text-foreground">{tech.name}</span>
       </div>
     </motion.div>
