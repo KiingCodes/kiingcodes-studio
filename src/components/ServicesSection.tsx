@@ -81,21 +81,9 @@ export const ServicesSection = () => {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, letterSpacing: "0.5em" }}
-            animate={isHeaderInView ? { opacity: 1, letterSpacing: "0.15em" } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-primary font-medium text-sm uppercase tracking-wider mb-4 block"
-          >
-            Our Services
-          </motion.span>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            What We <span className="text-gradient">Offer</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground">
+            Our <span className="text-gradient">Services</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Comprehensive digital solutions tailored to your needs. From concept
-            to deployment, we handle every aspect of your digital journey.
-          </p>
         </motion.div>
 
         {isLoading ? (
@@ -138,7 +126,6 @@ export const ServicesSection = () => {
                       height={600}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent" />
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-semibold text-foreground mb-2">{service.title}</h3>
