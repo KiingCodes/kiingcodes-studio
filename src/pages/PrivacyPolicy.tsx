@@ -89,7 +89,7 @@ const sections = [
           <li><strong>Supabase</strong> — secure database, authentication, and file storage.</li>
           <li><strong>Resend</strong> — transactional email delivery.</li>
           <li><strong>Google Analytics 4</strong> — anonymised traffic analytics (only with your cookie consent).</li>
-          <li><strong>Lovable AI / Gemini</strong> — to power the Owami assistant; conversations may be processed for response generation.</li>
+          <li><strong>AI providers</strong> — to power the Owami assistant; conversations may be processed for response generation.</li>
           <li><strong>Payment providers and accountants</strong> — for invoicing and tax compliance.</li>
         </ul>
         <p className="mt-3">

@@ -1,7 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FloatingDiamond } from "@/components/FloatingDiamond";
-import { TypewriterText } from "@/components/TypewriterText";
 import {
   Target,
   Shield,
@@ -153,88 +152,6 @@ export const AboutSection = () => {
             unique perspective to every project.
           </p>
         </motion.div>
-
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-6">
-              Building the Future of Digital Business
-            </h3>
-
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              <TypewriterText
-                text="At Jewel IQ, we understand that in today's digital age, having a strong online presence is crucial for business success. That's why we combine our expertise in full-stack development with intelligent systems to deliver solutions that not only look great but drive real business results."
-                speed={15}
-              />
-
-              <TypewriterText
-                text="Our team brings together years of experience in web development, mobile applications, and business strategy. We've helped startups launch their MVPs, established businesses modernize their digital infrastructure, and entrepreneurs turn their ideas into thriving online ventures."
-                speed={15}
-                delay={300}
-              />
-
-              <TypewriterText
-                text="Whether you need a simple landing page or a complex enterprise application, we approach every project with the same level of dedication and attention to detail. Your vision, our expertise – together, we create digital excellence."
-                speed={15}
-                delay={600}
-              />
-            </div>
-          </motion.div>
-
-          {/* Right - Expertise Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-card rounded-2xl p-8 border border-border glow-effect"
-          >
-            <h4 className="text-xl font-semibold text-foreground mb-8 text-center">
-              Our Expertise
-            </h4>
-
-            <div className="space-y-6">
-              {[
-                { label: "Full-Stack Development", value: 95 },
-                { label: "UI/UX Design", value: 90 },
-                { label: "Mobile Development", value: 85 },
-                { label: "Business Strategy", value: 88 },
-                { label: "Cloud & DevOps", value: 82 },
-              ].map((skill, index) => (
-                <div key={skill.label}>
-                  <div className="flex justify-between mb-2">
-                    <span className="text-sm text-muted-foreground">
-                      {skill.label}
-                    </span>
-                    <span className="text-sm text-primary font-medium">
-                      {skill.value}%
-                    </span>
-                  </div>
-
-                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      animate={
-                        isHeaderInView
-                          ? { width: `${skill.value}%` }
-                          : {}
-                      }
-                      transition={{
-                        duration: 1,
-                        delay: 0.5 + index * 0.1,
-                      }}
-                      className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
 
         {/* Values Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

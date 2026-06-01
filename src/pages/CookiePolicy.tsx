@@ -19,7 +19,7 @@ const cookies = [
   },
   {
     name: "sb-access-token / sb-refresh-token",
-    provider: "Lovable Cloud (Supabase Auth)",
+    provider: "Jewel IQ (Auth)",
     purpose: "Keeps you signed into the client portal and admin area.",
     duration: "Session / 7 days",
     type: "Necessary",
@@ -112,7 +112,7 @@ const sections = [
         <p>Third parties that may set cookies through our site include:</p>
         <ul className="list-disc pl-6 space-y-2 mt-3">
           <li><strong>Google Analytics 4</strong> — analytics. <a className="text-primary hover:underline" href="https://policies.google.com/privacy" target="_blank" rel="noreferrer">Privacy policy</a>.</li>
-          <li><strong>Lovable Cloud (Supabase)</strong> — authentication and secure session management.</li>
+          <li><strong>Jewel IQ Auth</strong> — authentication and secure session management.</li>
         </ul>
         <p className="mt-3">We do not sell or share cookie data with advertising networks.</p>
       </>
