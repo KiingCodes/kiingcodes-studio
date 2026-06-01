@@ -43,7 +43,10 @@ const iconImages: Record<string, string> = {
 };
 
 const titleOverrides: { match: RegExp; image: string }[] = [
-  { match: /website\s*development|web\s*development/i, image: serviceWebsiteDev },
+  {
+    match: /website\s*development|web\s*development/i,
+    image: serviceWebsiteDev,
+  },
   { match: /mobile\s*app|mobile\s*development/i, image: serviceMobileApp },
   { match: /project\s*management/i, image: serviceProjectMgmt },
   { match: /startup\s*consult/i, image: serviceStartupConsultation },
@@ -55,7 +58,13 @@ const titleOverrides: { match: RegExp; image: string }[] = [
   { match: /full[-\s]?stack/i, image: serviceFullstack },
 ];
 
-const pickImage = (service: any) => {
+type Service = {
+  id: string;
+  title: string;
+  icon: string;
+};
+
+const pickImage = (service: Service) => {
   const t = titleOverrides.find((o) => o.match.test(service.title || ""));
   return t?.image || iconImages[service.icon] || serviceWebDev;
 };
@@ -66,11 +75,8 @@ interface Props {
   /** reverse direction */
   reverse?: boolean;
 }
-
-const ServiceCard = ({ service }: { service: any }) => (
-  <div
-    className="group relative block w-[220px] md:w-[250px] shrink-0 rounded-xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-md hover:shadow-[0_15px_40px_-15px_hsl(var(--primary)/0.45)] hover:border-primary/50 transition-all duration-500"
-  >
+const ServiceCard = ({ service }: { service: Service }) => (
+  <div className="group relative block w-[220px] md:w-[250px] shrink-0 rounded-xl overflow-hidden border border-border bg-card/80 backdrop-blur-sm shadow-md hover:shadow-[0_15px_40px_-15px_hsl(var(--primary)/0.45)] hover:border-primary/50 transition-all duration-500">
     <div className="relative h-28 md:h-32 overflow-hidden">
       <img
         src={pickImage(service)}
@@ -96,7 +102,8 @@ export const ServicesMarquee = ({ speed = 45, reverse = false }: Props) => {
   const list = services ?? [];
   // Duplicate enough times to fill on wide screens with few services
   const minCount = 8;
-  const repeat = list.length > 0 ? Math.max(2, Math.ceil(minCount / list.length)) : 0;
+  const repeat =
+    list.length > 0 ? Math.max(2, Math.ceil(minCount / list.length)) : 0;
   const track = Array.from({ length: repeat }).flatMap(() => list);
 
   return (
@@ -112,12 +119,6 @@ export const ServicesMarquee = ({ speed = 45, reverse = false }: Props) => {
           <span className="text-primary font-medium text-xs uppercase tracking-[0.3em] mb-4 block">
             Our Services
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Everything you need, <span className="text-gradient">in motion</span>
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base md:text-lg">
-            A premium suite of digital services — flowing, always on, always evolving.
-          </p>
         </motion.div>
       </div>
 
