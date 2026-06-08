@@ -1,5 +1,4 @@
 import { PageLayout } from "@/components/PageLayout";
-import { AboutSection } from "@/components/AboutSection";
 import { TechStackSection } from "@/components/TechStackSection";
 import { CTASection } from "@/components/CTASection";
 import { PageHero } from "@/components/PageHero";
@@ -18,7 +17,6 @@ const AboutPage = () => {
         description="We blend strategy, design and engineering to ship digital products that perform — proudly from South Africa, made for the world."
         image={heroImage}
       />
-      <AboutSection />
       <TechStackSection />
       <CTASection />
     </PageLayout>
