@@ -13,57 +13,49 @@ import { VscVscode } from "react-icons/vsc";
 import { TbApi } from "react-icons/tb";
 import type { IconType } from "react-icons";
 
-const technologies = {
+type Tech = { name: string; Icon: IconType; brand: string };
+
+const technologies: Record<string, Tech[]> = {
   frontend: [
-    { name: "React", color: "from-cyan-400 to-blue-500", Icon: SiReact, brand: "#61DAFB" },
-    { name: "Next.js", color: "from-gray-400 to-gray-600", Icon: SiNextdotjs, brand: "#FFFFFF" },
-    { name: "TypeScript", color: "from-blue-400 to-blue-600", Icon: SiTypescript, brand: "#3178C6" },
-    { name: "Tailwind CSS", color: "from-teal-400 to-cyan-500", Icon: SiTailwindcss, brand: "#06B6D4" },
-    { name: "Vue.js", color: "from-green-400 to-emerald-500", Icon: SiVuedotjs, brand: "#4FC08D" },
-    { name: "Framer Motion", color: "from-pink-400 to-purple-500", Icon: SiFramer, brand: "#E94CC9" },
+    { name: "React", Icon: SiReact, brand: "#61DAFB" },
+    { name: "Next.js", Icon: SiNextdotjs, brand: "#FFFFFF" },
+    { name: "TypeScript", Icon: SiTypescript, brand: "#3178C6" },
+    { name: "Tailwind CSS", Icon: SiTailwindcss, brand: "#06B6D4" },
+    { name: "Vue.js", Icon: SiVuedotjs, brand: "#4FC08D" },
+    { name: "Framer Motion", Icon: SiFramer, brand: "#BB4B96" },
   ],
   backend: [
-    { name: "Node.js", color: "from-green-500 to-green-700", Icon: SiNodedotjs, brand: "#5FA04E" },
-    { name: "Python", color: "from-yellow-400 to-blue-500", Icon: SiPython, brand: "#3776AB" },
-    { name: "Express.js", color: "from-gray-400 to-gray-600", Icon: SiExpress, brand: "#FFFFFF" },
-    { name: "FastAPI", color: "from-teal-400 to-green-500", Icon: SiFastapi, brand: "#009688" },
-    { name: "GraphQL", color: "from-pink-500 to-pink-700", Icon: SiGraphql, brand: "#E10098" },
-    { name: "REST APIs", color: "from-orange-400 to-red-500", Icon: TbApi, brand: "#FF6B35" },
+    { name: "Node.js", Icon: SiNodedotjs, brand: "#5FA04E" },
+    { name: "Python", Icon: SiPython, brand: "#3776AB" },
+    { name: "Express.js", Icon: SiExpress, brand: "#FFFFFF" },
+    { name: "FastAPI", Icon: SiFastapi, brand: "#009688" },
+    { name: "GraphQL", Icon: SiGraphql, brand: "#E10098" },
+    { name: "REST APIs", Icon: TbApi, brand: "#FF6B35" },
   ],
   database: [
-    { name: "PostgreSQL", color: "from-blue-400 to-blue-600", Icon: SiPostgresql, brand: "#4169E1" },
-    { name: "MongoDB", color: "from-green-400 to-green-600", Icon: SiMongodb, brand: "#47A248" },
-    { name: "MySQL", color: "from-blue-500 to-orange-500", Icon: SiMysql, brand: "#4479A1" },
-    { name: "Redis", color: "from-red-500 to-red-700", Icon: SiRedis, brand: "#FF4438" },
-    { name: "Firebase", color: "from-yellow-400 to-orange-500", Icon: SiFirebase, brand: "#FFCA28" },
-    { name: "Supabase", color: "from-green-400 to-emerald-500", Icon: SiSupabase, brand: "#3FCF8E" },
+    { name: "PostgreSQL", Icon: SiPostgresql, brand: "#4169E1" },
+    { name: "MongoDB", Icon: SiMongodb, brand: "#47A248" },
+    { name: "MySQL", Icon: SiMysql, brand: "#4479A1" },
+    { name: "Redis", Icon: SiRedis, brand: "#FF4438" },
+    { name: "Firebase", Icon: SiFirebase, brand: "#FFCA28" },
+    { name: "Supabase", Icon: SiSupabase, brand: "#3FCF8E" },
   ],
   tools: [
-    { name: "Git", color: "from-orange-400 to-red-500", Icon: SiGit, brand: "#F05032" },
-    { name: "Docker", color: "from-blue-400 to-blue-600", Icon: SiDocker, brand: "#2496ED" },
-    { name: "AWS", color: "from-yellow-400 to-orange-500", Icon: FaAws, brand: "#FF9900" },
-    { name: "Vercel", color: "from-gray-400 to-gray-600", Icon: SiVercel, brand: "#FFFFFF" },
-    { name: "Figma", color: "from-pink-400 to-purple-500", Icon: SiFigma, brand: "#F24E1E" },
-    { name: "VS Code", color: "from-blue-400 to-blue-600", Icon: VscVscode, brand: "#007ACC" },
+    { name: "Git", Icon: SiGit, brand: "#F05032" },
+    { name: "Docker", Icon: SiDocker, brand: "#2496ED" },
+    { name: "AWS", Icon: FaAws, brand: "#FF9900" },
+    { name: "Vercel", Icon: SiVercel, brand: "#FFFFFF" },
+    { name: "Figma", Icon: SiFigma, brand: "#F24E1E" },
+    { name: "VS Code", Icon: VscVscode, brand: "#007ACC" },
   ],
 };
 
-const TechBadge = ({ tech, index }: { tech: { name: string; color: string; Icon: IconType; brand: string }; index: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-      whileHover={{ scale: 1.05, y: -2 }}
-      className="group relative"
-    >
-      <div className={`flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r ${tech.color} bg-opacity-10 border border-border hover:border-primary/50 transition-all duration-300`}>
-        <tech.Icon className="w-5 h-5 shrink-0" style={{ color: tech.brand }} aria-hidden />
-        <span className="text-sm font-medium text-foreground">{tech.name}</span>
-      </div>
-    </motion.div>
-  );
+const hexToRgba = (hex: string, alpha: number) => {
+  const h = hex.replace("#", "");
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
 export const TechStackSection = () => {
@@ -153,7 +145,7 @@ const TechMarquee = ({
   reverse = false,
   duration = 30,
 }: {
-  techs: { name: string; color: string; Icon: IconType; brand: string }[];
+  techs: Tech[];
   reverse?: boolean;
   duration?: number;
 }) => {
@@ -168,7 +160,11 @@ const TechMarquee = ({
         {loop.map((tech, i) => (
           <div
             key={`${tech.name}-${i}`}
-            className={`flex items-center gap-2.5 px-5 py-3 rounded-xl bg-gradient-to-r ${tech.color} bg-opacity-10 border border-border hover:border-primary/50 transition-colors duration-300 shrink-0`}
+            className="flex items-center gap-2.5 px-5 py-3 rounded-xl border transition-colors duration-300 shrink-0"
+            style={{
+              background: `linear-gradient(135deg, ${hexToRgba(tech.brand, 0.18)}, ${hexToRgba(tech.brand, 0.06)})`,
+              borderColor: hexToRgba(tech.brand, 0.35),
+            }}
           >
             <tech.Icon className="w-5 h-5 shrink-0" style={{ color: tech.brand }} aria-hidden />
             <span className="text-sm font-medium text-foreground whitespace-nowrap">{tech.name}</span>
