@@ -59,29 +59,6 @@ const SettingsPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Settings</h1>
           <p className="text-muted-foreground mb-8">Manage your account and preferences.</p>
 
-          {/* Appearance */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg">
-                {theme === "dark" ? <Moon className="w-5 h-5 text-primary" /> : <Sun className="w-5 h-5 text-primary" />}
-                Appearance
-              </CardTitle>
-              <CardDescription>Choose your preferred theme.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-between">
-                <Label htmlFor="theme-toggle" className="text-foreground">
-                  {theme === "dark" ? "Dark Mode" : "Light Mode"}
-                </Label>
-                <Switch
-                  id="theme-toggle"
-                  checked={theme === "dark"}
-                  onCheckedChange={toggleTheme}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
           {/* Account */}
           {user ? (
             <>

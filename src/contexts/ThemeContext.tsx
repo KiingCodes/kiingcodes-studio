@@ -10,17 +10,14 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("jeweliq-theme");
-    return (stored === "dark" || stored === "light") ? stored : "light";
-  });
+  const theme: Theme = "dark";
 
   useEffect(() => {
-    localStorage.setItem("jeweliq-theme", theme);
-    document.documentElement.classList.toggle("dark", theme === "dark");
-  }, [theme]);
+    document.documentElement.classList.add("dark");
+    try { localStorage.setItem("jeweliq-theme", "dark"); } catch {}
+  }, []);
 
-  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
