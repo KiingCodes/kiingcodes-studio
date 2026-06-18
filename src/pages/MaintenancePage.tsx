@@ -3,7 +3,7 @@ import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 export const MaintenancePage = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#05070d] text-foreground flex items-center justify-center px-6">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black text-foreground flex items-center justify-center px-6">
       {/* Background tech grid */}
       <div
         aria-hidden
