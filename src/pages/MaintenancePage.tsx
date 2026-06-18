@@ -3,7 +3,7 @@ import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 export const MaintenancePage = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-[#05070d] text-foreground flex items-center justify-center px-6">
+    <div className="relative min-h-screen w-full overflow-hidden bg-black text-foreground flex items-center justify-center px-6">
       {/* Background tech grid */}
       <div
         aria-hidden
@@ -21,7 +21,7 @@ export const MaintenancePage = () => {
       {/* Glow orbs */}
       <div aria-hidden className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full bg-cyan-500/20 blur-3xl" />
       <div aria-hidden className="absolute -bottom-40 -right-40 w-[520px] h-[520px] rounded-full bg-blue-600/20 blur-3xl" />
-      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#05070d]" />
+      <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
 
       <div className="relative z-10 w-full max-w-2xl text-center">
         <motion.img
