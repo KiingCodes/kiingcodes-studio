@@ -51,6 +51,10 @@ import AdminInvoices from "./pages/admin/AdminInvoices";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminApplications from "./pages/admin/AdminApplications";
 import AdminRoles from "./pages/admin/AdminRoles";
+import MaintenancePage from "./pages/MaintenancePage";
+
+// Toggle this flag to false to disable maintenance mode and restore the site.
+const MAINTENANCE_MODE = true;
 
 const queryClient = new QueryClient();
 
@@ -127,10 +131,14 @@ const App = () => (
           <Toaster />
           <Sonner />
 
-          <BrowserRouter>
-            <AnimatedRoutes />
-            <CookieConsent />
-          </BrowserRouter>
+          {MAINTENANCE_MODE ? (
+            <MaintenancePage />
+          ) : (
+            <BrowserRouter>
+              <AnimatedRoutes />
+              <CookieConsent />
+            </BrowserRouter>
+          )}
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>
