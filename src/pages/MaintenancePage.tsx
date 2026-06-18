@@ -4,20 +4,6 @@ import logo from "@/assets/jeweliq-logo.png.asset.json";
 export const MaintenancePage = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-black text-foreground flex items-center justify-center px-6">
-      {/* Background tech grid */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(56,189,248,0.35) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.35) 1px, transparent 1px)",
-          backgroundSize: "56px 56px",
-          maskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 30%, transparent 75%)",
-        }}
-      />
       {/* Glow orbs */}
       <div aria-hidden className="absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full bg-cyan-500/20 blur-3xl" />
       <div aria-hidden className="absolute -bottom-40 -right-40 w-[520px] h-[520px] rounded-full bg-blue-600/20 blur-3xl" />
