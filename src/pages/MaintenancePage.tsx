@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/jeweliq-logo.png.asset.json";
+import logo from "@/assets/jeweliq-logo-maintenance.png.asset.json";
 
 export const MaintenancePage = () => {
   return (

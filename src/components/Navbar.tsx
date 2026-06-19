@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -89,7 +89,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20 gap-3">
           <Link to="/" className="flex flex-col items-start shrink-0">
             <img
-              src={logo}
+              src={logo.url}
               alt="Jewel IQ Logo"
               className="h-14 md:h-16 w-auto object-contain"
             />

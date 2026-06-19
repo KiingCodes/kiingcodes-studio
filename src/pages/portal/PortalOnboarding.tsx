@@ -1,4 +1,5 @@
 import { useState } from "react";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -72,7 +73,7 @@ export default function PortalOnboarding() {
       <Card className="max-w-2xl w-full">
         <CardHeader className="text-center">
           <motion.img 
-            src="/src/assets/jeweliq-logo.png" 
+            src={logo.url} 
             alt="JewelIQ" 
             className="h-24 mx-auto mb-4"
             initial={{ rotate: 0 }}

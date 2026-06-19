@@ -7,7 +7,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Lock, Mail, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 type View = "login" | "signup" | "forgot";
@@ -78,7 +78,7 @@ const LoginPage = () => {
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
               <img
-                src={logo}
+                src={logo.url}
                 alt="JewelIQ"
                 className="h-28 mx-auto mb-5 object-contain"
               />

@@ -5,7 +5,7 @@ import { AnimatedBackground } from "@/components/AnimatedBackground";
 import { Cookie, Shield, Settings, BarChart3, Megaphone, Clock, Globe, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LegalTOC } from "@/components/LegalTOC";
-import jeweliqLogo from "@/assets/jeweliq-logo.png";
+import jeweliqLogo from "@/assets/jeweliq-logo.png.asset.json";
 
 const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
@@ -162,7 +162,7 @@ const CookiePolicy = () => {
               className="text-center mb-12"
             >
               <img
-                src={jeweliqLogo}
+                src={jeweliqLogo.url}
                 alt="Jewel IQ"
                 className="h-14 w-auto mx-auto mb-6 drop-shadow-[0_4px_24px_hsl(var(--primary)/0.35)]"
               />
