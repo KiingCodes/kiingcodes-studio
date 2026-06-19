@@ -78,7 +78,7 @@ const LoginPage = () => {
           <div className="bg-card rounded-2xl p-8 border border-border shadow-xl">
             <div className="text-center mb-8">
               <img
-                src={logo}
+                src={logo.url}
                 alt="JewelIQ"
                 className="h-28 mx-auto mb-5 object-contain"
               />

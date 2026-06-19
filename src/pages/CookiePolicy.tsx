@@ -162,7 +162,7 @@ const CookiePolicy = () => {
               className="text-center mb-12"
             >
               <img
-                src={jeweliqLogo}
+                src={jeweliqLogo.url}
                 alt="Jewel IQ"
                 className="h-14 w-auto mx-auto mb-6 drop-shadow-[0_4px_24px_hsl(var(--primary)/0.35)]"
               />

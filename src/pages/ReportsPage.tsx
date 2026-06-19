@@ -319,7 +319,7 @@ export default function ReportsPage() {
                     <div className="rounded-xl border border-border/30 bg-background/80 overflow-hidden">
                       <div className="p-4 border-b border-border/20" style={{ backgroundColor: brandColor + "15" }}>
                         <div className="flex items-center gap-3">
-                          {includeCompanyLogo && <img src={logo} alt="Logo" className="h-6 w-auto" />}
+                          {includeCompanyLogo && <img src={logo.url} alt="Logo" className="h-6 w-auto" />}
                           <div>
                             <p className="text-xs font-semibold text-foreground">{reportName || "Untitled Report"}</p>
                             <p className="text-[10px] text-muted-foreground">{new Date().toLocaleDateString()}</p>

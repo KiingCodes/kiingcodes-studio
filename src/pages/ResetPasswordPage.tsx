@@ -74,7 +74,7 @@ const ResetPasswordPage = () => {
             ) : (
               <>
                 <div className="text-center mb-8">
-                  <img src={logo} alt="JewelIQ" className="h-24 mx-auto mb-5 object-contain" />
+                  <img src={logo.url} alt="JewelIQ" className="h-24 mx-auto mb-5 object-contain" />
                   <h1 className="text-2xl font-bold text-foreground">Set New Password</h1>
                   <p className="text-muted-foreground text-sm mt-2">
                     Choose a strong password for your account.

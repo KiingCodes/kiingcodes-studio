@@ -39,7 +39,7 @@ export const Footer = () => {
           {/* Brand */}
           <div className="flex-shrink-0">
             <Link to="/" className="inline-block mb-2">
-              <img src={logo} alt="Jewel IQ Logo" className="h-10 w-auto object-contain" />
+              <img src={logo.url} alt="Jewel IQ Logo" className="h-10 w-auto object-contain" />
             </Link>
             <p className="text-muted-foreground text-xs max-w-[220px]">
               Intelligent systems built with precision. Premium digital experiences that drive growth.
