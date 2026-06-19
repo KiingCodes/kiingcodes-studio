@@ -5,7 +5,7 @@ import { Outlet, Navigate, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 export function PortalLayout() {

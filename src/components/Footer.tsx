@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 import footerBg from "@/assets/footer-bg-tech.jpg.asset.json";
 
 export const Footer = () => {

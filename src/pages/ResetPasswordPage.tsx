@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { Lock, Eye, EyeOff, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import diamondLogo from "@/assets/jeweliq-diamond-logo.png";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 const ResetPasswordPage = () => {
   const [password, setPassword] = useState("");

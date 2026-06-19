@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 interface Report {
   id: string;

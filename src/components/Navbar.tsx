@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import logo from "@/assets/jeweliq-logo.png";
+import logo from "@/assets/jeweliq-logo.png.asset.json";
 
 const navLinks = [
   { href: "/", label: "Home" },
