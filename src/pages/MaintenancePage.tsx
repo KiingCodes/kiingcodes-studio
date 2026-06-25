@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/jeweliq-logo-maintenance.png.asset.json";
 
 export const MaintenancePage = () => {
   return (
@@ -10,15 +9,6 @@ export const MaintenancePage = () => {
       <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
 
       <div className="relative z-10 w-full max-w-2xl text-center">
-        <motion.img
-          src={logo.url}
-          alt="JewelIQ — Smart Digital Solutions"
-          initial={{ opacity: 0, y: -16, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mx-auto w-[280px] md:w-[380px] h-auto drop-shadow-[0_0_40px_rgba(56,189,248,0.35)]"
-        />
-
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
