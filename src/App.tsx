@@ -52,9 +52,30 @@ import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminApplications from "./pages/admin/AdminApplications";
 import AdminRoles from "./pages/admin/AdminRoles";
 import MaintenancePage from "./pages/MaintenancePage";
+import JewelHome from "./pages/JewelHome";
 
 // Toggle this flag to false to disable maintenance mode and restore the site.
 const MAINTENANCE_MODE = true;
+
+// Preview bypass: /?preview=1 or localStorage.jeweliq_preview = "1" reveals the new site
+// while the public still sees maintenance mode.
+const isPreviewBypass = () => {
+  if (typeof window === "undefined") return false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("preview") === "1") {
+      localStorage.setItem("jeweliq_preview", "1");
+      return true;
+    }
+    if (params.get("preview") === "0") {
+      localStorage.removeItem("jeweliq_preview");
+      return false;
+    }
+    return localStorage.getItem("jeweliq_preview") === "1";
+  } catch {
+    return false;
+  }
+};
 
 const queryClient = new QueryClient();
 
@@ -131,8 +152,10 @@ const App = () => (
           <Toaster />
           <Sonner />
 
-          {MAINTENANCE_MODE ? (
+          {MAINTENANCE_MODE && !isPreviewBypass() ? (
             <MaintenancePage />
+          ) : MAINTENANCE_MODE ? (
+            <JewelHome />
           ) : (
             <BrowserRouter>
               <AnimatedRoutes />
