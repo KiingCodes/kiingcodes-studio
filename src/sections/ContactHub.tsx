@@ -5,14 +5,14 @@ import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlowButton } from "@/components/jewel/GlowButton";
 
 const services = [
-  "Web Development",
-  "Mobile Apps",
-  "UI/UX Design",
-  "Digital Marketing",
-  "Brand Strategy",
-  "Business Planning",
-  "Cloud & DevOps",
-  "AI Integration",
+  "Software Development",
+  "Web Application",
+  "Mobile App",
+  "Digital Entrepreneurship",
+  "Cybersecurity",
+  "Network Engineering",
+  "IT Support & Maintenance",
+  "Not sure yet",
 ];
 
 export const ContactHub = () => {
@@ -29,10 +29,10 @@ export const ContactHub = () => {
       <div className="mx-auto max-w-6xl px-4">
         <FadeInSection className="mx-auto max-w-2xl text-center">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-            Consultation Hub
+            Get in touch
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            Let&rsquo;s architect your <span className="text-jewel-gradient">next chapter</span>.
+            Tell us what you <span className="text-jewel-gradient">need</span>.
           </h2>
           <p className="mt-4 text-foreground/70">
             Tell us what you need. We reply within one business day.
@@ -66,9 +66,9 @@ export const ContactHub = () => {
                     <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-jewel-gradient text-primary-foreground">
                       <Check className="h-6 w-6" />
                     </div>
-                    <h3 className="font-display mt-4 text-2xl font-semibold">Signal received.</h3>
+                    <h3 className="font-display mt-4 text-2xl font-semibold">Message received.</h3>
                     <p className="mt-2 text-foreground/70">
-                      A strategist will reach out to {form.email || "you"} within one business day.
+                      Our team will reach out to {form.email || "you"} within one business day.
                     </p>
                   </motion.div>
                 ) : step === 0 ? (
@@ -80,10 +80,10 @@ export const ContactHub = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <h3 className="font-display text-xl font-semibold">
-                      What do you need built?
+                      What do you need help with?
                     </h3>
                     <p className="mt-1 text-sm text-foreground/60">
-                      Pick every discipline that fits your project.
+                      Pick every service that applies to your project.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
                       {services.map((s) => {
@@ -149,16 +149,16 @@ export const ContactHub = () => {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <h3 className="font-display text-xl font-semibold">The vision.</h3>
+                    <h3 className="font-display text-xl font-semibold">Project details.</h3>
                     <p className="mt-1 text-sm text-foreground/60">
-                      A few lines about what you want to build or unlock.
+                      A few lines about what you need and any deadlines.
                     </p>
                     <textarea
                       value={form.message}
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       rows={5}
                       className="mt-5 w-full resize-none rounded-2xl border border-border bg-background/40 p-4 text-sm text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40"
-                      placeholder="Tell us about the outcome you want..."
+                      placeholder="Describe your project or IT requirement..."
                     />
                     <div className="mt-8 flex items-center justify-between">
                       <GlowButton variant="ghost" onClick={() => setStep(1)}>
@@ -180,7 +180,7 @@ export const ContactHub = () => {
               <div>
                 <h3 className="font-display text-xl font-semibold">Prefer to talk directly?</h3>
                 <p className="mt-2 text-sm text-foreground/65">
-                  Our team is available across email, phone, and WhatsApp — pick whatever suits you.
+                  Reach our team by email, phone, or WhatsApp — whichever suits you.
                 </p>
                 <div className="mt-6 space-y-3">
                   <ContactRow icon={<Mail className="h-4 w-4" />} label="Email" value="info@jeweliq.com" href="mailto:info@jeweliq.com" />
@@ -190,7 +190,7 @@ export const ContactHub = () => {
               </div>
               <div className="mt-8 rounded-2xl border border-border/70 bg-background/40 p-4 text-xs text-foreground/70">
                 <p className="font-medium text-foreground">Response time</p>
-                <p className="mt-1">Under 24 hours on business days · Global engagements welcome.</p>
+                <p className="mt-1">Within one business day · Based in South Africa, working remotely worldwide.</p>
               </div>
             </div>
           </FadeInSection>

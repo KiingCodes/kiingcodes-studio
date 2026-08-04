@@ -4,21 +4,20 @@ import { JewelLogo } from "@/components/jewel/JewelLogo";
 
 const cols = [
   {
-    title: "Studio",
+    title: "Services",
     links: [
-      { label: "Services", href: "#ecosystem" },
-      { label: "Framework", href: "#about" },
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Contact", href: "#contact" },
+      { label: "Software Development", href: "#ecosystem" },
+      { label: "Digital Entrepreneurship", href: "#ecosystem" },
+      { label: "Cybersecurity", href: "#ecosystem" },
+      { label: "Network Engineering", href: "#ecosystem" },
     ],
   },
   {
     title: "Company",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
-      { label: "Blog", href: "#" },
+      { label: "How We Work", href: "#about" },
+      { label: "Capabilities", href: "#portfolio" },
+      { label: "Contact", href: "#contact" },
     ],
   },
   {
@@ -47,10 +46,10 @@ export const JewelFooter = () => {
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid gap-10 md:grid-cols-[1.4fr,repeat(3,1fr)]">
           <div>
-            <JewelLogo />
+            <JewelLogo size="h-10" />
             <p className="mt-4 max-w-xs text-sm text-foreground/65">
-              A cyber-luxury tech studio building intelligent products, brands, and
-              business systems.
+              An Information Technology company delivering software development,
+              digital entrepreneurship, cybersecurity, and network engineering.
             </p>
             <form
               onSubmit={(e) => {
@@ -99,7 +98,7 @@ export const JewelFooter = () => {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-xs text-foreground/50 sm:flex-row">
           <p>© {new Date().getFullYear()} Jewel IQ Technologies. All rights reserved.</p>
-          <p className="font-mono uppercase tracking-[0.2em]">Made with precision · ZA</p>
+          <p className="font-mono uppercase tracking-[0.2em]">South Africa</p>
         </div>
       </div>
     </footer>
