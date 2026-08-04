@@ -55,7 +55,7 @@ import MaintenancePage from "./pages/MaintenancePage";
 import JewelHome from "./pages/JewelHome";
 
 // Toggle this flag to false to disable maintenance mode and restore the site.
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 // Preview bypass: /?preview=1 or localStorage.jeweliq_preview = "1" reveals the new site
 // while the public still sees maintenance mode.
