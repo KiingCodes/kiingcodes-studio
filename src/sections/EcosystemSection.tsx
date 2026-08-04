@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Rocket, ShieldCheck, Network, ArrowUpRight, Check } from "lucide-react";
+import {
+  Code2,
+  Rocket,
+  ShieldCheck,
+  Network,
+  ArrowUpRight,
+  Check,
+} from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlassCard } from "@/components/jewel/GlassCard";
 
@@ -14,10 +21,16 @@ const pillars = [
     ring: "hsl(217 91% 60%)",
     lead: "Custom web, mobile, and cloud software built to your specification and maintained long-term.",
     features: [
+      "UI/UX design and prototyping",
       "Web applications & business portals",
       "Android & cross-platform mobile apps",
       "APIs, databases & system integrations",
-      "UI/UX design and prototyping",
+      "SaaS & Custom Platform Development",
+      "Legacy System Modernization",
+      "Software Testing & Quality Assurance (QA)",
+      "DevOps & Cloud Deployment",
+      "Maintenance & Continuous Support",
+      "Workflow Automation & AI Integration",
     ],
   },
   {
@@ -29,10 +42,21 @@ const pillars = [
     ring: "hsl(187 92% 55%)",
     lead: "We help founders and small businesses take an idea online and run it as a real digital operation.",
     features: [
+      "MVP (Minimum Viable Product) Development",
       "Digital business setup & online presence",
       "E-commerce and booking platforms",
       "Workflow automation & digital tooling",
       "Tech consulting and product guidance",
+      "Digital Marketing & Growth Strategy",
+      "Business Analytics & Performance Tracking",
+      "Customer Relationship Management (CRM) Solutions",
+      "Monetization & Payment Gateway Setup",
+      "Brand Identity & Digital Assets Creation",
+      "Graphic Design & Visual Content Production",
+      "Legal & Compliance Guidance for Digital Ventures",
+      "Marketing & Promotional Collateral Design",
+      "Social Media Strategy & Management",
+      "Email Marketing Campaigns & Automation",
     ],
   },
   {
@@ -44,10 +68,18 @@ const pillars = [
     ring: "hsl(158 84% 45%)",
     lead: "Practical security work that protects your systems, your data, and the people who use them.",
     features: [
-      "Security assessments & vulnerability testing",
-      "Endpoint, email & access hardening",
-      "Backup, recovery & incident response",
-      "Security awareness training for teams",
+      "Threat Vulnerability & Penetration Testing",
+      "Zero-Trust Access & Endpoint Security",
+      "Incident Response & Disaster Recovery",
+      "Security Awareness Training & Phishing Simulations",
+      "Data Encryption & Secure Communication Protocols",
+      "Compliance Management & Security Awareness",
+      "Cloud Infrastructure & Architecture Hardening",
+      "Identity & Access Management (IAM) Solutions",
+      "Continuous SOC & Real-Time Threat Monitoring",
+      "API & Web Application Protection",
+      "Data Loss Prevention (DLP) & Privacy Controls",
+      "Identity & Access Management (IAM) Solutions",
     ],
   },
   {
@@ -93,11 +125,12 @@ export const EcosystemSection = () => {
             The Ecosystem
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            Four disciplines. <span className="text-jewel-gradient">One IT partner.</span>
+            Four disciplines.{" "}
+            <span className="text-jewel-gradient">One IT partner.</span>
           </h2>
           <p className="mt-4 text-foreground/70">
-            Jewel IQ Technologies delivers software, digital business enablement,
-            cybersecurity, and network engineering under one roof.
+            Jewel IQ Technologies delivers software, digital business
+            enablement, cybersecurity, and network engineering under one roof.
           </p>
         </FadeInSection>
 
@@ -110,14 +143,20 @@ export const EcosystemSection = () => {
                   key={p.id}
                   onClick={() => setActive(p.id)}
                   className={`relative rounded-full px-4 py-2 text-xs font-medium transition-colors sm:text-sm ${
-                    isActive ? "text-foreground" : "text-foreground/60 hover:text-foreground/90"
+                    isActive
+                      ? "text-foreground"
+                      : "text-foreground/60 hover:text-foreground/90"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="pillar-pill"
                       className="absolute inset-0 rounded-full bg-jewel-gradient opacity-90"
-                      transition={{ type: "spring", stiffness: 340, damping: 32 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 340,
+                        damping: 32,
+                      }}
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-1.5">
@@ -142,7 +181,9 @@ export const EcosystemSection = () => {
                   }`}
                   style={
                     isActive
-                      ? { boxShadow: `0 0 0 1px ${p.ring}, 0 20px 60px -20px ${p.ring}` }
+                      ? {
+                          boxShadow: `0 0 0 1px ${p.ring}, 0 20px 60px -20px ${p.ring}`,
+                        }
                       : undefined
                   }
                 >
@@ -155,7 +196,9 @@ export const EcosystemSection = () => {
                   >
                     <p.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="font-display mt-5 text-xl font-semibold">{p.title}</h3>
+                  <h3 className="font-display mt-5 text-xl font-semibold">
+                    {p.title}
+                  </h3>
                   <p className="mt-2 text-sm text-foreground/65">{p.lead}</p>
                   <div className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/70 transition-colors group-hover:text-foreground">
                     Learn more <ArrowUpRight className="h-3.5 w-3.5" />
@@ -179,7 +222,9 @@ export const EcosystemSection = () => {
                 className="grid gap-8 md:grid-cols-[1fr,1fr] md:items-center"
               >
                 <div>
-                  <p className={`font-mono text-xs uppercase tracking-[0.25em] ${current.tone}`}>
+                  <p
+                    className={`font-mono text-xs uppercase tracking-[0.25em] ${current.tone}`}
+                  >
                     {current.tag} · Pillar
                   </p>
                   <h3 className="font-display mt-2 text-2xl font-semibold sm:text-3xl">
@@ -198,7 +243,10 @@ export const EcosystemSection = () => {
                     >
                       <span
                         className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full"
-                        style={{ background: current.ring, color: "hsl(var(--background))" }}
+                        style={{
+                          background: current.ring,
+                          color: "hsl(var(--background))",
+                        }}
                       >
                         <Check className="h-3 w-3" />
                       </span>

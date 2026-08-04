@@ -23,7 +23,7 @@ const cols = [
   {
     title: "Contact",
     links: [
-      { label: "info@jeweliq.com", href: "mailto:info@jeweliq.com" },
+      { label: "bookings@jeweliq.tech", href: "mailto:bookings@jeweliq.tech" },
       { label: "+27 60 433 4341", href: "tel:+27604334341" },
       { label: "WhatsApp", href: "https://wa.me/27604334341" },
     ],
@@ -70,7 +70,8 @@ export const JewelFooter = () => {
                 type="submit"
                 className="inline-flex h-9 items-center gap-1 rounded-full bg-jewel-gradient px-4 text-xs font-medium text-primary-foreground transition-transform hover:scale-[1.02]"
               >
-                {ok ? "Joined" : "Subscribe"} <ArrowRight className="h-3.5 w-3.5" />
+                {ok ? "Joined" : "Subscribe"}{" "}
+                <ArrowRight className="h-3.5 w-3.5" />
               </button>
             </form>
           </div>
@@ -97,7 +98,10 @@ export const JewelFooter = () => {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-border/60 pt-6 text-xs text-foreground/50 sm:flex-row">
-          <p>© {new Date().getFullYear()} Jewel IQ Technologies. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} Jewel IQ Technologies. All rights
+            reserved.
+          </p>
           <p className="font-mono uppercase tracking-[0.2em]">South Africa</p>
         </div>
       </div>

@@ -6,35 +6,40 @@ const cases = [
     tag: "Software",
     title: "Business Web Applications",
     metric: "Custom build",
-    detail: "Client portals, dashboards, booking and management systems built around how your business actually works.",
+    detail:
+      "Client portals, dashboards, booking and management systems built around how your business actually works.",
     gradient: "from-primary via-accent to-emerald-400",
   },
   {
     tag: "Software",
     title: "Mobile Applications",
     metric: "Android & cross-platform",
-    detail: "Mobile apps for customers or staff, connected to your existing systems and data.",
+    detail:
+      "Mobile apps for customers or staff, connected to your existing systems and data.",
     gradient: "from-emerald-400 via-primary to-accent",
   },
   {
     tag: "Entrepreneurship",
     title: "Digital Business Enablement",
     metric: "Online presence",
-    detail: "Getting small businesses and founders online: websites, e-commerce, payments, and automated workflows.",
+    detail:
+      "Getting small businesses and founders online: websites, e-commerce, payments, and automated workflows.",
     gradient: "from-accent via-emerald-400 to-primary",
   },
   {
     tag: "Cybersecurity",
     title: "Security Assessments & Hardening",
     metric: "Assess · Fix · Train",
-    detail: "Vulnerability assessment, access and endpoint hardening, backups, and staff security awareness training.",
+    detail:
+      "Vulnerability assessment, access and endpoint hardening, backups, and staff security awareness training.",
     gradient: "from-primary via-emerald-400 to-accent",
   },
   {
     tag: "Networking",
     title: "Network Design & Installation",
     metric: "LAN · WAN · Wi-Fi",
-    detail: "Site surveys, structured cabling, routing and switching, firewalls, and ongoing network support.",
+    detail:
+      "Site surveys, structured cabling, routing and switching, firewalls, and ongoing network support.",
     gradient: "from-accent via-primary to-emerald-400",
   },
 ];
@@ -52,7 +57,7 @@ export const PortfolioSection = () => (
           </h2>
         </div>
         <p className="max-w-sm text-sm text-foreground/65">
-          The services our team takes on day to day — swipe to explore.
+          The services our team takes on day to day - swipe to explore.
         </p>
       </FadeInSection>
     </div>
@@ -64,7 +69,9 @@ export const PortfolioSection = () => (
             key={c.title}
             className="group relative aspect-[3/4] w-[280px] flex-none snap-start overflow-hidden rounded-3xl sm:aspect-[4/5] sm:w-[360px]"
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-80`} />
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-80`}
+            />
             <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px] transition-all duration-500 group-hover:bg-background/20" />
             <div
               aria-hidden
@@ -84,8 +91,12 @@ export const PortfolioSection = () => (
                 <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent">
                   {c.tag}
                 </p>
-                <h3 className="font-display mt-1.5 text-lg font-semibold">{c.title}</h3>
-                <p className="mt-2 line-clamp-3 text-sm text-foreground/70">{c.detail}</p>
+                <h3 className="font-display mt-1.5 text-lg font-semibold">
+                  {c.title}
+                </h3>
+                <p className="mt-2 line-clamp-3 text-sm text-foreground/70">
+                  {c.detail}
+                </p>
                 <a
                   href="#contact"
                   className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/80 hover:text-accent"
