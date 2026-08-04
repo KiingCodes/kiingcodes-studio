@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Sparkles, Activity, TrendingUp, ShieldCheck } from "lucide-react";
+import { ArrowRight, Sparkles, Code2, Rocket, ShieldCheck, Network } from "lucide-react";
 import { useRef } from "react";
 import { ParticleField } from "@/components/jewel/ParticleField";
 import { GlowButton } from "@/components/jewel/GlowButton";
@@ -42,7 +42,7 @@ export const HeroSection = () => {
           className="mx-auto inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-foreground/80"
         >
           <Sparkles className="h-3.5 w-3.5 text-accent" />
-          Cyber-luxury tech studio · Est. 2024
+          Jewel IQ Technologies · Information Technology company
         </motion.div>
 
         <motion.h1
@@ -51,8 +51,8 @@ export const HeroSection = () => {
           transition={{ duration: 0.9, delay: 0.1 }}
           className="font-display mx-auto mt-6 max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl"
         >
-          Architecting the Future of{" "}
-          <span className="text-jewel-gradient">Digital Intelligence</span>.
+          Software, Security &{" "}
+          <span className="text-jewel-gradient">Networks</span>, done properly.
         </motion.h1>
 
         <motion.p
@@ -61,8 +61,8 @@ export const HeroSection = () => {
           transition={{ duration: 0.9, delay: 0.25 }}
           className="mx-auto mt-6 max-w-2xl text-balance text-base text-foreground/70 sm:text-lg"
         >
-          We blend cutting-edge software development, dominant marketing strategies,
-          and bulletproof business execution to scale your vision.
+          An IT company delivering software development, digital entrepreneurship,
+          cybersecurity, and network engineering for businesses of every size.
         </motion.p>
 
         <motion.div
@@ -82,11 +82,11 @@ export const HeroSection = () => {
             size="lg"
             onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Book a Consultation
+            Talk to Us
           </GlowButton>
         </motion.div>
 
-        {/* Mock dashboard */}
+        {/* Capability panel */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,26 +100,18 @@ export const HeroSection = () => {
             />
             <div className="glass-strong relative overflow-hidden rounded-3xl p-4 sm:p-6">
               <div className="flex items-center justify-between border-b border-border/60 pb-3">
-                <div className="flex items-center gap-1.5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
-                  <span className="h-2.5 w-2.5 rounded-full bg-foreground/20" />
-                </div>
-                <span className="font-mono text-xs text-foreground/50">
-                  jeweliq.io / control-plane
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-foreground/50">
+                  What we do
                 </span>
-                <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 font-mono text-[10px] text-emerald-400">
-                  LIVE
+                <span className="font-mono text-[10px] text-foreground/40">
+                  Jewel IQ Technologies
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-3 pt-4 md:grid-cols-4">
-                <Stat icon={<Activity className="h-4 w-4" />} label="Uptime" value="99.99%" tone="cyan" />
-                <Stat icon={<TrendingUp className="h-4 w-4" />} label="Growth" value="+312%" tone="emerald" />
-                <Stat icon={<ShieldCheck className="h-4 w-4" />} label="Threats blocked" value="1.2M" tone="sapphire" />
-                <Stat icon={<Sparkles className="h-4 w-4" />} label="Latency" value="83ms" tone="cyan" />
-              </div>
-              <div className="mt-4 h-32 rounded-xl bg-background/40 p-3">
-                <MockChart />
+                <Stat icon={<Code2 className="h-4 w-4" />} label="Build" value="Software Development" tone="sapphire" />
+                <Stat icon={<Rocket className="h-4 w-4" />} label="Grow" value="Digital Entrepreneurship" tone="cyan" />
+                <Stat icon={<ShieldCheck className="h-4 w-4" />} label="Secure" value="Cybersecurity" tone="emerald" />
+                <Stat icon={<Network className="h-4 w-4" />} label="Connect" value="Network Engineering" tone="sapphire" />
               </div>
             </div>
           </TiltCard>
@@ -152,30 +144,7 @@ const Stat = ({
         {icon}
         <span className="uppercase tracking-wider text-foreground/60">{label}</span>
       </div>
-      <div className="font-display mt-1.5 text-xl font-semibold text-foreground">{value}</div>
+      <div className="font-display mt-1.5 text-sm font-semibold leading-snug sm:text-base text-foreground">{value}</div>
     </div>
-  );
-};
-
-const MockChart = () => {
-  const points = [12, 18, 14, 22, 30, 26, 38, 42, 55, 48, 64, 70, 66, 78, 90];
-  const max = Math.max(...points);
-  const w = 100;
-  const h = 100;
-  const step = w / (points.length - 1);
-  const path = points
-    .map((v, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (v / max) * h}`)
-    .join(" ");
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className="h-full w-full">
-      <defs>
-        <linearGradient id="heroChart" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(187 92% 55%)" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="hsl(187 92% 55%)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={`${path} L ${w} ${h} L 0 ${h} Z`} fill="url(#heroChart)" />
-      <path d={path} stroke="hsl(187 92% 55%)" strokeWidth="1.2" fill="none" vectorEffect="non-scaling-stroke" />
-    </svg>
   );
 };

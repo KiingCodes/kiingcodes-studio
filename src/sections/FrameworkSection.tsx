@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
-import { Compass, Layers, Rocket, TrendingUp } from "lucide-react";
+import { Compass, Layers, Rocket, LifeBuoy } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 
 const steps = [
   {
     icon: Compass,
-    title: "Discovery",
-    lead: "Deep audit of product, market, and metrics — we map the terrain before we build.",
+    title: "Consultation",
+    lead: "We sit down with you to understand the business, the systems in place, and the problem to solve.",
   },
   {
     icon: Layers,
-    title: "Architecture",
-    lead: "Systems design, brand strategy, and roadmap. Every dependency mapped, every risk named.",
+    title: "Design & Planning",
+    lead: "Scope, technical design, timelines, and cost — agreed in writing before any work starts.",
   },
   {
     icon: Rocket,
-    title: "Execution",
-    lead: "Cross-functional pods ship product, campaigns, and infrastructure in tight, weekly loops.",
+    title: "Implementation",
+    lead: "We build, configure, and deploy — with regular check-ins so you always know where things stand.",
   },
   {
-    icon: TrendingUp,
-    title: "Hyper-Growth",
-    lead: "Compounding gains: measurement, iteration, and expansion until the flywheel is undeniable.",
+    icon: LifeBuoy,
+    title: "Support & Maintenance",
+    lead: "Ongoing monitoring, updates, and technical support to keep everything running after handover.",
   },
 ];
 
@@ -30,10 +30,10 @@ export const FrameworkSection = () => (
     <div className="mx-auto max-w-5xl px-4">
       <FadeInSection className="mx-auto max-w-2xl text-center">
         <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-          The JewelIQ Framework
+          How We Work
         </p>
         <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-          A four-step engine for <span className="text-jewel-gradient">compounding results</span>.
+          A clear process, <span className="text-jewel-gradient">start to support</span>.
         </h2>
       </FadeInSection>
 
