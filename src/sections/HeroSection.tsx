@@ -144,30 +144,7 @@ const Stat = ({
         {icon}
         <span className="uppercase tracking-wider text-foreground/60">{label}</span>
       </div>
-      <div className="font-display mt-1.5 text-xl font-semibold text-foreground">{value}</div>
+      <div className="font-display mt-1.5 text-sm font-semibold leading-snug sm:text-base text-foreground">{value}</div>
     </div>
-  );
-};
-
-const MockChart = () => {
-  const points = [12, 18, 14, 22, 30, 26, 38, 42, 55, 48, 64, 70, 66, 78, 90];
-  const max = Math.max(...points);
-  const w = 100;
-  const h = 100;
-  const step = w / (points.length - 1);
-  const path = points
-    .map((v, i) => `${i === 0 ? "M" : "L"} ${i * step} ${h - (v / max) * h}`)
-    .join(" ");
-  return (
-    <svg viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none" className="h-full w-full">
-      <defs>
-        <linearGradient id="heroChart" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="hsl(187 92% 55%)" stopOpacity="0.45" />
-          <stop offset="100%" stopColor="hsl(187 92% 55%)" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d={`${path} L ${w} ${h} L 0 ${h} Z`} fill="url(#heroChart)" />
-      <path d={path} stroke="hsl(187 92% 55%)" strokeWidth="1.2" fill="none" vectorEffect="non-scaling-stroke" />
-    </svg>
   );
 };
