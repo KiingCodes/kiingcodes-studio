@@ -3,38 +3,38 @@ import { ArrowUpRight } from "lucide-react";
 
 const cases = [
   {
-    tag: "Fintech",
-    title: "Fintech Platform Overhaul",
-    metric: "+300% Growth",
-    detail: "Rebuilt payment rails and dashboards for a Series B fintech, cutting checkout drop-off in half.",
+    tag: "Software",
+    title: "Business Web Applications",
+    metric: "Custom build",
+    detail: "Client portals, dashboards, booking and management systems built around how your business actually works.",
     gradient: "from-primary via-accent to-emerald-400",
   },
   {
-    tag: "E-Commerce",
-    title: "Global E-Commerce Expansion",
-    metric: "Sub-100ms Latency",
-    detail: "Multi-region storefront with edge personalization for a fashion brand shipping to 42 markets.",
+    tag: "Software",
+    title: "Mobile Applications",
+    metric: "Android & cross-platform",
+    detail: "Mobile apps for customers or staff, connected to your existing systems and data.",
     gradient: "from-emerald-400 via-primary to-accent",
   },
   {
-    tag: "SaaS",
-    title: "AI Analytics Platform",
-    metric: "5.4× ARR",
-    detail: "Realtime analytics with LLM-powered insights for an ops platform serving Fortune-500 teams.",
+    tag: "Entrepreneurship",
+    title: "Digital Business Enablement",
+    metric: "Online presence",
+    detail: "Getting small businesses and founders online: websites, e-commerce, payments, and automated workflows.",
     gradient: "from-accent via-emerald-400 to-primary",
   },
   {
-    tag: "Brand",
-    title: "Luxury Brand Relaunch",
-    metric: "+184% Retention",
-    detail: "End-to-end rebrand, immersive site, and paid engine for a heritage jewellery house.",
+    tag: "Cybersecurity",
+    title: "Security Assessments & Hardening",
+    metric: "Assess · Fix · Train",
+    detail: "Vulnerability assessment, access and endpoint hardening, backups, and staff security awareness training.",
     gradient: "from-primary via-emerald-400 to-accent",
   },
   {
-    tag: "Infra",
-    title: "Operator Cloud Migration",
-    metric: "62% Cost Cut",
-    detail: "Legacy-to-cloud migration and IaC pipeline for a national telecoms operator.",
+    tag: "Networking",
+    title: "Network Design & Installation",
+    metric: "LAN · WAN · Wi-Fi",
+    detail: "Site surveys, structured cabling, routing and switching, firewalls, and ongoing network support.",
     gradient: "from-accent via-primary to-emerald-400",
   },
 ];
@@ -45,15 +45,14 @@ export const PortfolioSection = () => (
       <FadeInSection className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-xl">
           <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-            Case Studies
+            Capabilities
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            Work we&rsquo;re <span className="text-jewel-gradient">obsessed</span> with.
+            What we <span className="text-jewel-gradient">deliver</span>.
           </h2>
         </div>
         <p className="max-w-sm text-sm text-foreground/65">
-          A handful of the platforms, launches, and turnarounds we&rsquo;ve architected —
-          drag to explore.
+          The services our team takes on day to day — swipe to explore.
         </p>
       </FadeInSection>
     </div>
@@ -87,9 +86,12 @@ export const PortfolioSection = () => (
                 </p>
                 <h3 className="font-display mt-1.5 text-lg font-semibold">{c.title}</h3>
                 <p className="mt-2 line-clamp-3 text-sm text-foreground/70">{c.detail}</p>
-                <div className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/80">
-                  View case study <ArrowUpRight className="h-3.5 w-3.5" />
-                </div>
+                <a
+                  href="#contact"
+                  className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/80 hover:text-accent"
+                >
+                  Enquire <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
               </div>
             </div>
           </article>
