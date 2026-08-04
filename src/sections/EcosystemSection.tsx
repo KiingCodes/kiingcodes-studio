@@ -1,53 +1,68 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Code2, Megaphone, Briefcase, ArrowUpRight, Check } from "lucide-react";
+import { Code2, Rocket, ShieldCheck, Network, ArrowUpRight, Check } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlassCard } from "@/components/jewel/GlassCard";
 
 const pillars = [
   {
-    id: "engineering",
+    id: "software",
     icon: Code2,
-    title: "Web & Software Engineering",
+    title: "Software Development",
     tag: "Build",
     tone: "text-primary",
     ring: "hsl(217 91% 60%)",
-    lead: "Custom enterprise web apps, mobile products, and cloud architecture — engineered for scale.",
+    lead: "Custom web, mobile, and cloud software built to your specification and maintained long-term.",
     features: [
-      "Enterprise web & mobile applications",
-      "UI/UX design systems & prototyping",
-      "Cloud architecture & DevOps pipelines",
-      "API platforms & realtime infrastructure",
+      "Web applications & business portals",
+      "Android & cross-platform mobile apps",
+      "APIs, databases & system integrations",
+      "UI/UX design and prototyping",
     ],
   },
   {
-    id: "marketing",
-    icon: Megaphone,
-    title: "Advertising & Digital Marketing",
+    id: "entrepreneurship",
+    icon: Rocket,
+    title: "Digital Entrepreneurship",
     tag: "Grow",
     tone: "text-accent",
     ring: "hsl(187 92% 55%)",
-    lead: "Data-driven campaigns and brand positioning that turn attention into compounding revenue.",
+    lead: "We help founders and small businesses take an idea online and run it as a real digital operation.",
     features: [
-      "Technical SEO & content strategy",
-      "Hyper-targeted paid ad campaigns",
-      "Brand positioning & narrative design",
-      "Social growth & community programs",
+      "Digital business setup & online presence",
+      "E-commerce and booking platforms",
+      "Workflow automation & digital tooling",
+      "Tech consulting and product guidance",
     ],
   },
   {
-    id: "business",
-    icon: Briefcase,
-    title: "Business Planning & Execution",
-    tag: "Scale",
+    id: "cybersecurity",
+    icon: ShieldCheck,
+    title: "Cybersecurity",
+    tag: "Secure",
     tone: "text-emerald-400",
     ring: "hsl(158 84% 45%)",
-    lead: "Strategy, workflow automation, and IT infrastructure to run leaner and grow faster.",
+    lead: "Practical security work that protects your systems, your data, and the people who use them.",
     features: [
-      "Corporate & product strategy",
-      "Workflow automation & internal tools",
-      "Financial modelling & unit economics",
-      "Scalable IT infrastructure roadmaps",
+      "Security assessments & vulnerability testing",
+      "Endpoint, email & access hardening",
+      "Backup, recovery & incident response",
+      "Security awareness training for teams",
+    ],
+  },
+  {
+    id: "network",
+    icon: Network,
+    title: "Network Engineering",
+    tag: "Connect",
+    tone: "text-primary",
+    ring: "hsl(217 91% 60%)",
+    lead: "Designing, installing, and maintaining reliable networks for offices, campuses, and remote sites.",
+    features: [
+      "LAN, WAN & Wi-Fi design and installation",
+      "Routing, switching & firewall configuration",
+      "Structured cabling and site surveys",
+      "Network monitoring, support & maintenance",
     ],
   },
 ];
@@ -78,11 +93,11 @@ export const EcosystemSection = () => {
             The Ecosystem
           </p>
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">
-            Three pillars. <span className="text-jewel-gradient">One intelligent studio.</span>
+            Four disciplines. <span className="text-jewel-gradient">One IT partner.</span>
           </h2>
           <p className="mt-4 text-foreground/70">
-            Every engagement pulls from the disciplines below — engineered, marketed,
-            and executed as one system.
+            Jewel IQ Technologies delivers software, digital business enablement,
+            cybersecurity, and network engineering under one roof.
           </p>
         </FadeInSection>
 
@@ -115,7 +130,7 @@ export const EcosystemSection = () => {
           </div>
         </FadeInSection>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((p, idx) => {
             const isActive = p.id === active;
             return (
