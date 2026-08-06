@@ -8,7 +8,7 @@ const cases = [
     metric: "Custom build",
     detail:
       "Client portals, dashboards, booking and management systems built around how your business actually works.",
-    gradient: "from-primary via-accent to-emerald-400",
+    gradient: "from-primary via-accent to-[hsl(var(--emerald))]",
   },
   {
     tag: "Software",
@@ -16,7 +16,7 @@ const cases = [
     metric: "Android & cross-platform",
     detail:
       "Mobile apps for customers or staff, connected to your existing systems and data.",
-    gradient: "from-emerald-400 via-primary to-accent",
+    gradient: "from-[hsl(var(--emerald))] via-primary to-accent",
   },
   {
     tag: "Entrepreneurship",
@@ -24,7 +24,7 @@ const cases = [
     metric: "Online presence",
     detail:
       "Getting small businesses and founders online: websites, e-commerce, payments, and automated workflows.",
-    gradient: "from-accent via-emerald-400 to-primary",
+    gradient: "from-accent via-[hsl(var(--emerald))] to-primary",
   },
   {
     tag: "Cybersecurity",
@@ -32,7 +32,7 @@ const cases = [
     metric: "Assess · Fix · Train",
     detail:
       "Vulnerability assessment, access and endpoint hardening, backups, and staff security awareness training.",
-    gradient: "from-primary via-emerald-400 to-accent",
+    gradient: "from-primary via-[hsl(var(--emerald))] to-accent",
   },
   {
     tag: "Networking",
@@ -40,7 +40,7 @@ const cases = [
     metric: "LAN · WAN · Wi-Fi",
     detail:
       "Site surveys, structured cabling, routing and switching, firewalls, and ongoing network support.",
-    gradient: "from-accent via-primary to-emerald-400",
+    gradient: "from-accent via-primary to-[hsl(var(--emerald))]",
   },
 ];
 

@@ -136,7 +136,7 @@ const Stat = ({
     tone === "cyan"
       ? "text-accent"
       : tone === "emerald"
-        ? "text-emerald-400"
+        ? "text-[hsl(var(--emerald))]"
         : "text-primary";
   return (
     <div className="rounded-xl border border-border/60 bg-background/40 p-3 text-left">
