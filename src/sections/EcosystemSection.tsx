@@ -10,6 +10,13 @@ import {
 } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlassCard } from "@/components/jewel/GlassCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const pillars = [
   {
@@ -18,7 +25,7 @@ const pillars = [
     title: "Software Development",
     tag: "Build",
     tone: "text-primary",
-    ring: "hsl(217 91% 60%)",
+    ring: "hsl(222 100% 55%)",
     lead: "Custom web, mobile, and cloud software built to your specification and maintained long-term.",
     features: [
       "UI/UX design and prototyping",
@@ -39,7 +46,7 @@ const pillars = [
     title: "Digital Entrepreneurship",
     tag: "Grow",
     tone: "text-accent",
-    ring: "hsl(187 92% 55%)",
+    ring: "hsl(191 96% 58%)",
     lead: "We help founders and small businesses take an idea online and run it as a real digital operation.",
     features: [
       "MVP (Minimum Viable Product) Development",
@@ -64,8 +71,8 @@ const pillars = [
     icon: ShieldCheck,
     title: "Cybersecurity",
     tag: "Secure",
-    tone: "text-emerald-400",
-    ring: "hsl(158 84% 45%)",
+    tone: "text-[hsl(var(--emerald))]",
+    ring: "hsl(205 100% 62%)",
     lead: "Practical security work that protects your systems, your data, and the people who use them.",
     features: [
       "Threat Vulnerability & Penetration Testing",
@@ -88,7 +95,7 @@ const pillars = [
     title: "Network Engineering",
     tag: "Connect",
     tone: "text-primary",
-    ring: "hsl(217 91% 60%)",
+    ring: "hsl(222 100% 55%)",
     lead: "Designing, installing, and maintaining reliable networks for offices, campuses, and remote sites.",
     features: [
       "LAN, WAN & Wi-Fi design and installation",
@@ -102,6 +109,8 @@ const pillars = [
 export const EcosystemSection = () => {
   const [active, setActive] = useState(pillars[0].id);
   const current = pillars.find((p) => p.id === active)!;
+  const [detail, setDetail] = useState<string | null>(null);
+  const detailPillar = pillars.find((p) => p.id === detail) ?? null;
 
   // Typing effect for the lead line
   const [typed, setTyped] = useState("");
@@ -200,9 +209,17 @@ export const EcosystemSection = () => {
                     {p.title}
                   </h3>
                   <p className="mt-2 text-sm text-foreground/65">{p.lead}</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/70 transition-colors group-hover:text-foreground">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActive(p.id);
+                      setDetail(p.id);
+                    }}
+                    className="relative z-10 mt-4 inline-flex items-center gap-1 text-xs text-foreground/70 underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                  >
                     Learn more <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
+                  </button>
                 </GlassCard>
               </FadeInSection>
             );
@@ -259,6 +276,47 @@ export const EcosystemSection = () => {
           </div>
         </FadeInSection>
       </div>
+
+      <Dialog open={!!detail} onOpenChange={(o) => !o && setDetail(null)}>
+        <DialogContent className="glass-strong max-h-[85vh] overflow-y-auto sm:max-w-lg">
+          {detailPillar && (
+            <>
+              <DialogHeader>
+                <div
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-background/50 ${detailPillar.tone}`}
+                >
+                  <detailPillar.icon className="h-5 w-5" />
+                </div>
+                <DialogTitle className="font-display pt-3 text-2xl">
+                  {detailPillar.title}
+                </DialogTitle>
+                <DialogDescription className="text-foreground/70">
+                  {detailPillar.lead}
+                </DialogDescription>
+              </DialogHeader>
+              <ul className="mt-2 grid gap-2">
+                {detailPillar.features.map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/40 px-4 py-2.5 text-sm"
+                  >
+                    <span
+                      className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full"
+                      style={{
+                        background: detailPillar.ring,
+                        color: "hsl(var(--background))",
+                      }}
+                    >
+                      <Check className="h-3 w-3" />
+                    </span>
+                    <span className="text-foreground/85">{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
