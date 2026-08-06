@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Sparkles, Code2, Rocket, ShieldCheck, Network } from "lucide-react";
+import { ArrowRight, Code2, Rocket, ShieldCheck, Network } from "lucide-react";
 import { useRef } from "react";
 import { ParticleField } from "@/components/jewel/ParticleField";
 import { GlowButton } from "@/components/jewel/GlowButton";

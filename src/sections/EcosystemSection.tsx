@@ -64,7 +64,7 @@ const pillars = [
     icon: ShieldCheck,
     title: "Cybersecurity",
     tag: "Secure",
-    tone: "text-emerald-400",
+    tone: "text-[hsl(var(--emerald))]",
     ring: "hsl(158 84% 45%)",
     lead: "Practical security work that protects your systems, your data, and the people who use them.",
     features: [

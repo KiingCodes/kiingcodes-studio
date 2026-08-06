@@ -40,7 +40,7 @@ export const FrameworkSection = () => (
       <div className="relative mt-16 pl-6 sm:pl-12">
         {/* Timeline spine */}
         <div className="absolute left-3 top-2 bottom-2 w-px sm:left-6">
-          <div className="h-full w-full bg-gradient-to-b from-primary via-accent to-emerald-400 opacity-40" />
+          <div className="h-full w-full bg-gradient-to-b from-primary via-accent to-[hsl(var(--emerald))] opacity-40" />
         </div>
 
         <ol className="space-y-10">
