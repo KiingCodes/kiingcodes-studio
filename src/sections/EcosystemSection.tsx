@@ -276,6 +276,47 @@ export const EcosystemSection = () => {
           </div>
         </FadeInSection>
       </div>
+
+      <Dialog open={!!detail} onOpenChange={(o) => !o && setDetail(null)}>
+        <DialogContent className="glass-strong max-h-[85vh] overflow-y-auto sm:max-w-lg">
+          {detailPillar && (
+            <>
+              <DialogHeader>
+                <div
+                  className={`inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-background/50 ${detailPillar.tone}`}
+                >
+                  <detailPillar.icon className="h-5 w-5" />
+                </div>
+                <DialogTitle className="font-display pt-3 text-2xl">
+                  {detailPillar.title}
+                </DialogTitle>
+                <DialogDescription className="text-foreground/70">
+                  {detailPillar.lead}
+                </DialogDescription>
+              </DialogHeader>
+              <ul className="mt-2 grid gap-2">
+                {detailPillar.features.map((f) => (
+                  <li
+                    key={f}
+                    className="flex items-start gap-3 rounded-xl border border-border/60 bg-background/40 px-4 py-2.5 text-sm"
+                  >
+                    <span
+                      className="mt-0.5 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full"
+                      style={{
+                        background: detailPillar.ring,
+                        color: "hsl(var(--background))",
+                      }}
+                    >
+                      <Check className="h-3 w-3" />
+                    </span>
+                    <span className="text-foreground/85">{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
