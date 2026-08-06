@@ -25,7 +25,7 @@ const pillars = [
     title: "Software Development",
     tag: "Build",
     tone: "text-primary",
-    ring: "hsl(217 91% 60%)",
+    ring: "hsl(222 100% 55%)",
     lead: "Custom web, mobile, and cloud software built to your specification and maintained long-term.",
     features: [
       "UI/UX design and prototyping",
@@ -46,7 +46,7 @@ const pillars = [
     title: "Digital Entrepreneurship",
     tag: "Grow",
     tone: "text-accent",
-    ring: "hsl(187 92% 55%)",
+    ring: "hsl(191 96% 58%)",
     lead: "We help founders and small businesses take an idea online and run it as a real digital operation.",
     features: [
       "MVP (Minimum Viable Product) Development",
@@ -72,7 +72,7 @@ const pillars = [
     title: "Cybersecurity",
     tag: "Secure",
     tone: "text-[hsl(var(--emerald))]",
-    ring: "hsl(158 84% 45%)",
+    ring: "hsl(205 100% 62%)",
     lead: "Practical security work that protects your systems, your data, and the people who use them.",
     features: [
       "Threat Vulnerability & Penetration Testing",
@@ -95,7 +95,7 @@ const pillars = [
     title: "Network Engineering",
     tag: "Connect",
     tone: "text-primary",
-    ring: "hsl(217 91% 60%)",
+    ring: "hsl(222 100% 55%)",
     lead: "Designing, installing, and maintaining reliable networks for offices, campuses, and remote sites.",
     features: [
       "LAN, WAN & Wi-Fi design and installation",
