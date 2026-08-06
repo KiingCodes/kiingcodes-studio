@@ -10,6 +10,13 @@ import {
 } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlassCard } from "@/components/jewel/GlassCard";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 const pillars = [
   {
@@ -102,6 +109,8 @@ const pillars = [
 export const EcosystemSection = () => {
   const [active, setActive] = useState(pillars[0].id);
   const current = pillars.find((p) => p.id === active)!;
+  const [detail, setDetail] = useState<string | null>(null);
+  const detailPillar = pillars.find((p) => p.id === detail) ?? null;
 
   // Typing effect for the lead line
   const [typed, setTyped] = useState("");
@@ -200,9 +209,17 @@ export const EcosystemSection = () => {
                     {p.title}
                   </h3>
                   <p className="mt-2 text-sm text-foreground/65">{p.lead}</p>
-                  <div className="mt-4 inline-flex items-center gap-1 text-xs text-foreground/70 transition-colors group-hover:text-foreground">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActive(p.id);
+                      setDetail(p.id);
+                    }}
+                    className="relative z-10 mt-4 inline-flex items-center gap-1 text-xs text-foreground/70 underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                  >
                     Learn more <ArrowUpRight className="h-3.5 w-3.5" />
-                  </div>
+                  </button>
                 </GlassCard>
               </FadeInSection>
             );
