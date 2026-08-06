@@ -35,21 +35,11 @@ export const HeroSection = () => {
       />
 
       <motion.div style={{ y, opacity }} className="mx-auto max-w-6xl px-4 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mx-auto inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs text-foreground/80"
-        >
-          <Sparkles className="h-3.5 w-3.5 text-accent" />
-          Jewel IQ Technologies · Information Technology company
-        </motion.div>
-
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="font-display mx-auto mt-6 max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl"
+          className="font-display mx-auto max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl"
         >
           Software, Security &{" "}
           <span className="text-jewel-gradient">Networks</span>, done properly.
