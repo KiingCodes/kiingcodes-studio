@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/jeweliq-logo-real.png.asset.json";
+import logoAsset from "@/assets/jeweliq-logo-official.png.asset.json";
 
 interface Props {
   className?: string;
