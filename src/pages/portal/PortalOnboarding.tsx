@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logo from "@/assets/jeweliq-logo.png.asset.json";
+import logo from "@/assets/jeweliq-logo-real.png.asset.json";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
