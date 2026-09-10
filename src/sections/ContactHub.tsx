@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlowButton } from "@/components/jewel/GlowButton";
+import { track } from "@/lib/analytics";
 
 const services = [
   "Software Development",

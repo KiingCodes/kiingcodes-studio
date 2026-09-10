@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { JewelLogo } from "@/components/jewel/JewelLogo";
 import { GlowButton } from "@/components/jewel/GlowButton";
+import { track } from "@/lib/analytics";
 
 const links = [
   { href: "#ecosystem", label: "Services" },

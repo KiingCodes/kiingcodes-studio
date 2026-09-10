@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { ParticleField } from "@/components/jewel/ParticleField";
 import { GlowButton } from "@/components/jewel/GlowButton";
 import { TiltCard } from "@/components/jewel/TiltCard";
+import { track } from "@/lib/analytics";
 
 export const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
