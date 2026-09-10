@@ -96,7 +96,8 @@ export const JewelNavbar = () => {
                 className="mt-2"
                 onClick={() => {
                   setOpen(false);
-                  scrollTo("#contact");
+                  track("cta_click", { cta: "get_started", location: "navbar_mobile" });
+                  document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
               >
                 Get Started
