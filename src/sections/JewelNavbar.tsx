@@ -53,7 +53,14 @@ export const JewelNavbar = () => {
             ))}
           </nav>
           <div className="hidden md:block">
-            <GlowButton variant="outline" size="sm" onClick={() => scrollTo("#contact")}>
+            <GlowButton
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                track("cta_click", { cta: "get_started", location: "navbar" });
+                document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               Get Started <ArrowRight className="h-3.5 w-3.5" />
             </GlowButton>
           </div>
