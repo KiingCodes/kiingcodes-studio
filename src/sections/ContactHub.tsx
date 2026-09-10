@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlowButton } from "@/components/jewel/GlowButton";
+import { track } from "@/lib/analytics";
 
 const services = [
   "Software Development",
@@ -122,7 +123,10 @@ export const ContactHub = () => {
                       <GlowButton
                         size="md"
                         disabled={picked.length === 0}
-                        onClick={() => setStep(1)}
+                        onClick={() => {
+                          track("booking_step_completed", { step: 1, services: picked });
+                          setStep(1);
+                        }}
                         className="disabled:cursor-not-allowed disabled:opacity-40"
                       >
                         Next <ArrowRight className="h-4 w-4" />
@@ -165,7 +169,10 @@ export const ContactHub = () => {
                       </GlowButton>
                       <GlowButton
                         disabled={!form.name || !form.email}
-                        onClick={() => setStep(2)}
+                        onClick={() => {
+                          track("booking_step_completed", { step: 2, has_company: !!form.company });
+                          setStep(2);
+                        }}
                         className="disabled:cursor-not-allowed disabled:opacity-40"
                       >
                         Next <ArrowRight className="h-4 w-4" />
@@ -199,7 +206,16 @@ export const ContactHub = () => {
                       <GlowButton variant="ghost" onClick={() => setStep(1)}>
                         <ArrowLeft className="h-4 w-4" /> Back
                       </GlowButton>
-                      <GlowButton onClick={() => setSubmitted(true)}>
+                      <GlowButton
+                        onClick={() => {
+                          track("lead_submitted", {
+                            services: picked,
+                            company: form.company || null,
+                            message_length: form.message.length,
+                          });
+                          setSubmitted(true);
+                        }}
+                      >
                         Send Brief <ArrowRight className="h-4 w-4" />
                       </GlowButton>
                     </div>
