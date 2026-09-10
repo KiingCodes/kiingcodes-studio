@@ -63,14 +63,20 @@ export const HeroSection = () => {
         >
           <GlowButton
             size="lg"
-            onClick={() => document.querySelector("#ecosystem")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => {
+              track("cta_click", { cta: "explore_services", location: "hero" });
+              document.querySelector("#ecosystem")?.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             Explore Our Services <ArrowRight className="h-4 w-4" />
           </GlowButton>
           <GlowButton
             variant="outline"
             size="lg"
-            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => {
+              track("cta_click", { cta: "talk_to_us", location: "hero" });
+              document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
           >
             Talk to Us
           </GlowButton>
