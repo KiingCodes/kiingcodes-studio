@@ -34,6 +34,33 @@ export const ContactHub = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+
+  const submitBrief = async () => {
+    setSending(true);
+    setSendError(null);
+    track("lead_submitted", {
+      services: picked,
+      company: form.company || null,
+      message_length: form.message.length,
+    });
+    const { error } = await supabase.functions.invoke("send-booking", {
+      body: {
+        name: form.name,
+        email: form.email,
+        company: form.company || undefined,
+        projectType: picked.join(", "),
+        message: form.message || "No additional details provided.",
+      },
+    });
+    setSending(false);
+    if (error) {
+      setSendError("Something went wrong sending your brief. Please try again or email us directly.");
+      return;
+    }
+    setSubmitted(true);
+  };
 
   const toggle = (s: string) =>
     setPicked((p) => (p.includes(s) ? p.filter((x) => x !== s) : [...p, s]));
