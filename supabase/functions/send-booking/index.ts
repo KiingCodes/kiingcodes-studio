@@ -98,7 +98,26 @@ serve(async (req) => {
       </div>
     `;
 
-    const res = await fetch(`${GATEWAY_URL}/emails`, {
+    // 1. Always save the booking so no lead is ever lost
+    let saved = false;
+    try {
+      const sbUrl = Deno.env.get('SUPABASE_URL')!;
+      const sbKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+      const dbRes = await fetch(`${sbUrl}/rest/v1/chat_leads`, {
+        method: 'POST',
+        headers: { apikey: sbKey, Authorization: `Bearer ${sbKey}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+        body: JSON.stringify({
+          name: booking.name, email: booking.email, phone: booking.phone ?? null,
+          company: booking.company ?? null, source: 'booking_form', status: 'new',
+          conversation_summary: `Services: ${booking.projectType}\n\n${booking.message}`,
+        }),
+      });
+      saved = dbRes.ok;
+      if (!dbRes.ok) console.error('DB save failed', dbRes.status, await dbRes.text());
+    } catch (e) { console.error('DB save error', e); }
+
+    // 2. Send email; fall back to Resend's test sender if domain isn't verified yet
+    const send = (from: string) => fetch(`${GATEWAY_URL}/emails`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,7 +125,7 @@ serve(async (req) => {
         'X-Connection-Api-Key': RESEND_API_KEY,
       },
       body: JSON.stringify({
-        from: 'JewelIQ Bookings <bookings@jeweliq.tech>',
+        from,
         to: ['bookings@jeweliq.tech'],
         subject: `New Booking: ${projectType} - ${name}`,
         html: emailHtml,
@@ -114,18 +133,26 @@ serve(async (req) => {
       }),
     });
 
-    const data = await res.json();
+    let res = await send('JewelIQ Bookings <bookings@jeweliq.tech>');
+    let data = await res.json();
+    if (!res.ok && res.status === 403) {
+      console.warn('Domain not verified, retrying with fallback sender');
+      res = await send('JewelIQ Bookings <onboarding@resend.dev>');
+      data = await res.json();
+    }
 
     if (!res.ok) {
       console.error(`Resend gateway error [${res.status}]:`, JSON.stringify(data));
-      return new Response(
-        JSON.stringify({ error: 'Failed to send email', status: res.status, details: data }),
-        { status: res.status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      );
+      if (!saved) {
+        return new Response(
+          JSON.stringify({ error: 'Failed to send email', status: res.status, details: data }),
+          { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
     }
 
     return new Response(
-      JSON.stringify({ success: true, id: data.id }),
+      JSON.stringify({ success: true, saved, emailed: res.ok }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   } catch (error) {
