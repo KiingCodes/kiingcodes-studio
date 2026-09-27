@@ -11,6 +11,7 @@ import {
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlowButton } from "@/components/jewel/GlowButton";
 import { track } from "@/lib/analytics";
+import { supabase } from "@/integrations/supabase/client";
 
 const services = [
   "Software Development",
