@@ -11,6 +11,7 @@ import {
 import { FadeInSection } from "@/components/jewel/FadeInSection";
 import { GlowButton } from "@/components/jewel/GlowButton";
 import { track } from "@/lib/analytics";
+import { supabase } from "@/integrations/supabase/client";
 
 const services = [
   "Software Development",
@@ -33,6 +34,33 @@ export const ContactHub = () => {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
+
+  const submitBrief = async () => {
+    setSending(true);
+    setSendError(null);
+    track("lead_submitted", {
+      services: picked,
+      company: form.company || null,
+      message_length: form.message.length,
+    });
+    const { error } = await supabase.functions.invoke("send-booking", {
+      body: {
+        name: form.name,
+        email: form.email,
+        company: form.company || undefined,
+        projectType: picked.join(", "),
+        message: form.message || "No additional details provided.",
+      },
+    });
+    setSending(false);
+    if (error) {
+      setSendError("Something went wrong sending your brief. Please try again or email us directly.");
+      return;
+    }
+    setSubmitted(true);
+  };
 
   const toggle = (s: string) =>
     setPicked((p) => (p.includes(s) ? p.filter((x) => x !== s) : [...p, s]));
@@ -202,21 +230,21 @@ export const ContactHub = () => {
                       className="mt-5 w-full resize-none rounded-2xl border border-border bg-background/40 p-4 text-sm text-foreground placeholder:text-foreground/40 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/40"
                       placeholder="Describe your project or IT requirement..."
                     />
+                    {sendError && (
+                      <p className="mt-4 rounded-xl border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+                        {sendError}
+                      </p>
+                    )}
                     <div className="mt-8 flex items-center justify-between">
                       <GlowButton variant="ghost" onClick={() => setStep(1)}>
                         <ArrowLeft className="h-4 w-4" /> Back
                       </GlowButton>
                       <GlowButton
-                        onClick={() => {
-                          track("lead_submitted", {
-                            services: picked,
-                            company: form.company || null,
-                            message_length: form.message.length,
-                          });
-                          setSubmitted(true);
-                        }}
+                        disabled={sending}
+                        onClick={submitBrief}
+                        className="disabled:cursor-not-allowed disabled:opacity-40"
                       >
-                        Send Brief <ArrowRight className="h-4 w-4" />
+                        {sending ? "Sending..." : "Send Brief"} <ArrowRight className="h-4 w-4" />
                       </GlowButton>
                     </div>
                   </motion.div>
